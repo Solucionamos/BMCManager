@@ -1,4 +1,4 @@
-package com.example.appapp;
+package com.solucionamos.bmcmanager;
 
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.appapp.dummy.DummyContent;
+import com.example.bmcmanager.R;
+import com.solucionamos.bmcmanager.dummy.DummyContent;
 
 /**
  * A fragment representing a single Item detail screen.

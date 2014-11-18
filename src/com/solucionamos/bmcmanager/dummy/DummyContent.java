@@ -1,4 +1,4 @@
-package com.example.appapp.dummy;
+package com.solucionamos.bmcmanager.dummy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

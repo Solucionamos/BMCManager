@@ -1,4 +1,4 @@
-package com.example.appapp;
+package com.solucionamos.bmcmanager;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-import com.example.appapp.dummy.DummyContent;
+import com.solucionamos.bmcmanager.dummy.DummyContent;
 
 /**
  * A list fragment representing a list of Items. This fragment

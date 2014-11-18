@@ -1,4 +1,6 @@
-package com.example.appapp;
+package com.solucionamos.bmcmanager;
+
+import com.example.bmcmanager.R;
 
 import android.content.Intent;
 import android.os.Bundle;
