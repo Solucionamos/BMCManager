@@ -89,7 +89,7 @@ public class ServerListFragment extends ListFragment {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
     }
-
+    
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

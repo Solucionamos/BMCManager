@@ -3,5 +3,10 @@
 
     <string name="app_name">BMCManager</string>
     <string name="title_server_detail">Server Detail</string>
-
+    
+    <string name="add_server">Add Server</string>
+    <string name="power_cycle">Power Cycle</string>
+    <string name="hard_reset">Hard Reset</string>
+    <string name="delete">Delete</string>
+    
 </resources>

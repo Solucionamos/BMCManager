@@ -4,6 +4,8 @@ import com.example.bmcmanager.R;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.app.Activity;
 
 
@@ -82,4 +84,12 @@ public class ServerListActivity extends Activity
             startActivity(detailIntent);
         }
     }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.menu_server_list, menu);
+		return true;
+    }
+    
 }

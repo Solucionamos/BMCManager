@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/AppBaseTheme" >
+
+    <item
+        android:id="@+id/power_cycle"
+        android:title="@string/power_cycle"/>
+    <item
+        android:id="@+id/hard_reset"
+        android:title="@string/hard_reset"/>
+    <item
+        android:id="@+id/delete"
+        android:title="@string/delete"/>
+
+</menu>
