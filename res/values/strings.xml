@@ -2,6 +2,6 @@
 <resources>
 
     <string name="app_name">BMCManager</string>
-    <string name="title_item_detail">Item Detail</string>
+    <string name="title_server_detail">Server Detail</string>
 
 </resources>
