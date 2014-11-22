@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.app.Activity;
 
 
@@ -77,6 +78,7 @@ public class ServerListActivity extends Activity
                     .commit();
 
         } else {
+        	System.out.println(id);
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, ServerDetailActivity.class);
@@ -91,5 +93,27 @@ public class ServerListActivity extends Activity
     	inflater.inflate(R.menu.menu_server_list, menu);
 		return true;
     }
+    
+    @Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.add_server:
+			goToAddServerActivity();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+    
+    public void goToAddServerActivity() {
+		Intent k = new Intent(ServerListActivity.this, AddServerActivity.class);
+		startActivity(k);
+	}
+
     
 }

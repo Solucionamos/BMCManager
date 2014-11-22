@@ -1,15 +1,79 @@
-<resources>
-    <!-- Application theme. -->
-  <!-- inherit from the material theme -->
-  <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
-    <!-- Main theme colors -->
-    <!--   your app branding color for the app bar -->
-    <item name="android:colorPrimary">#F44336</item>
-    <!--   darker variant for the status bar and contextual app bars -->
-    <item name="android:colorPrimaryDark">#B71C1C</item>
-    <!--   theme UI controls like checkboxes and text fields -->
-    <item name="android:colorAccent">#BDBDBD</item>
-  </style>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  
+    <!-- inherit from the material theme -->
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+
+        <!-- Main theme colors -->
+        <!-- your app branding color for the app bar -->
+        <item name="android:colorPrimary">@color/primary</item>
+        <!-- darker variant for the status bar and contextual app bars -->
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <!-- theme UI controls like checkboxes and text fields -->
+        <item name="android:colorAccent">@color/accent</item>
+    </style>
+
+    <style name="ActionBar" parent="@android:style/Theme.Material.Light">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ServerInformation">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ServerInformation.Green">
+        <item name="android:background">@drawable/serveron</item>
+    </style>
+
+    <style name="ServerInformation.Red">
+        <item name="android:background">@color/background_red</item>
+    </style>
+
+    <style name="InformartionBlock">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@drawable/block</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="InformartionBlockHeader">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:background">@drawable/header</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="InformationBlockBlock">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="InformationBlockIcon">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:paddingLeft">4dp</item>
+    </style>
+
+    <style name="InformationBlockDescriptionBlock">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">45dp</item>
+        <item name="android:paddingTop">3dp</item>
+    </style>
+
 </resources>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppBaseTheme" >
+
+    <RelativeLayout
+        android:id="@+id/relativeHeader"
+        style="@style/ServerInformation.Green"
+        android:paddingBottom="15dp"
+        android:paddingTop="5dp" >
+
+        <TextView
+            android:id="@+id/textServerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="Server Name"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textServerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textServerName"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="15dp"
+            android:text="IP Address" />
+
+        <Button
+            android:id="@+id/Options_Image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:drawableTop="@drawable/ic_action_overflow"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/serverdetails_options"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bellowHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeHeader"
+        android:layout_marginTop="-6dp"
+        android:background="@drawable/header" >
+
+        <TextView
+            android:id="@+id/serverStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/server_status"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/switchStatus"
+            android:layout_alignBottom="@+id/switchStatus"
+            android:layout_toLeftOf="@+id/switchStatus"
+            android:text="@string/serverdetails_power"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
+        <Switch
+            android:id="@+id/switchStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:checked="true"
+            android:textColor="@color/black"
+            android:thumb="@color/white" />
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bellowHeader" >
+
+        <ScrollView
+            android:id="@+id/scrollViewBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bellowHeader" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/temperatureBlock"
+                        style="@style/InformartionBlock" >
+
+                        <TextView
+                            android:id="@+id/textTemperatureHeader"
+                            style="@style/InformartionBlockHeader"
+                            android:text="@string/serverdetails_temperature" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/coolerBlock"
+                        style="@style/InformartionBlock" >
+
+                        <TextView
+                            android:id="@+id/textCoolerHeader"
+                            style="@style/InformartionBlockHeader"
+                            android:text="@string/serverdetails_fans" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:id="@+id/powerBlock"
+                        style="@style/InformartionBlock" >
+
+                        <TextView
+                            android:id="@+id/textPowerHeader"
+                            style="@style/InformartionBlockHeader"
+                            android:text="@string/serverdetails_powersupply" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

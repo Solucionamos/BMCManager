@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.content.Context;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +49,15 @@ public class ServerListFragment extends ListFragment implements
 
 	private List<Server> listArray = null;
 
+	private View view;
+	
+	private int pos;
+
+	private ListFragmentSwipeRefreshLayout swipeLayout;
+
+	
+	
+	private ServerAdapter adapter;
 	/**
 	 * A callback interface that all activities containing this fragment must
 	 * implement. This mechanism allows activities to be notified of item
@@ -74,18 +85,61 @@ public class ServerListFragment extends ListFragment implements
 	 * fragment (e.g. upon screen orientation changes).
 	 */
 	public ServerListFragment() {
+		swipeLayout = null;
 		listArray = new ArrayList<Server>();
-		listArray.add(new Server("HTTPS", "IVB", "coiso", "10.35.107.212",
-				"lenovo", "len0vO"));
+		//listArray.add(new Server("HTTP", "IVB", "lucio", "10.0.3.2:8080",
+			//"lucionamos", "6lucio9"));
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		DBHelper mydb = new DBHelper(this.getActivity());
+		listArray = mydb.getAllServers();
+		
+		
+		
+		
+		// Create adapter
+		adapter = new ServerAdapter(this.getActivity(),
+						R.layout.serverlistitem, listArray);
+		/* Setting the list adapter for the ListFragment */
+		// Set the adapter for this list as the one we created
+		
+		adapter.setNotifyOnChange(true);
+		
+		setListAdapter(adapter);
+	}
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		
+		//setRetainInstance(true);
 
-		setListAdapter(new ServerAdapter(this.getActivity(),
-				R.layout.server_list_item, listArray));
+		View listView = super.onCreateView(inflater, container,
+				savedInstanceState);
 
+		swipeLayout = new ListFragmentSwipeRefreshLayout(listView.getContext());
+
+		swipeLayout.addView(listView, ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT);
+
+		// Make sure that the SwipeRefreshLayout will fill the fragment
+		swipeLayout.setLayoutParams(new ViewGroup.LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT,
+				ViewGroup.LayoutParams.MATCH_PARENT));
+
+		swipeLayout.setOnRefreshListener(this);
+		swipeLayout.setRefreshing(true);
+		swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+				android.R.color.holo_green_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_red_light);
+
+		// Return a view by using the Fragment onCreateView standard method.
+		return swipeLayout;
 	}
 
 	@Override
@@ -125,10 +179,11 @@ public class ServerListFragment extends ListFragment implements
 	public void onListItemClick(ListView listView, View view, int position,
 			long id) {
 		super.onListItemClick(listView, view, position, id);
-
+		
+		Server s = listArray.get(position);
 		// Notify the active callbacks interface (the activity, if the
 		// fragment is attached to one) that an item has been selected.
-		mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+		mCallbacks.onItemSelected(s.getName());
 	}
 
 	@Override
@@ -165,6 +220,74 @@ public class ServerListFragment extends ListFragment implements
 	@Override
 	public void onRefresh() {
 		// TODO Auto-generated method stub
+		swipeLayout.setRefreshing(true);
+	}
+	
+	// This happens the last, after the view and activity are created, then
+	// setEmptyText for this fragment as the text from the string empty from the
+	// strings.xml (important for localization)
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		setEmptyText(this.getActivity().getResources().getString(R.string.empty));
 		
 	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		// Set title
+		getActivity().getActionBar().setTitle(R.string.action_titleServerList);
+		/*if(listArray != null){
+			DBHelper mydb = new DBHelper(this.getActivity().getApplicationContext());
+			listArray = mydb.getAllServers();
+		}*/
+		//this.refresh();
+	}
+	
+	private class ListFragmentSwipeRefreshLayout extends SwipeRefreshLayout {
+
+		public ListFragmentSwipeRefreshLayout(Context context) {
+			super(context);
+		}
+
+		/**
+		 * As mentioned above, we need to override this method to properly
+		 * signal when a 'swipe-to-refresh' is possible.
+		 * 
+		 * @return true if the {@link android.widget.ListView} is visible and
+		 *         can scroll up.
+		 */
+		@Override
+		public boolean canChildScrollUp() {
+			final ListView listView = getListView();
+			if (listView.getVisibility() == View.VISIBLE) {
+				return canListViewScrollUp(listView);
+			} else {
+				return false;
+			}
+		}
+
+	}
+
+	/**
+	 * Utility method to check whether a {@link ListView} can scroll up from
+	 * it's current position. Handles platform version differences, providing
+	 * backwards compatible functionality where needed.
+	 */
+	private static boolean canListViewScrollUp(ListView listView) {
+		if (android.os.Build.VERSION.SDK_INT >= 14) {
+			// For ICS and above we can call canScrollVertically() to determine
+			// this
+			return ViewCompat.canScrollVertically(listView, -1);
+		} else {
+			// Pre-ICS we need to manually check the first visible item and the
+			// child view's top
+			// value
+			return listView.getChildCount() > 0
+					&& (listView.getFirstVisiblePosition() > 0 || listView
+							.getChildAt(0).getTop() < listView.getPaddingTop());
+		}
+	}
+	
 }

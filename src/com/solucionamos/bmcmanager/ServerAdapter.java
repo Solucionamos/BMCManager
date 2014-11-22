@@ -44,7 +44,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			LayoutInflater inflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			viewList.set(position,
-					inflater.inflate(R.layout.fragment_server_detail, null));
+					inflater.inflate(R.layout.serverlistitem, null));
 			// view = inflater.inflate(R.layout.serverlistitem, null);
 		}
 
@@ -62,7 +62,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			s.setPosition(position);
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
-/*
+
 			TextView sName = (TextView) viewList.get(position).findViewById(
 					R.id.itemName);
 			TextView sDesc = (TextView) viewList.get(position).findViewById(
@@ -76,7 +76,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			if (sDesc != null) {
 				sDesc.setText(s.getAddress());
 			}
-*/
+
 			RetrieveSensorsTask asyncTask = new RetrieveSensorsTask();
 			asyncTask.delegate = this;
 			asyncTask.execute(s);
@@ -89,7 +89,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
 	@Override
 	public void processFinish(BMCResponse response, Exception ex) {
-		/*if (ex == null) {
+		if (ex == null) {
 			if (response.getPwState() == Server.PWSTATE_OFF) {
 				viewList.get(response.getServer().getPosition())
 						.setBackgroundResource(R.color.background_red);
@@ -118,7 +118,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 					.setBackgroundResource(R.color.background_red);
 			viewList.get(response.getServer().getPosition()).setTag(
 					R.color.background_red);
-		}*/
+		}
 	}
 
 	private class RetrieveSensorsTask extends

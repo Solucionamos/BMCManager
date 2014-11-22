@@ -114,7 +114,7 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 		/* --- PREPARE THE REQUEST --- */
 		URL url = null;
 		url = createHttpsUrl(protocol, "/data/login");
-		String urlParameters = "username=" + username + "&password=" + password
+		String urlParameters = "user=" + username + "&password=" + password
 				+ "&press=btnOK";
 
 		/* --- SEND REQUEST --- */
