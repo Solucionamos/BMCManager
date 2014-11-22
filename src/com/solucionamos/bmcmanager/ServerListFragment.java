@@ -53,7 +53,7 @@ public class ServerListFragment extends ListFragment implements
 	
 	private int pos;
 
-	private ListFragmentSwipeRefreshLayout swipeLayout;
+	private SwipeRefreshLayout swipeLayout;
 
 	
 	
@@ -110,9 +110,12 @@ public class ServerListFragment extends ListFragment implements
 		adapter.setNotifyOnChange(true);
 		
 		setListAdapter(adapter);
+		
+		
+		
 	}
 	
-	@Override
+	/*@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
@@ -121,26 +124,26 @@ public class ServerListFragment extends ListFragment implements
 		View listView = super.onCreateView(inflater, container,
 				savedInstanceState);
 
-		swipeLayout = new ListFragmentSwipeRefreshLayout(listView.getContext());
+		swipeLayout = (SwipeRefreshLayout) listView.findViewById(R.id.swipeRefreshList);
 
-		swipeLayout.addView(listView, ViewGroup.LayoutParams.MATCH_PARENT,
+		/*swipeLayout.addView(listView, ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.MATCH_PARENT);
 
 		// Make sure that the SwipeRefreshLayout will fill the fragment
 		swipeLayout.setLayoutParams(new ViewGroup.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT));
+				ViewGroup.LayoutParams.MATCH_PARENT));*/
 
-		swipeLayout.setOnRefreshListener(this);
-		swipeLayout.setRefreshing(true);
-		swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
-				android.R.color.holo_green_light,
-				android.R.color.holo_orange_light,
-				android.R.color.holo_red_light);
+		//swipeLayout.setOnRefreshListener(this);
+		//swipeLayout.setRefreshing(true);
+		//swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+			//	android.R.color.holo_green_light,
+				//android.R.color.holo_orange_light,
+				//android.R.color.holo_red_light);
 
 		// Return a view by using the Fragment onCreateView standard method.
-		return swipeLayout;
-	}
+		//return swipeLayout;
+	//}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -221,6 +224,7 @@ public class ServerListFragment extends ListFragment implements
 	public void onRefresh() {
 		// TODO Auto-generated method stub
 		swipeLayout.setRefreshing(true);
+		swipeLayout.setRefreshing(false);
 	}
 	
 	// This happens the last, after the view and activity are created, then
@@ -230,7 +234,19 @@ public class ServerListFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText(this.getActivity().getResources().getString(R.string.empty));
+swipeLayout = (SwipeRefreshLayout) this.getActivity().findViewById(R.id.swipeRefreshList);
 		
+		if(swipeLayout != null){
+			
+		swipeLayout.setOnRefreshListener(this);
+				//swipeLayout.setRefreshing(true);
+				swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+					android.R.color.holo_green_light,
+						android.R.color.holo_orange_light,
+						android.R.color.holo_red_light);}else{
+							System.out.println("NULL");
+						}
+		//swipeLayout.setRefreshing(false);
 	}
 	
 	@Override
