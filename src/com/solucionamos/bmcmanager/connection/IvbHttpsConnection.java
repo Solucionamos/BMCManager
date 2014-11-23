@@ -191,6 +191,9 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 		conn.disconnect();
 
 		return sensors;
+		
+		
+		
 	}
 
 	@Override

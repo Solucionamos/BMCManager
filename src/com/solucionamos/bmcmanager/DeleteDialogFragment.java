@@ -8,44 +8,48 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-public class ActionDialogFragment extends DialogFragment {
+import com.solucionamos.bmcmanager.model.Server;
 
-	public interface ActionDialogInterface {
-		public void cancelPowerOperation(int op);
-
-		public void confirmPowerOperation(int op);
-	}
-	private int operation;
+public class DeleteDialogFragment extends DialogFragment {
+	private Server el;
+	private boolean tabletFlag;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the Builder class for convenient dialog construction
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(R.string.actiondialog_text)
+		builder.setMessage(R.string.deletedialog_text)
 				.setPositiveButton(R.string.dialog_confirm,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								/*ServerListActivity main = (ServerListActivity) getActivity();
-								if (main != null) {
-								}*/
-								((ActionDialogInterface) getTargetFragment())
-										.confirmPowerOperation(getOperation());
-
+								if(tabletFlag){
+									ServerListActivity main = (ServerListActivity) getActivity();
+									if (main != null)
+										main.deleteServer(el);
+								}else{
+									ServerDetailActivity main = (ServerDetailActivity) getActivity();
+									if (main != null)
+										main.deleteServer(el);
+								}
+								
+								
 							}
 						})
 				.setNegativeButton(R.string.dialog_cancel,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								((ActionDialogInterface) getTargetFragment())
-										.cancelPowerOperation(getOperation());
-
+								// User cancelled the dialog
 							}
 						});
 		// Create the AlertDialog object and return it
 		return builder.create();
 	}
 
-	protected int getOperation() {
-		return getArguments().getInt("operation");
+	public void setServer(Server el) {
+		this.el = el;
+	}
+	
+	public void setTablet(boolean tabletFlag){
+		this.tabletFlag = tabletFlag;
 	}
 }

@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public boolean insertServer(Server el) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
-
+		
 		contentValues.put(SERVER_COLUMN_NAME, el.getName());
 		contentValues.put(SERVER_COLUMN_PROTOCOL, el.getProtocol());
 		contentValues.put(SERVER_COLUMN_MODEL, el.getModel());
@@ -60,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor res = db.rawQuery("select * from " + SERVER_TABLE_NAME, null);
 		res.moveToFirst();
+		
 		while (res.isAfterLast() == false) {
 			array_list.add(new Server(res.getString(res
 					.getColumnIndex(SERVER_COLUMN_PROTOCOL)), res.getString(res
@@ -94,7 +95,8 @@ public class DBHelper extends SQLiteOpenHelper {
 					.getColumnIndex(SERVER_COLUMN_NAME)), res.getString(res
 					.getColumnIndex(SERVER_COLUMN_ADDRESS)), res.getString(res
 					.getColumnIndex(SERVER_COLUMN_USERNAME)), res.getString(res
-					.getColumnIndex(SERVER_COLUMN_PASSWORD)));
+					.getColumnIndex(SERVER_COLUMN_PASSWORD))
+					);
 			res.moveToNext();
 		}
 		db.close();

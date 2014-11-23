@@ -75,6 +75,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 
 			}
 		});
+		
 	}
 
 	@Override
@@ -84,7 +85,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 
 		for (int i = 0; i < menu.size(); i++)
 			menu.getItem(i).setVisible(false);
-
+		
 		return true;
 	}
 

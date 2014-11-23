@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.app.Activity;
 
+import com.solucionamos.bmcmanager.model.Server;
 
 
 
@@ -110,10 +112,28 @@ public class ServerListActivity extends Activity
 		}
 	}
     
+    @Override
+    public void onResume(){
+    	super.onResume();
+    	
+    	if(mTwoPane)
+    		getActionBar().setTitle(R.string.title_AppTitle);
+    	else
+    		getActionBar().setTitle(R.string.action_titleServerList);
+    }
+    
     public void goToAddServerActivity() {
 		Intent k = new Intent(ServerListActivity.this, AddServerActivity.class);
 		startActivity(k);
 	}
 
-    
+    public void deleteServer(Server el){
+    	DBHelper mydb = new DBHelper(this);
+    	mydb.deleteServer(el.getName());
+    	((ServerListFragment) getFragmentManager()
+                .findFragmentById(R.id.item_list)).removeServer(el);
+    	
+    	FrameLayout myFrame = (FrameLayout) findViewById(R.id.item_detail_container);
+    	myFrame.removeAllViews();
+    }
 }

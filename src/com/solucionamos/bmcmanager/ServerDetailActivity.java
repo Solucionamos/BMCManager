@@ -9,6 +9,7 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import com.solucionamos.bmcmanager.model.Server;
 
 
 /**
@@ -67,13 +68,23 @@ public class ServerDetailActivity extends Activity {
             NavUtils.navigateUpTo(this, new Intent(this, ServerListActivity.class));
             return true;
         }
+        if(id == R.id.add_server){
+        	Intent k = new Intent(ServerDetailActivity.this, AddServerActivity.class);
+    		startActivity(k);
+        }
         return super.onOptionsItemSelected(item);
     }
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.menu_server_details, menu);
+    	inflater.inflate(R.menu.menu_server_list, menu);
 		return true;
+    }
+    
+    public void deleteServer(Server el){
+    	DBHelper mydb = new DBHelper(this);
+    	mydb.deleteServer(el.getName());
+    	NavUtils.navigateUpTo(this, new Intent(this, ServerListActivity.class));
     }
 }

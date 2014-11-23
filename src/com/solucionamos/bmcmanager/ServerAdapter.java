@@ -60,6 +60,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
 		if (s != null) {
 			s.setPosition(position);
+			System.out.println("SERVER "+s.getPosition());
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
 

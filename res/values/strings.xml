@@ -63,6 +63,7 @@
     <string name="action_titleServerList">Server List</string>
     <string name="action_titleServerDetails">Server Details</string>
     <string name="action_titleAddServer">Server Setup</string>
+    <string name="title_AppTitle">BMC Manager</string>
     <!-- END -->
     <string name="title_activity_add_serv">Server Setup</string>
     <string name="hello_world">Hello world!</string>

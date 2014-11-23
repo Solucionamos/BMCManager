@@ -10,7 +10,7 @@ public class BMCResponse {
 	public final static String TYPE_PWSTATE = "PWSTATE";
 	public final static String TYPE_SERVER = "SERVER";
 	
-	public String type = null;
+	public Object type = null;
 	private List<Sensor> sensors;
 	private int pwState;
 	private Server server;

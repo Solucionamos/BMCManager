@@ -1,6 +1,7 @@
 package com.solucionamos.bmcmanager;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
@@ -107,7 +108,7 @@ public class ServerListFragment extends ListFragment implements
 		/* Setting the list adapter for the ListFragment */
 		// Set the adapter for this list as the one we created
 		
-		adapter.setNotifyOnChange(true);
+		adapter.setNotifyOnChange(false);
 		
 		setListAdapter(adapter);
 		
@@ -224,8 +225,11 @@ public class ServerListFragment extends ListFragment implements
 	public void onRefresh() {
 		// TODO Auto-generated method stub
 		swipeLayout.setRefreshing(true);
+		adapter.notifyDataSetChanged();
 		swipeLayout.setRefreshing(false);
 	}
+	
+
 	
 	// This happens the last, after the view and activity are created, then
 	// setEmptyText for this fragment as the text from the string empty from the
@@ -234,26 +238,38 @@ public class ServerListFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText(this.getActivity().getResources().getString(R.string.empty));
-swipeLayout = (SwipeRefreshLayout) this.getActivity().findViewById(R.id.swipeRefreshList);
+		swipeLayout = (SwipeRefreshLayout) this.getActivity().findViewById(R.id.swipeRefreshList);
 		
 		if(swipeLayout != null){
 			
 		swipeLayout.setOnRefreshListener(this);
 				//swipeLayout.setRefreshing(true);
-				swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+		swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
 					android.R.color.holo_green_light,
-						android.R.color.holo_orange_light,
-						android.R.color.holo_red_light);}else{
-							System.out.println("NULL");
-						}
+					android.R.color.holo_orange_light,
+					android.R.color.holo_red_light);
+		}
 		//swipeLayout.setRefreshing(false);
+	}
+	
+	public void removeServer(Server el){
+		Iterator<Server> it = listArray.iterator();
+		Server itElement = null;
+		while(it.hasNext()){
+			itElement = it.next();
+			if(itElement.getName().equals(el.getName())){
+				break;
+			}
+		}
+		adapter.remove(itElement);
+		adapter.notifyDataSetChanged();
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Set title
-		getActivity().getActionBar().setTitle(R.string.action_titleServerList);
+		
+		adapter.notifyDataSetChanged();
 		/*if(listArray != null){
 			DBHelper mydb = new DBHelper(this.getActivity().getApplicationContext());
 			listArray = mydb.getAllServers();
