@@ -25,7 +25,7 @@
         	android:name="com.solucionamos.bmcmanager.ServerListFragment"
         	android:layout_width="0dp"
         	android:layout_height="match_parent"
-        	android:layout_weight="1"
+        	android:layout_weight="2"
         	tools:layout="@android:layout/list_content"
         	android:elevation="0dp"
         	 />
