@@ -154,7 +154,7 @@ public class ServerDetailFragment extends Fragment implements
          	
          	statusTxt = (TextView) rootView.findViewById(R.id.serverStatus);
          	colorBlock = (RelativeLayout) rootView.findViewById(R.id.relativeHeader);
-         	colorBlock.setBackgroundResource(R.color.background_green);
+         	colorBlock.setBackgroundResource(R.color.background_grey);
          	
          	
         }
@@ -468,7 +468,7 @@ public class ServerDetailFragment extends Fragment implements
 			showToast(getString(R.string.connection_nosuccess));
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_unreachable_status));
-			showEmptyBlocks();
+			showEmptyBlocks(true);
 		} else if (pwState == Server.PWSTATE_OFF) {
 			isRefreshing = true;
 			powerSwitch.setChecked(false);
@@ -476,7 +476,7 @@ public class ServerDetailFragment extends Fragment implements
 			showToast(getString(R.string.server_powered_off));
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_off_status));
-			showEmptyBlocks();
+			showEmptyBlocks(false);
 		} else if (sensors != null) {
 			isRefreshing = true;
 			powerSwitch.setChecked(true);
@@ -591,32 +591,42 @@ public class ServerDetailFragment extends Fragment implements
 		}
 	}
 
-	private void showEmptyBlocks() {
+	private void showEmptyBlocks(boolean unreachable) {
 		TextView sensorName;
+		TextView sensorLocal;
 		TextView value;
 		ImageView iconChange;
 		LinearLayout aBlock;
 		int textName;
+		int textLocal;
 		int textValue;
 		int layoutItem;
+		
 		View view = null;
 		LayoutInflater inflater = LayoutInflater.from(getActivity()
 				.getBaseContext());
 
 		cancelTasks();
-
-		colorBlock.setBackgroundResource(R.color.background_red);
-
+		
+		if (unreachable == true){
+			colorBlock.setBackgroundResource(R.color.background_grey);
+		}else{
+			colorBlock.setBackgroundResource(R.color.background_red);
+		}
+		
 		aBlock = tempBlock;
 		textName = R.id.textTemperature1;
+		textLocal = R.id.textTemperatureDesc1;
 		textValue = R.id.textTemperatureNumber1;
 		layoutItem = R.layout.temperatureitem;
 
 		view = inflater.inflate(layoutItem, aBlock, false);
 		iconChange = (ImageView) view.findViewById(R.id.iconTemperature1);
-		iconChange.setImageResource(R.drawable.ic_temperature_bad);
+		iconChange.setImageResource(R.drawable.ic_temperature_unreachable);
 		sensorName = (TextView) view.findViewById(textName);
 		sensorName.setText(getString(R.string.empty_block));
+		sensorLocal = (TextView) view.findViewById(textLocal);
+		sensorLocal.setText(getString(R.string.empty_value));
 		value = (TextView) view.findViewById(textValue);
 		value.setText(getString(R.string.empty_value));
 
@@ -624,14 +634,17 @@ public class ServerDetailFragment extends Fragment implements
 
 		aBlock = voltBlock;
 		textName = R.id.textPower1;
+		textLocal = R.id.textPowerDesc1;
 		textValue = R.id.textPowerNumber1;
 		layoutItem = R.layout.voltageitem;
 
 		view = inflater.inflate(layoutItem, aBlock, false);
 		iconChange = (ImageView) view.findViewById(R.id.imageView12);
-		iconChange.setImageResource(R.drawable.ic_power_bad);
+		iconChange.setImageResource(R.drawable.ic_power_unreachable);
 		sensorName = (TextView) view.findViewById(textName);
 		sensorName.setText(getString(R.string.empty_block));
+		sensorLocal = (TextView) view.findViewById(textLocal);
+		sensorLocal.setText(getString(R.string.empty_value));
 		value = (TextView) view.findViewById(textValue);
 		value.setText(getString(R.string.empty_value));
 
@@ -639,14 +652,17 @@ public class ServerDetailFragment extends Fragment implements
 
 		aBlock = fanBlock;
 		textName = R.id.textFan1;
+		textLocal = R.id.textFanDesc1;
 		textValue = R.id.textFanNumber1;
 		layoutItem = R.layout.fanitem;
 
 		view = inflater.inflate(layoutItem, aBlock, false);
 		iconChange = (ImageView) view.findViewById(R.id.imageView3);
-		iconChange.setImageResource(R.drawable.ic_fan_bad);
+		iconChange.setImageResource(R.drawable.ic_fan_unreachable);
 		sensorName = (TextView) view.findViewById(textName);
 		sensorName.setText(getString(R.string.empty_block));
+		sensorLocal = (TextView) view.findViewById(textLocal);
+		sensorLocal.setText(getString(R.string.empty_value));
 		value = (TextView) view.findViewById(textValue);
 		value.setText(getString(R.string.empty_value));
 

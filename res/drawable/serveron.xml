@@ -46,7 +46,7 @@
     <!-- content background -->
     <item>
         <shape>
-            <solid android:color="@color/background_green" />
+            <solid android:color="@color/background_grey" />
         </shape>
     </item>
 
