@@ -397,6 +397,12 @@ public class ServerDetailFragment extends Fragment implements
 		PopupMenu popup = new PopupMenu(getActivity(), v);
 		MenuInflater inflater = popup.getMenuInflater();
 		inflater.inflate(R.menu.serverdetails_options_popmenu, popup.getMenu());
+		
+		if (!powerSwitch.isChecked()) {
+			popup.getMenu().removeItem(R.id.hreset_server);
+			popup.getMenu().removeItem(R.id.reset_server);
+		}
+		
 		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				Bundle bundle = new Bundle();
