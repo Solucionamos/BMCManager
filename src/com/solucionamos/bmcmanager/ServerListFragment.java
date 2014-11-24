@@ -54,7 +54,7 @@ public class ServerListFragment extends ListFragment implements
 	
 	private int pos;
 
-	private SwipeRefreshLayout swipeLayout;
+	private ListFragmentSwipeRefreshLayout swipeLayout;
 
 	
 	
@@ -116,7 +116,7 @@ public class ServerListFragment extends ListFragment implements
 		
 	}
 	
-	/*@Override
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
@@ -125,26 +125,26 @@ public class ServerListFragment extends ListFragment implements
 		View listView = super.onCreateView(inflater, container,
 				savedInstanceState);
 
-		swipeLayout = (SwipeRefreshLayout) listView.findViewById(R.id.swipeRefreshList);
+		swipeLayout = new ListFragmentSwipeRefreshLayout(listView.getContext());
 
-		/*swipeLayout.addView(listView, ViewGroup.LayoutParams.MATCH_PARENT,
+		swipeLayout.addView(listView, ViewGroup.LayoutParams.MATCH_PARENT,
 				ViewGroup.LayoutParams.MATCH_PARENT);
 
 		// Make sure that the SwipeRefreshLayout will fill the fragment
 		swipeLayout.setLayoutParams(new ViewGroup.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.MATCH_PARENT));*/
+				ViewGroup.LayoutParams.MATCH_PARENT));
 
-		//swipeLayout.setOnRefreshListener(this);
+		swipeLayout.setOnRefreshListener(this);
 		//swipeLayout.setRefreshing(true);
-		//swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
-			//	android.R.color.holo_green_light,
-				//android.R.color.holo_orange_light,
-				//android.R.color.holo_red_light);
+		swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+				android.R.color.holo_green_light,
+				android.R.color.holo_orange_light,
+				android.R.color.holo_red_light);
 
 		// Return a view by using the Fragment onCreateView standard method.
-		//return swipeLayout;
-	//}
+		return swipeLayout;
+	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -238,7 +238,7 @@ public class ServerListFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText(this.getActivity().getResources().getString(R.string.empty));
-		swipeLayout = (SwipeRefreshLayout) this.getActivity().findViewById(R.id.swipeRefreshList);
+		/*swipeLayout = (SwipeRefreshLayout) this.getActivity().findViewById(R.id.swipeRefreshList);
 		
 		if(swipeLayout != null){
 			
@@ -248,7 +248,7 @@ public class ServerListFragment extends ListFragment implements
 					android.R.color.holo_green_light,
 					android.R.color.holo_orange_light,
 					android.R.color.holo_red_light);
-		}
+		}*/
 		//swipeLayout.setRefreshing(false);
 	}
 	
