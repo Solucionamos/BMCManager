@@ -289,6 +289,7 @@ public class ServerDetailFragment extends Fragment implements
     		try {
     			serverItem.connect();
     			serverItem.setPWState(params[0]);
+    			response.setPwState(params[0]);
     			serverItem.disconnect();
     		} catch (Exception e) {
     			ex = e;
@@ -444,9 +445,9 @@ public class ServerDetailFragment extends Fragment implements
 		List<Sensor> sensors = null;
 		int pwState = -1;
 		if(ex == null){
-			if (response.type.equals("SENSOR")) {
+			if (response.type.equals(BMCResponse.TYPE_SENSOR)) {
 				sensors = response.getSensors();
-			} else if (response.type.equals("PWSTATE")) {
+			} else if (response.type.equals(BMCResponse.TYPE_PWSTATE)) {
 				pwState = response.getPwState();
 			}
 		}
