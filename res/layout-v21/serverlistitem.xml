@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp" >
+    android:padding="20dp"
+    android:background="@color/background_grey" >
 
     <TextView
         android:id="@+id/itemName"
@@ -11,6 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="23dp"
         android:text="Server Name"
+        android:textColor="@color/white"
         android:textSize="16sp" />
 
     <TextView
@@ -20,6 +22,7 @@
         android:layout_below="@+id/itemName"
         android:layout_marginLeft="23dp"
         android:layout_marginTop="5dp"
+        android:textColor="@color/white"
         android:text="IP Address" />
 
     <ImageView

@@ -17,6 +17,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="Server Name"
+            android:textColor="@color/white"
             android:textSize="16sp" />
 
         <TextView
@@ -26,6 +27,7 @@
             android:layout_below="@+id/textServerName"
             android:layout_marginLeft="23dp"
             android:layout_marginTop="15dp"
+            android:textColor="@color/white"
             android:text="IP Address" />
 
         <Button
@@ -38,6 +40,7 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:text="@string/serverdetails_options"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </RelativeLayout>
 
@@ -77,8 +80,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:checked="true"
-            android:textColor="@color/black"
-            android:thumb="@color/white" />
+            />
     </RelativeLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout

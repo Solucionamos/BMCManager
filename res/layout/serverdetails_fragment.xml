@@ -67,7 +67,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:text="@string/serverdetails_power"
-            android:textColor="@color/white" />
+			/>
     </RelativeLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
