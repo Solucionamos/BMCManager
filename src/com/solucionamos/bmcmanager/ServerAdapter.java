@@ -20,12 +20,16 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 		AsyncResponse<BMCResponse> {
 	private List<View> viewList;
 	private List<Server> objects;
+	private List<AsyncTask> tasks;
+	private Context context;
 
 	public ServerAdapter(Context context, int textViewResourceId,
 			List<Server> objects) {
 		super(context, textViewResourceId, objects);
 		this.objects = objects;
 		viewList = new ArrayList<View>();
+		tasks = new ArrayList<AsyncTask>();
+		this.context = context;
 	}
 
 	/*
@@ -81,6 +85,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			RetrieveSensorsTask asyncTask = new RetrieveSensorsTask();
 			asyncTask.delegate = this;
 			asyncTask.execute(s);
+			tasks.add(asyncTask);
 
 		}
 		// the view must be returned to our activity
@@ -119,6 +124,12 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 					.setBackgroundResource(R.color.background_red);
 			viewList.get(response.getServer().getPosition()).setTag(
 					R.color.background_red);
+		}
+		
+		if(tasks.isEmpty()){
+			ServerListActivity listActivity = (ServerListActivity) context;
+			((ServerListFragment) listActivity.getFragmentManager()
+	                .findFragmentById(R.id.item_list)).setRefreshing(false);
 		}
 	}
 
@@ -203,6 +214,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 		@Override
 		protected void onPostExecute(BMCResponse response) {
 			if (isrunning) {
+				tasks.remove(this);
 				delegate.processFinish(response, ex);
 			}
 		}

@@ -19,6 +19,7 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
+
     	<fragment
         	android:id="@+id/item_list"
         	android:name="com.solucionamos.bmcmanager.ServerListFragment"

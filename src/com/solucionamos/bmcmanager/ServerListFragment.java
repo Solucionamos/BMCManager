@@ -88,8 +88,6 @@ public class ServerListFragment extends ListFragment implements
 	public ServerListFragment() {
 		swipeLayout = null;
 		listArray = new ArrayList<Server>();
-		//listArray.add(new Server("HTTP", "IVB", "lucio", "10.0.3.2:8080",
-			//"lucionamos", "6lucio9"));
 	}
 
 	@Override
@@ -226,7 +224,12 @@ public class ServerListFragment extends ListFragment implements
 		// TODO Auto-generated method stub
 		swipeLayout.setRefreshing(true);
 		adapter.notifyDataSetChanged();
-		swipeLayout.setRefreshing(false);
+		if(this.getActivity().findViewById(R.id.item_detail_container) != null){
+			ServerDetailFragment detailFragment = ((ServerDetailFragment) this.getActivity().getFragmentManager()
+	                .findFragmentById(R.id.item_detail_container));
+			if(detailFragment != null)
+				detailFragment.refreshData();
+		}
 	}
 	
 
@@ -238,18 +241,7 @@ public class ServerListFragment extends ListFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setEmptyText(this.getActivity().getResources().getString(R.string.empty));
-		/*swipeLayout = (SwipeRefreshLayout) this.getActivity().findViewById(R.id.swipeRefreshList);
 		
-		if(swipeLayout != null){
-			
-		swipeLayout.setOnRefreshListener(this);
-				//swipeLayout.setRefreshing(true);
-		swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
-					android.R.color.holo_green_light,
-					android.R.color.holo_orange_light,
-					android.R.color.holo_red_light);
-		}*/
-		//swipeLayout.setRefreshing(false);
 	}
 	
 	public void removeServer(Server el){
@@ -320,6 +312,10 @@ public class ServerListFragment extends ListFragment implements
 					&& (listView.getFirstVisiblePosition() > 0 || listView
 							.getChildAt(0).getTop() < listView.getPaddingTop());
 		}
+	}
+	
+	public void setRefreshing(boolean bool){
+		swipeLayout.setRefreshing(bool);
 	}
 	
 }

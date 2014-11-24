@@ -289,6 +289,7 @@ public class ServerDetailFragment extends Fragment implements
     		try {
     			serverItem.connect();
     			serverItem.setPWState(params[0]);
+    			response.setPwState(params[0]);
     			serverItem.disconnect();
     		} catch (Exception e) {
     			ex = e;
@@ -396,6 +397,12 @@ public class ServerDetailFragment extends Fragment implements
 		PopupMenu popup = new PopupMenu(getActivity(), v);
 		MenuInflater inflater = popup.getMenuInflater();
 		inflater.inflate(R.menu.serverdetails_options_popmenu, popup.getMenu());
+		
+		if (!powerSwitch.isChecked()) {
+			popup.getMenu().removeItem(R.id.hreset_server);
+			popup.getMenu().removeItem(R.id.reset_server);
+		}
+		
 		popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			public boolean onMenuItemClick(MenuItem item) {
 				Bundle bundle = new Bundle();
@@ -444,9 +451,9 @@ public class ServerDetailFragment extends Fragment implements
 		List<Sensor> sensors = null;
 		int pwState = -1;
 		if(ex == null){
-			if (response.type.equals("SENSOR")) {
+			if (response.type.equals(BMCResponse.TYPE_SENSOR)) {
 				sensors = response.getSensors();
-			} else if (response.type.equals("PWSTATE")) {
+			} else if (response.type.equals(BMCResponse.TYPE_PWSTATE)) {
 				pwState = response.getPwState();
 			}
 		}
