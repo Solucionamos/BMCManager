@@ -1,11 +1,4 @@
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/swipeRefreshList"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.bmcmanager.ItemListActivity"
-    tools:ignore="MergeRootFrame" 
-    tools:layout="@android:layout/list_content" >
+
 
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,5 +8,3 @@
     android:layout_height="match_parent"
     tools:context="com.example.bmcmanager.ItemListActivity"
     />
-
-</android.support.v4.widget.SwipeRefreshLayout>
