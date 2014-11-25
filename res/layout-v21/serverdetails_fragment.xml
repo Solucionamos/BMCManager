@@ -4,31 +4,12 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppBaseTheme" >
 
-    <RelativeLayout
-        android:id="@+id/relativeHeader"
-        style="@style/ServerInformation.Green"
-        android:paddingBottom="15dp"
-        android:paddingTop="5dp" >
-
-        <TextView
-            android:id="@+id/textServerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:text="Server Name"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textServerDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textServerName"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/white"
-            android:text="IP Address" />
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@color/background_grey"
+    android:id="@+id/relativeHeader">
 
         <Button
             android:id="@+id/Options_Image"
@@ -42,14 +23,43 @@
             android:text="@string/serverdetails_options"
             android:textColor="@color/white"
             android:textSize="14sp" />
-    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/forward_Image"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textServerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:text="Server Name"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textServerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="5dp"
+            android:text="IP Address"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>
+    
 
     <RelativeLayout
         android:id="@+id/bellowHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeHeader"
-        android:layout_marginTop="-6dp"
         android:background="@drawable/header" >
 
         <TextView

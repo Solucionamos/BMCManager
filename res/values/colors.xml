@@ -22,14 +22,14 @@
     <color name="text_grey">#d01716</color>
     
     
-    <color name="blockheader_background">#607D8B</color>
+    <color name="blockheader_background">#616161</color>
     <color name="block_background">#FFFFFF</color>
     
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     
-    <color name="primary">#607D8B</color>
-    <color name="primary_dark">#37474F</color>
+    <color name="primary">#616161</color>
+    <color name="primary_dark">#424242</color>
     <color name="accent">#ff9800</color>
     
     <color name="gradient_start">#50000000</color>
