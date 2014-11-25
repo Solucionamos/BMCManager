@@ -49,5 +49,4 @@
             <solid android:color="@color/background_grey" />
         </shape>
     </item>
-
 </layer-list>

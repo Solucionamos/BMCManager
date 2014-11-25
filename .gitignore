@@ -11,6 +11,9 @@
 # Java class files
 *.class
 
+# Classpath
+*.classpath
+
 # generated files
 bin/
 gen/
@@ -49,4 +52,3 @@ local.properties
 .buildpath
 
 *~
-/project.properties
