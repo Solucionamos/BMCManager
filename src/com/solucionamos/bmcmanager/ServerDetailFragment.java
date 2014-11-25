@@ -463,6 +463,7 @@ public class ServerDetailFragment extends Fragment implements
 		int textValue = 0;
 		int layoutItem = 0;
 		int iconItem = 0;
+		int textDesc = 0;
 		
 		if (ex != null) {
 			showToast(getString(R.string.connection_nosuccess));
@@ -503,26 +504,33 @@ public class ServerDetailFragment extends Fragment implements
 					textValue = R.id.textTemperatureNumber1;
 					layoutItem = R.layout.temperatureitem;
 					iconItem = R.id.iconTemperature1;
+					textDesc = R.id.textTemperatureDesc1;
 				} else if (sensorType.equals(Sensor.TYPE_VOLTAGE)) {
 					aBlock = voltBlock;
 					textName = R.id.textPower1;
 					textValue = R.id.textPowerNumber1;
 					layoutItem = R.layout.voltageitem;
 					iconItem = R.id.imageView12;
+					textDesc = R.id.textPowerDesc1;
 				} else if (sensorType.equals(Sensor.TYPE_FAN)) {
 					aBlock = fanBlock;
 					textName = R.id.textFan1;
 					textValue = R.id.textFanNumber1;
 					layoutItem = R.layout.fanitem;
 					iconItem = R.id.imageView3;
+					textDesc = R.id.textFanDesc1;
 				}
 
 				view = inflater.inflate(layoutItem, aBlock, false);
 				sensorName = (TextView) view.findViewById(textName);
 				sensorName.setText(aSensor.getName());
 				value = (TextView) view.findViewById(textValue);
-				value.setText(aSensor.getReading());
-
+				if(!(aSensor.getUnits() == null))
+					value.setText(aSensor.getReading()+" "+aSensor.getUnits());
+				else
+					value.setText(aSensor.getReading());
+				((TextView) view.findViewById(textDesc)).setText(aSensor.getStatus());
+				
 				iconChange = (ImageView) view.findViewById(iconItem);
 
 				if (sensorType.equals(Sensor.TYPE_TEMPERATURE)) {

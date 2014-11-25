@@ -4,29 +4,13 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppBaseTheme" >
 
-    <RelativeLayout
-        android:id="@+id/relativeHeader"
-        style="@style/ServerInformation.Green"
-        android:paddingBottom="15dp"
-        android:paddingTop="5dp" >
-
-        <TextView
-            android:id="@+id/textServerName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="15dp"
-            android:text="Server Name"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/textServerDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textServerName"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="15dp"
-            android:text="IP Address" />
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@color/background_grey"
+    android:id="@+id/relativeHeader"
+    android:elevation="10dp">
 
         <Button
             android:id="@+id/Options_Image"
@@ -38,16 +22,47 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:text="@string/serverdetails_options"
+            android:textColor="@color/white"
             android:textSize="14sp" />
-    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/forward_Image"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textServerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:text="Server Name"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textServerDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="5dp"
+            android:text="IP Address"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</RelativeLayout>
+    
 
     <RelativeLayout
         android:id="@+id/bellowHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeHeader"
-        android:layout_marginTop="-6dp"
-        android:background="@drawable/header" >
+        android:background="@drawable/header"
+        android:elevation="10dp" >
 
         <TextView
             android:id="@+id/serverStatus"
@@ -59,15 +74,25 @@
             android:text="@string/server_status"
             android:textColor="@color/white" />
 
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/switchStatus"
+            android:layout_alignBottom="@+id/switchStatus"
+            android:layout_toLeftOf="@+id/switchStatus"
+            android:text="@string/serverdetails_power"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/white" />
+
         <Switch
             android:id="@+id/switchStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:text="@string/serverdetails_power"
-			/>
+            android:layout_alignParentTop="true"
+            android:checked="true"
+            />
     </RelativeLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -88,10 +113,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                <android.support.v7.widget.CardView
+                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                	android:id="@+id/card_view1"
+                	android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+               		card_view:cardElevation="4dp"
+                	card_view:cardUseCompatPadding="true"
+                	card_view:contentPadding="0dp"
+                	card_view:elevation="7dp" >
 
                     <LinearLayout
                         android:id="@+id/temperatureBlock"
@@ -102,12 +132,17 @@
                             style="@style/InformartionBlockHeader"
                             android:text="@string/serverdetails_temperature" />
                     </LinearLayout>
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                <android.support.v7.widget.CardView
+                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                	android:id="@+id/card_view2"
+                	android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+               		card_view:cardElevation="4dp"
+                	card_view:cardUseCompatPadding="true"
+                	card_view:contentPadding="0dp"
+                	card_view:elevation="7dp" >
 
                     <LinearLayout
                         android:id="@+id/coolerBlock"
@@ -118,12 +153,17 @@
                             style="@style/InformartionBlockHeader"
                             android:text="@string/serverdetails_fans" />
                     </LinearLayout>
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                <android.support.v7.widget.CardView
+                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                	android:id="@+id/card_view3"
+                	android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+               		card_view:cardElevation="4dp"
+                	card_view:cardUseCompatPadding="true"
+                	card_view:contentPadding="0dp"
+                	card_view:elevation="7dp" >
 
                     <LinearLayout
                         android:id="@+id/powerBlock"
@@ -134,7 +174,7 @@
                             style="@style/InformartionBlockHeader"
                             android:text="@string/serverdetails_powersupply" />
                     </LinearLayout>
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>

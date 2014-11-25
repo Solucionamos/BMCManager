@@ -9,7 +9,8 @@
     android:layout_height="wrap_content"
     android:padding="20dp"
     android:background="@color/background_grey"
-    android:id="@+id/relativeHeader">
+    android:id="@+id/relativeHeader"
+    android:elevation="10dp">
 
         <Button
             android:id="@+id/Options_Image"
@@ -60,7 +61,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeHeader"
-        android:background="@drawable/header" >
+        android:background="@drawable/header"
+        android:elevation="10dp" >
 
         <TextView
             android:id="@+id/serverStatus"
@@ -111,10 +113,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                <android.support.v7.widget.CardView
+                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                	android:id="@+id/card_view1"
+                	android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+               		card_view:cardElevation="4dp"
+                	card_view:cardUseCompatPadding="true"
+                	card_view:contentPadding="0dp"
+                	card_view:elevation="7dp" >
 
                     <LinearLayout
                         android:id="@+id/temperatureBlock"
@@ -125,12 +132,17 @@
                             style="@style/InformartionBlockHeader"
                             android:text="@string/serverdetails_temperature" />
                     </LinearLayout>
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                <android.support.v7.widget.CardView
+                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                	android:id="@+id/card_view2"
+                	android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+               		card_view:cardElevation="4dp"
+                	card_view:cardUseCompatPadding="true"
+                	card_view:contentPadding="0dp"
+                	card_view:elevation="7dp" >
 
                     <LinearLayout
                         android:id="@+id/coolerBlock"
@@ -141,12 +153,17 @@
                             style="@style/InformartionBlockHeader"
                             android:text="@string/serverdetails_fans" />
                     </LinearLayout>
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                <android.support.v7.widget.CardView
+                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                	android:id="@+id/card_view3"
+                	android:layout_width="match_parent"
+                	android:layout_height="wrap_content"
+               		card_view:cardElevation="4dp"
+                	card_view:cardUseCompatPadding="true"
+                	card_view:contentPadding="0dp"
+                	card_view:elevation="7dp" >
 
                     <LinearLayout
                         android:id="@+id/powerBlock"
@@ -157,7 +174,7 @@
                             style="@style/InformartionBlockHeader"
                             android:text="@string/serverdetails_powersupply" />
                     </LinearLayout>
-                </LinearLayout>
+                </android.support.v7.widget.CardView>
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>

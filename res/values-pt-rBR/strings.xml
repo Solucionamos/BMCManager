@@ -18,14 +18,14 @@
     <string name="addserver_desc">Adicione um servidor, preenchendo as informações abaixo:</string>
     <string name="addserver_protocol">Protocolo:</string>
     <string name="addserver_name">Nome do Servidor:</string>
-    <string name="addserver_address">IP do Servidor:</string>
+    <string name="addserver_address">Endereço:</string>
     <string name="addserver_username">Nome de Usuário:</string>
     <string name="addserver_password">Senha:</string>
     <string name="addserver_button">CONFIRMAR</string>
     <string name="addserver_button_hint">Confirmar e adiciona o servidor</string>
     <string name="backserver_button">CANCELAR</string>
     <string name="backserver_button_hint">Cancelar e volta à pagina anterior</string>
-
+	<string name="server_exists">Já existe um servidor com este nome!</string>
     <!-- FIM -->
 
 
@@ -38,9 +38,9 @@
     <string name="serverdetails_options_delete">Deletar</string>
     <string name="serverdetails_options">Opções</string>
     <string name="serverdetails_status">Estado:</string>
-    <string name="serverdetails_power">Ligado:</string>
+    <string name="serverdetails_power">Energia:</string>
     <string name="serverdetails_temperature">Temperatura:</string>
-    <string name="serverdetails_fans">Ventoinha:</string>
+    <string name="serverdetails_fans">Coolers:</string>
     <string name="serverdetails_powersupply">Alimentação de Energia:</string>
     <string name="deletedialog_text">Você tem certeza que quer deletar este servidor"?</string>
     <string name="actiondialog_text">Você tem certeza que deseja realizar esta operação"?</string>

@@ -18,7 +18,7 @@
     <string name="addserver_desc">You can add a server just by filling the information below:</string>
     <string name="addserver_protocol">Protocol:</string>
     <string name="addserver_name">Server Name:</string>
-    <string name="addserver_address">Server IP:</string>
+    <string name="addserver_address">Server Address:</string>
     <string name="addserver_username">Username:</string>
     <string name="addserver_password">Password:</string>
     <string name="addserver_button">CONFIRM</string>
@@ -26,6 +26,8 @@
     <string name="backserver_button">CANCEL</string>
     <string name="backserver_button_hint">Go back to previous page</string>
 
+    
+    <string name="server_exists">There is already one server with this name!</string>
     <!-- END -->
 
 

@@ -4,8 +4,9 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
+    
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
-
+		<item name="android:logo">@android:color/transparent</item>
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
@@ -47,11 +48,6 @@
     <style name="InformartionBlock">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:background">@drawable/block</item>
         <item name="android:orientation">vertical</item>
     </style>
 

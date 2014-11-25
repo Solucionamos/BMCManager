@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -37,6 +39,10 @@ public class AddServerActivity extends Activity implements OnClickListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addserver_frag);
+		
+		// Show the Up button in the action bar.
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        
 
 		btn = (Button) this.findViewById(R.id.addServerBtn);
 		btn.setOnClickListener(this);
@@ -81,10 +87,8 @@ public class AddServerActivity extends Activity implements OnClickListener,
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		
 
-		for (int i = 0; i < menu.size(); i++)
-			menu.getItem(i).setVisible(false);
 		
 		return true;
 	}
@@ -112,9 +116,19 @@ public class AddServerActivity extends Activity implements OnClickListener,
 			if (!(spinnerText.length() == 0 || name.length() == 0
 					|| ipaddress.length() == 0 || uname.length() == 0 || pass
 						.length() == 0)) {
-				TestConnectionTask asyncTask = new TestConnectionTask();
-				asyncTask.delegate = this;
-				asyncTask.execute(serv);
+				mydb = new DBHelper(this);
+				Server el = mydb.getServer(name);
+				if(el != null){
+					Context context = this.getApplicationContext();
+					CharSequence text = getString(R.string.server_exists);
+					int duration = Toast.LENGTH_SHORT;
+					Toast toast = Toast.makeText(context, text, duration);
+					toast.show();
+				}else{
+					TestConnectionTask asyncTask = new TestConnectionTask();
+					asyncTask.delegate = this;
+					asyncTask.execute(serv);
+				}
 			} else {
 				Context context = this.getApplicationContext();
 				CharSequence text = getString(R.string.required_string) + "\n";
@@ -157,6 +171,23 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		}
 
 	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // This ID represents the Home or Up button. In the case of this
+            // activity, the Up button is shown. Use NavUtils to allow users
+            // to navigate up one level in the application structure. For
+            // more details, see the Navigation pattern on Android Design:
+            //
+            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            //
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 	private void addServer(Server el) {
 		mydb = new DBHelper(this);
