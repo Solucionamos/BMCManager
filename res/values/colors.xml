@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Background using orange (#ffcc80) color -->
+    <!-- Background using orange (#EF6C00) color -->
     <color name="background_orange">#EF6C00</color>
-    <!-- Text using orange (#0a7e07) color -->
+    <!-- Text using orange (#f57c00) color -->
     <color name="text_orange">#f57c00</color>
 
-    <!-- Background using green (#72d572) color -->
+    <!-- Background using green (#43A047) color -->
     <color name="background_green">#43A047</color>
     <!-- Text using green (#0a7e07) color -->
     <color name="text_green">#0a7e07</color>
 
-    <!-- Background using red (#f69988) color -->
+    <!-- Background using red (#FF8080) color -->
     <color name="background_red">#FF8080</color>
     <!-- Text using red (#d01716) color -->
     <color name="text_red">#d01716</color>
     
-    <!-- Background using grey (#f69988) color -->
-    <color name="background_grey">#BDBDBD</color>
+    <!-- Background using grey (#9E9E9E) color -->
+    <color name="background_grey">#9E9E9E</color>
     <!-- Text using grey (#d01716) color -->
     <color name="text_grey">#d01716</color>
     
