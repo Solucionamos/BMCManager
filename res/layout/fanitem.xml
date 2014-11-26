@@ -42,6 +42,6 @@
         android:layout_centerVertical="true"
         android:paddingRight="5dp"
         android:text="3600 RPM"
-        android:textSize="20sp" />
+        android:textSize="24sp" />
 
 </RelativeLayout>

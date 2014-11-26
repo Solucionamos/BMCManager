@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:background="@color/background_grey" >
+    android:layout_height="72dp"
+    android:background="@color/background_grey"
+    android:minHeight="72dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp" >
 
     <ImageView
         android:id="@+id/forward_Image"
@@ -25,7 +27,6 @@
             android:id="@+id/itemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
             android:text="Server Name"
             android:textColor="@color/white"
             android:textSize="24sp" />
@@ -34,8 +35,6 @@
             android:id="@+id/itemAddr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
-            android:layout_marginTop="5dp"
             android:text="IP Address"
             android:textColor="@color/white"
             android:textSize="12sp" />

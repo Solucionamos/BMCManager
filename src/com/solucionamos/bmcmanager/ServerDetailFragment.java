@@ -525,8 +525,15 @@ public class ServerDetailFragment extends Fragment implements
 				sensorName = (TextView) view.findViewById(textName);
 				sensorName.setText(aSensor.getName());
 				value = (TextView) view.findViewById(textValue);
-				if(!(aSensor.getUnits() == null))
-					value.setText(aSensor.getReading()+" "+aSensor.getUnits());
+				
+				String unit = aSensor.getUnits();
+				if(!(unit == null)) {
+					if (unit.equals("C") || unit.equals("F")) {
+						unit = "°" + unit;
+					}
+					unit = " " + unit;
+					value.setText(aSensor.getReading() + unit);
+				}
 				else
 					value.setText(aSensor.getReading());
 				((TextView) view.findViewById(textDesc)).setText(aSensor.getStatus());

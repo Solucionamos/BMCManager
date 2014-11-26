@@ -38,10 +38,10 @@
     <string name="serverdetails_options_delete">Deletar</string>
     <string name="serverdetails_options">Opções</string>
     <string name="serverdetails_status">Estado:</string>
-    <string name="serverdetails_power">Energia:</string>
-    <string name="serverdetails_temperature">Temperatura:</string>
-    <string name="serverdetails_fans">Coolers:</string>
-    <string name="serverdetails_powersupply">Alimentação de Energia:</string>
+    <string name="serverdetails_power">Energia</string>
+    <string name="serverdetails_temperature">Temperatura</string>
+    <string name="serverdetails_fans">Coolers</string>
+    <string name="serverdetails_powersupply">Alimentação de Energia</string>
     <string name="deletedialog_text">Você tem certeza que quer deletar este servidor"?</string>
     <string name="actiondialog_text">Você tem certeza que deseja realizar esta operação"?</string>
     <string name="dialog_confirm">Confirmar</string>

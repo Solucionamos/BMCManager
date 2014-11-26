@@ -42,11 +42,11 @@
     <string name="serverdetails_options_cyclereset">Reset</string>
     <string name="serverdetails_options_hardreset">Hard Reset</string>
     <string name="serverdetails_status">Status:</string>
-    <string name="serverdetails_power">Power:</string>
-    <string name="serverdetails_temperature">Temperature:</string>
+    <string name="serverdetails_power">Power</string>
+    <string name="serverdetails_temperature">Temperature</string>
     <string name="serverdetails_temperatureIcon">Temperature Icon</string>
-    <string name="serverdetails_fans">Fans:</string>
-    <string name="serverdetails_powersupply">Power Supply:</string>
+    <string name="serverdetails_fans">Fans</string>
+    <string name="serverdetails_powersupply">Power Supply</string>
     <string name="deletedialog_text">Are you sure you want to delete this server?</string>
     <string name="actiondialog_text">Are you sure you want to proceed with this operation?</string>
     <string name="dialog_confirm">Confirm</string>
