@@ -466,6 +466,10 @@ public class ServerDetailFragment extends Fragment implements
 		int textDesc = 0;
 		
 		if (ex != null) {
+			isRefreshing = true;
+			powerSwitch.setChecked(false);
+			isRefreshing = false;
+			
 			showToast(getString(R.string.connection_nosuccess));
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_unreachable_status));
@@ -474,6 +478,7 @@ public class ServerDetailFragment extends Fragment implements
 			isRefreshing = true;
 			powerSwitch.setChecked(false);
 			isRefreshing = false;
+			
 			showToast(getString(R.string.server_powered_off));
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_off_status));
