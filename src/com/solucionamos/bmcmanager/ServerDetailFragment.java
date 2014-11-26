@@ -324,7 +324,8 @@ public class ServerDetailFragment extends Fragment implements
 	}
 
 	public void refreshData() {
-
+		cancelTasks();
+		
 		if (voltBlock != null) {
 			removeChildrenFromBlock(voltBlock);
 		}
@@ -372,7 +373,7 @@ public class ServerDetailFragment extends Fragment implements
 			task.cancel(true);
 		}
 		tasks.clear();
-		swipeLayout.setRefreshing(false);
+		swipeLayout.setRefreshing(true);
 	}
 
 	
