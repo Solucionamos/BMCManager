@@ -15,9 +15,10 @@
     <style name="ActionBar" parent="@android:style/Theme.Material.Light">
         <item name="android:background">@color/primary</item>
         <item name="android:textColor">@color/white</item>
+        
     </style>
 
-    <style name="ServerInformation">
+    <style name="ServerInformation" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
@@ -34,20 +35,18 @@
     <style name="InformartionBlock">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">0dp</item>
         <item name="android:orientation">vertical</item>
     </style>
 
     <style name="InformartionBlockHeader">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">1dp</item>
-        <item name="android:layout_marginRight">1dp</item>
-        <item name="android:layout_marginTop">1dp</item>
         <item name="android:background">@drawable/header</item>
-        <item name="android:paddingLeft">5dp</item>
-        <item name="android:paddingRight">0dp</item>
+        <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="InformationBlockBlock">

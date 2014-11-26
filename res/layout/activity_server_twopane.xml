@@ -29,6 +29,8 @@
         	tools:layout="@android:layout/list_content"
         	android:elevation="0dp"
         	 />
+    	
+    	
     <FrameLayout
         android:id="@+id/item_detail_container"
         android:layout_width="0dp"

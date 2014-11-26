@@ -3,6 +3,7 @@ package com.solucionamos.bmcmanager;
 import com.example.bmcmanager.R;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.app.NavUtils;
@@ -30,7 +31,8 @@ public class ServerDetailActivity extends Activity {
 
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+        	getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).

@@ -3,6 +3,7 @@ package com.solucionamos.bmcmanager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -42,7 +43,8 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		
 		// Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+        	getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
 		btn = (Button) this.findViewById(R.id.addServerBtn);
 		btn.setOnClickListener(this);
