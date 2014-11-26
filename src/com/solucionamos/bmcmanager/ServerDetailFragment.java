@@ -630,6 +630,9 @@ public class ServerDetailFragment extends Fragment implements
 		
 		if (unreachable == true){
 			colorBlock.setBackgroundResource(R.color.background_grey);
+			removeChildrenFromBlock(tempBlock);
+			removeChildrenFromBlock(voltBlock);
+			removeChildrenFromBlock(fanBlock);
 		}else{
 			colorBlock.setBackgroundResource(R.color.background_red);
 		}
