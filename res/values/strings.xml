@@ -80,8 +80,8 @@
     <string name="empty_block">Couldn\'t load information</string>
     <string name="empty_value"></string>
     <string name="server_status">Status: </string>
-    <string name="server_on_status">Online</string>
-    <string name="server_off_status">Offline</string>
+    <string name="server_on_status">On</string>
+    <string name="server_off_status">Off</string>
     <string name="server_unreachable_status">Unreachable</string>
 
     
@@ -89,4 +89,8 @@
     <string name="hard_reset">Hard Reset</string>
     <string name="delete">Delete</string>
     <string name="add_server">Add Server</string>
+    
+    <string name="status_critical">Critical</string>
+    <string name="status_normal">Normal</string>
+    <string name="status_warning">Warning</string>
 </resources>

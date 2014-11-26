@@ -71,4 +71,8 @@
     <string name="server_off_status">Desligado</string>
     <string name="server_unreachable_status">Inacessível</string>
 
+    
+    <string name="status_critical">Crítico</string>
+    <string name="status_normal">Normal</string>
+    <string name="status_warning">Advertência</string>
 </resources>

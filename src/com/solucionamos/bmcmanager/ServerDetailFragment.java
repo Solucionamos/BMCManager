@@ -542,7 +542,16 @@ public class ServerDetailFragment extends Fragment implements
 				}
 				else
 					value.setText(aSensor.getReading());
-				((TextView) view.findViewById(textDesc)).setText(aSensor.getStatus());
+				
+				if(aSensor.getStatus().equals("Critical")){
+					((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_critical));
+				}else if(aSensor.getStatus().equals("Warning")){
+					((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_warning));
+				}else if(aSensor.getStatus().equals("Normal")){
+					((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_normal));
+				}
+					
+				
 				
 				iconChange = (ImageView) view.findViewById(iconItem);
 
@@ -599,10 +608,13 @@ public class ServerDetailFragment extends Fragment implements
 
 			if (colorFlag == 2) {
 				colorBlock.setBackgroundResource(R.color.background_red);
+				statusTxt.setText(statusTxt.getText()+" - "+getString(R.string.status_critical));
 			} else if (colorFlag == 1) {
 				colorBlock.setBackgroundResource(R.color.background_orange);
+				statusTxt.setText(statusTxt.getText()+" - "+getString(R.string.status_warning));
 			} else {
 				colorBlock.setBackgroundResource(R.color.background_green);
+				statusTxt.setText(statusTxt.getText()+" - "+getString(R.string.status_normal));
 			}
 
 		}
