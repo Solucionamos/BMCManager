@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fanTemplate"
+    style="@style/InformationBlockBlock" >
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingLeft="5dp"
+        android:src="@drawable/ic_fan_good" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="45dp"
+        android:paddingTop="3dp" >
+
+        <TextView
+            android:id="@+id/textFan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fan #1"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textFanDesc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textFan1"
+            android:paddingLeft="5dp"
+            android:text="System Board"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textFanNumber1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="5dp"
+        android:text="3600 RPM"
+        android:textSize="24sp" />
+
+</RelativeLayout>

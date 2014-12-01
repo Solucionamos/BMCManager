@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Background using orange (#EF6C00) color -->
+    <color name="background_orange">#EF6C00</color>
+    <!-- Text using orange (#f57c00) color -->
+    <color name="text_orange">#f57c00</color>
+
+    <!-- Background using green (#4CAF50) color -->
+    <color name="background_green">#4CAF50</color>
+    <!-- Text using green (#0a7e07) color -->
+    <color name="text_green">#0a7e07</color>
+
+    <!-- Background using red (#E53935) color -->
+    <color name="background_red">#E53935</color>
+    <!-- Text using red (#d01716) color -->
+    <color name="text_red">#d01716</color>
+    
+    <!-- Background using grey (#9E9E9E) color -->
+    <color name="background_grey">#9E9E9E</color>
+    <!-- Text using grey (#d01716) color -->
+    <color name="text_grey">#d01716</color>
+    
+    
+    <color name="blockheader_background">#512DA8</color>
+    <color name="block_background">#FFFFFF</color>
+    
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    
+    <color name="primary">#512DA8</color>
+    <color name="primary_dark">#311B92</color>
+    <color name="accent">#ff9800</color>
+    
+    <color name="gradient_start">#50000000</color>
+    <color name="gradient_light_start">#30000000</color>
+</resources>

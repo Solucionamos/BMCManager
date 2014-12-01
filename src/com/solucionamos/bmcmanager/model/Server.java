@@ -8,8 +8,8 @@ import com.solucionamos.bmcmanager.connection.*;
 public class Server {
 	public static final int PWSTATE_OFF = 0;
 	public static final int PWSTATE_ON = 1;
-	protected static final int PWSTATE_RESET = 2;
-	protected static final int PWSTATE_HRESET = 3;
+	public static final int PWSTATE_RESET = 2;
+	public static final int PWSTATE_HRESET = 3;
 
 	public static final String MODEL_IVB = "IVB";
 
