@@ -483,6 +483,7 @@ public class ServerDetailFragment extends Fragment implements
 			showToast(getString(R.string.server_powered_off));
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_off_status));
+			colorBlock.setBackgroundResource(R.color.background_grey);
 			showEmptyBlocks(false);
 		} else if (sensors != null) {
 			isRefreshing = true;
@@ -646,8 +647,6 @@ public class ServerDetailFragment extends Fragment implements
 			removeChildrenFromBlock(tempBlock);
 			removeChildrenFromBlock(voltBlock);
 			removeChildrenFromBlock(fanBlock);
-		}else{
-			colorBlock.setBackgroundResource(R.color.background_red);
 		}
 		
 		aBlock = tempBlock;

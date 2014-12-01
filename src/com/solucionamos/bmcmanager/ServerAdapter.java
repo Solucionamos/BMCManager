@@ -98,9 +98,9 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 		if (ex == null) {
 			if (response.getPwState() == Server.PWSTATE_OFF) {
 				viewList.get(response.getServer().getPosition())
-						.setBackgroundResource(R.color.background_red);
+						.setBackgroundResource(R.color.background_grey);
 				viewList.get(response.getServer().getPosition()).setTag(
-						R.color.background_red);
+						R.color.background_grey);
 			} else if (response.getPwState() == Server.PWSTATE_ON) {
 				if (response.getColorIndex() == 0) {
 					viewList.get(response.getServer().getPosition())
