@@ -324,6 +324,7 @@ public class ServerDetailFragment extends Fragment implements
 	}
 
 	public void refreshData() {
+		powerSwitch.setEnabled(false);
 		cancelTasks();
 		
 		if (voltBlock != null) {
@@ -622,6 +623,7 @@ public class ServerDetailFragment extends Fragment implements
 
 		if (tasks.isEmpty()) {
 			swipeLayout.setRefreshing(false);
+			powerSwitch.setEnabled(true);
 		}
 	}
 
