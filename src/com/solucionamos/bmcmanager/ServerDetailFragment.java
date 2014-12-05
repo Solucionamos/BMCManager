@@ -120,8 +120,12 @@ public class ServerDetailFragment extends Fragment implements
 
          	((TextView) rootView.findViewById(R.id.textServerDescription)).setText(serverItem.getAddress());
          	
-         	powerSwitch = (Switch) rootView.findViewById(R.id.switchStatus);
-         	powerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+     		powerSwitch = (Switch) rootView.findViewById(R.id.switchStatus);
+     		
+     		if (savedInstanceState != null)
+     			powerSwitch.setChecked(savedInstanceState.getBoolean("switchChecked"));
+
+     		powerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
  				public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
 						if (!isRefreshing) {
@@ -160,6 +164,12 @@ public class ServerDetailFragment extends Fragment implements
         }
 
         return rootView;
+    }
+    
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+    	savedInstanceState.putBoolean("switchChecked", powerSwitch.isChecked());
+    	super.onSaveInstanceState(savedInstanceState);
     }
     
     private class RetrieveSensorsTask extends AsyncTask<String, Void, BMCResponse> {
