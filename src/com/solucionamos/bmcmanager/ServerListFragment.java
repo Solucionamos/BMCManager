@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.ListFragment;
 import android.content.Context;
 import android.support.v4.view.ViewCompat;
@@ -260,6 +261,14 @@ public class ServerListFragment extends ListFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
+		
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				swipeLayout.setRefreshing(true);
+			}
+		}, 100);
 		
 		adapter.notifyDataSetChanged();
 		/*if(listArray != null){
