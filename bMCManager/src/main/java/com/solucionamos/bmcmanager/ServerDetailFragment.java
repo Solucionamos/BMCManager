@@ -547,7 +547,7 @@ public class ServerDetailFragment extends Fragment implements
 				String unit = aSensor.getUnits();
 				if(!(unit == null)) {
 					if (unit.equals("C") || unit.equals("F")) {
-						unit = "ฐ" + unit;
+						unit = "ยบ" + unit;
 					}
 					unit = " " + unit;
 					value.setText(aSensor.getReading() + unit);
