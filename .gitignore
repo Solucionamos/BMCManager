@@ -21,6 +21,14 @@ gen/
 # Local configuration file (sdk path, etc)
 local.properties
 
+
+###########################################################
+### AndroidStudio.gitignore ###
+
+.idea
+.gradle
+build/
+
 ###########################################################
 ### Eclipse.gitignore ###
 
