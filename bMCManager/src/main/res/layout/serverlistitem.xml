@@ -8,6 +8,7 @@
     android:paddingRight="8dp" >
 
     <ImageView
+        android:contentDescription="@string/serverlist_view_details"
         android:id="@+id/forward_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +28,7 @@
             android:id="@+id/itemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Server Name"
+            android:text="@string/server_name"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -35,7 +36,7 @@
             android:id="@+id/itemAddr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IP Address"
+            android:text="@string/server_address"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>

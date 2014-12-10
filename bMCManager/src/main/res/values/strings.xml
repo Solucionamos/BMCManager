@@ -4,27 +4,27 @@
     <!-- Action Bar Strings -->
 
     <string name="app_name">Manager</string>
-    <string name="action_new">Add Server</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_refresh">Refresh</string>
 
     <!-- END -->
 
+    <!-- Server List Strings -->
+
+    <string name="server_name">Server Name</string>
+    <string name="server_address">Server Address</string>
+
+    <!-- END -->
 
     <!-- Add Server Strings -->
 
     <string name="empty">There are no servers added yet. Add one by clicking the "+" symbol at the top bar.</string>
-    <string name="addserver_title">Server Setup</string>
     <string name="addserver_desc">You can add a server just by filling the information below:</string>
     <string name="addserver_protocol">Protocol:</string>
     <string name="addserver_name">Server Name:</string>
     <string name="addserver_address">Server Address:</string>
     <string name="addserver_username">Username:</string>
     <string name="addserver_password">Password:</string>
-    <string name="addserver_button">CONFIRM</string>
-    <string name="addserver_button_hint">Add this server</string>
-    <string name="backserver_button">CANCEL</string>
-    <string name="backserver_button_hint">Go back to previous page</string>
+    <string name="addserver_button">Confirm</string>
+    <string name="backserver_button">@android:string/cancel</string>
 
     
     <string name="server_exists">There is already one server with this name!</string>
@@ -33,15 +33,9 @@
 
     <!-- Server Details Strings -->
 
-    <string name="serverdetails_title">Server Details</string>
-    <string name="serverdetails_servername">Server Name</string>
-    <string name="serverdetails_serverdescription">Server Description</string>
-    <string name="serverdetails_options">Options</string>
-    <string name="serverdetails_options_edit">Edit</string>
     <string name="serverdetails_options_delete">Delete</string>
     <string name="serverdetails_options_cyclereset">Reset</string>
     <string name="serverdetails_options_hardreset">Hard Reset</string>
-    <string name="serverdetails_status">Status:</string>
     <string name="serverdetails_power">Power</string>
     <string name="serverdetails_temperature">Temperature</string>
     <string name="serverdetails_temperatureIcon">Temperature Icon</string>
@@ -56,7 +50,6 @@
     <!-- Toast Messages -->
     <string name="connection_nosuccess">The connection was not successful</string>
     <string name="server_powered_off">The server is powered off</string>
-    <string name="empty_field">is required.</string>
     <string name="required_string">Required fields:</string>
     <!-- END -->
 
@@ -68,7 +61,6 @@
     <string name="title_AppTitle">BMC Manager</string>
     <!-- END -->
     <string name="title_activity_add_serv">Server Setup</string>
-    <string name="hello_world">Hello world!</string>
     <string name="all_fields_required">*All fields are mandatory.</string>
 
     <string-array name="connection_array">
@@ -84,13 +76,18 @@
     <string name="server_off_status">Off</string>
     <string name="server_unreachable_status">Unreachable</string>
 
-    
-    <string name="power_cycle">Reset</string>
-    <string name="hard_reset">Hard Reset</string>
-    <string name="delete">Delete</string>
     <string name="add_server">Add Server</string>
-    
+
     <string name="status_critical">Critical</string>
     <string name="status_normal">Normal</string>
     <string name="status_warning">Warning</string>
+
+    <string name="serverlist_view_details">View details</string>
+
+    <string name="fan_state_normal">Normal state fan</string>
+    <string name="voltage_state_normal">Normal state voltage</string>
+
+    <string name="sensor_name">Sensor Name</string>
+    <string name="sensor_status">Status</string>
+    <string name="sensor_reading">Sensor Reading</string>
 </resources>

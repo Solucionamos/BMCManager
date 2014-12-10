@@ -2,6 +2,7 @@ package com.solucionamos.bmcmanager;
 
 import com.example.bmcmanager.R;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.solucionamos.bmcmanager.model.Server;
  */
 public class ServerDetailActivity extends Activity {
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

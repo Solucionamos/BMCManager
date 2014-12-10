@@ -4,42 +4,39 @@
     <!-- Strings da Barra de Ações -->
 
     <string name="app_name">Manager</string>
-    <string name="action_new">Adicionar Servidor</string>
-    <string name="action_settings">Configurações</string>
-    <string name="action_refresh">Atualizar</string>
 
     <!-- FIM -->
 
+    <!-- Server List Strings -->
+
+    <string name="server_name">Nome do Servidor</string>
+    <string name="server_address">Endereço do Servidor</string>
+
+    <!-- END -->
 
     <!-- Strings de Adicionar Servidor -->
 
     <string name="empty">Não há servidores adicionados. Adicione um novo servidor através do símbolo "+", no barra acima.</string>
-    <string name="addserver_title">Configurar Servidor</string>
     <string name="addserver_desc">Adicione um servidor, preenchendo as informações abaixo:</string>
     <string name="addserver_protocol">Protocolo:</string>
     <string name="addserver_name">Nome do Servidor:</string>
     <string name="addserver_address">Endereço:</string>
     <string name="addserver_username">Nome de Usuário:</string>
     <string name="addserver_password">Senha:</string>
-    <string name="addserver_button">CONFIRMAR</string>
-    <string name="addserver_button_hint">Confirmar e adiciona o servidor</string>
-    <string name="backserver_button">CANCELAR</string>
-    <string name="backserver_button_hint">Cancelar e volta à pagina anterior</string>
+    <string name="addserver_button">Confirmar</string>
+    <string name="backserver_button">@android:string/cancel</string>
 	<string name="server_exists">Já existe um servidor com este nome!</string>
     <!-- FIM -->
 
 
     <!-- Strings de Detalhes do Servidor -->
 
-    <string name="serverdetails_title">Detalhes do Servidor</string>
-    <string name="serverdetails_servername">Nome do Servidor</string>
-    <string name="serverdetails_serverdescription">Descrição do Servidor</string>
-    <string name="serverdetails_options_edit">Editar</string>
-    <string name="serverdetails_options_delete">Deletar</string>
-    <string name="serverdetails_options">Opções</string>
-    <string name="serverdetails_status">Estado:</string>
+    <string name="serverdetails_options_delete">Remover</string>
+    <string name="serverdetails_options_cyclereset">Reset</string>
+    <string name="serverdetails_options_hardreset">Hard Reset</string>
     <string name="serverdetails_power">Energia</string>
     <string name="serverdetails_temperature">Temperatura</string>
+    <string name="serverdetails_temperatureIcon">Ícone da temperatura</string>
     <string name="serverdetails_fans">Coolers</string>
     <string name="serverdetails_powersupply">Alimentação de Energia</string>
     <string name="deletedialog_text">Você tem certeza que quer deletar este servidor"?</string>
@@ -51,7 +48,6 @@
     <!-- Toast Messages -->
     <string name="connection_nosuccess">Conexão não pode ser executada com sucesso</string>
     <string name="server_powered_off">O servidor está desligado</string>
-    <string name="empty_field">é obrigatório.</string>
     <string name="required_string">Campos obrigatórios:</string>
     <!-- END -->
 
@@ -60,19 +56,37 @@
     <string name="action_titleServerList">Lista de Servidores</string>
     <string name="action_titleServerDetails">Detalhes do Servidor</string>
     <string name="action_titleAddServer">Configuração de Servidor</string>
+    <string name="title_AppTitle">BMC Manager</string>
     <!-- END -->
 
     <string name="title_activity_add_serv">Configuração de Servidor</string>
     <string name="all_fields_required">*Todos os campos são obrigatórios.</string>
+
+    <string-array name="connection_array">
+        <item>HTTP</item>
+        <item>HTTPS</item>
+    </string-array>
+
     <string name="credentials">Credenciais:</string>
     <string name="empty_block">Não foi possível carregar informação</string>
+    <string name="empty_value"></string>
     <string name="server_status">Estado: </string>
     <string name="server_on_status">Ligado</string>
     <string name="server_off_status">Desligado</string>
     <string name="server_unreachable_status">Inacessível</string>
 
-    
-    <string name="status_critical">Crítico</string>
+    <string name="add_server">Adicionar Servidor</string>
+
+    <string name="status_critical">Critical</string>
     <string name="status_normal">Normal</string>
-    <string name="status_warning">Advertência</string>
+    <string name="status_warning">Warning</string>
+
+    <string name="serverlist_view_details">Ver detalhes</string>
+
+    <string name="fan_state_normal">Fan em estado normal</string>
+    <string name="voltage_state_normal">Voltagem em estado normal</string>
+
+    <string name="sensor_name">Nome do sensor</string>
+    <string name="sensor_status">Estado</string>
+    <string name="sensor_reading">Leitura do sensor</string>
 </resources>

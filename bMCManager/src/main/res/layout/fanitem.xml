@@ -4,10 +4,12 @@
     style="@style/InformationBlockBlock" >
 
     <ImageView
+        android:contentDescription="@string/fan_state_normal"
         android:id="@+id/imageView3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:src="@drawable/ic_fan_good" />
 
     <LinearLayout
@@ -15,22 +17,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="45dp"
+        android:paddingRight="45dp"
         android:paddingTop="3dp" >
 
         <TextView
             android:id="@+id/textFan1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fan #1"
+            android:text="@string/sensor_name"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/textFanDesc1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textFan1"
             android:paddingLeft="5dp"
-            android:text="System Board"
+            android:paddingRight="5dp"
+            android:text="@string/sensor_status"
             android:textSize="12sp" />
     </LinearLayout>
 
@@ -40,8 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:text="3600 RPM"
+        android:text="@string/sensor_reading"
         android:textSize="24sp" />
 
 </RelativeLayout>

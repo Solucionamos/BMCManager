@@ -48,7 +48,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			LayoutInflater inflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			viewList.set(position,
-					inflater.inflate(R.layout.serverlistitem, null));
+					inflater.inflate(R.layout.serverlistitem, parent, false));
 			// view = inflater.inflate(R.layout.serverlistitem, null);
 		}
 

@@ -28,7 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/forward_Image"
         android:orientation="vertical" >
 
         <TextView
@@ -36,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:text="Server Name"
+            android:text="@string/server_name"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -46,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="0dp"
-            android:text="IP Address"
+            android:text="@string/server_address"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </LinearLayout>

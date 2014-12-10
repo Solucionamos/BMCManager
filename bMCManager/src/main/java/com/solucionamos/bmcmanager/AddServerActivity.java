@@ -1,5 +1,6 @@
 package com.solucionamos.bmcmanager;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 
 	private DBHelper mydb;
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +45,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		
 		// Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) && 
+        if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) &&
         		(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP))
         	getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
