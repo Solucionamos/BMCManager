@@ -82,7 +82,7 @@
             android:layout_alignBottom="@+id/switchStatus"
             android:layout_marginRight="4dp"
             android:layout_toLeftOf="@+id/switchStatus"
-            android:text="@string/serverdetails_power"
+            android:text="@string/server_details_power"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/white" />
 
@@ -127,12 +127,12 @@
 
                     <LinearLayout
                         android:id="@+id/temperatureBlock"
-                        style="@style/InformartionBlock" >
+                        style="@style/InformationBlock" >
 
                         <TextView
                             android:id="@+id/textTemperatureHeader"
-                            style="@style/InformartionBlockHeader"
-                            android:text="@string/serverdetails_temperature" />
+                            style="@style/InformationBlockHeader"
+                            android:text="@string/server_details_temperature" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
@@ -148,12 +148,12 @@
 
                     <LinearLayout
                         android:id="@+id/coolerBlock"
-                        style="@style/InformartionBlock" >
+                        style="@style/InformationBlock" >
 
                         <TextView
                             android:id="@+id/textCoolerHeader"
-                            style="@style/InformartionBlockHeader"
-                            android:text="@string/serverdetails_fans" />
+                            style="@style/InformationBlockHeader"
+                            android:text="@string/server_details_fans" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
@@ -169,12 +169,12 @@
 
                     <LinearLayout
                         android:id="@+id/powerBlock"
-                        style="@style/InformartionBlock" >
+                        style="@style/InformationBlock" >
 
                         <TextView
                             android:id="@+id/textPowerHeader"
-                            style="@style/InformartionBlockHeader"
-                            android:text="@string/serverdetails_powersupply" />
+                            style="@style/InformationBlockHeader"
+                            android:text="@string/server_details_power_supply" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>

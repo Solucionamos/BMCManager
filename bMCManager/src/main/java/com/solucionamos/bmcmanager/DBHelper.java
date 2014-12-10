@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	}
 
 	public ArrayList<Server> getAllServers() {
-		ArrayList<Server> array_list = new ArrayList<Server>();
+		ArrayList<Server> array_list = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor res = db.rawQuery("select * from " + SERVER_TABLE_NAME, null);
 		res.moveToFirst();
@@ -73,12 +73,11 @@ public class DBHelper extends SQLiteOpenHelper {
 		return array_list;
 	}
 
-	public int deleteServer(String name) {
+	public void deleteServer(String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
-		int removed = db.delete("server", "name = ? ", new String[] { name });
+		db.delete("server", "name = ? ", new String[] { name });
 		db.close();
-		return removed;
 	}
 
 	public Server getServer(String name){

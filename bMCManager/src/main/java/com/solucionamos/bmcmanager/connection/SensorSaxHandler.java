@@ -10,7 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.solucionamos.bmcmanager.model.Sensor;
 
 public class SensorSaxHandler extends DefaultHandler {
-	private final List<Sensor> sensors = new ArrayList<Sensor>();
+	private final List<Sensor> sensors = new ArrayList<>();
 	private Sensor lastSensor = null;
 	private String content = null;
 
@@ -27,29 +27,41 @@ public class SensorSaxHandler extends DefaultHandler {
 
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException {
-		if (localName.equals("sensorStatus")) {
-			lastSensor.setStatus(content);
-		} else if (localName.equals("name")) {
-			lastSensor.setName(content);
-		} else if (localName.equals("reading")) {
-			lastSensor.setReading(content);
-		} else if (localName.equals("units")) {
-			lastSensor.setUnits(content);
-		} else if (localName.equals("lowerNC")) {
-			lastSensor.setLowerNC(content);
-		} else if (localName.equals("upperNC")) {
-			lastSensor.setUpperNC(content);
-		} else if (localName.equals("lowerCT")) {
-			lastSensor.setLowerCT(content);
-		} else if (localName.equals("upperCT")) {
-			lastSensor.setUpperCT(content);
-		} else if (localName.equals("lowerNR")) {
-			lastSensor.setLowerNR(content);
-		} else if (localName.equals("upperNR")) {
-			lastSensor.setUpperNR(content);
-		} else if (localName.equals("sensor")) {
-			sensors.add(lastSensor);
-		}
+        switch (localName) {
+            case "sensorStatus":
+                lastSensor.setStatus(content);
+                break;
+            case "name":
+                lastSensor.setName(content);
+                break;
+            case "reading":
+                lastSensor.setReading(content);
+                break;
+            case "units":
+                lastSensor.setUnits(content);
+                break;
+            case "lowerNC":
+                lastSensor.setLowerNC(content);
+                break;
+            case "upperNC":
+                lastSensor.setUpperNC(content);
+                break;
+            case "lowerCT":
+                lastSensor.setLowerCT(content);
+                break;
+            case "upperCT":
+                lastSensor.setUpperCT(content);
+                break;
+            case "lowerNR":
+                lastSensor.setLowerNR(content);
+                break;
+            case "upperNR":
+                lastSensor.setUpperNR(content);
+                break;
+            case "sensor":
+                sensors.add(lastSensor);
+                break;
+        }
 	}
 
 	public void characters(char[] ch, int start, int length) {

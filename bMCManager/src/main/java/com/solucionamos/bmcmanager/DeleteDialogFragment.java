@@ -18,7 +18,7 @@ public class DeleteDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the Builder class for convenient dialog construction
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(R.string.deletedialog_text)
+		builder.setMessage(R.string.delete_dialog_text)
 				.setPositiveButton(R.string.dialog_confirm,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {

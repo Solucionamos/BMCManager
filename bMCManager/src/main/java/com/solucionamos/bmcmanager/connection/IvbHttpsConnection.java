@@ -112,8 +112,7 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 		CookieHandler.setDefault(cookieManager);
 
 		/* --- PREPARE THE REQUEST --- */
-		URL url = null;
-		url = createHttpsUrl(protocol, "/data/login");
+		URL url = createHttpsUrl(protocol, "/data/login");
 		String urlParameters = "user=" + username + "&password=" + password
 				+ "&press=btnOK";
 
@@ -150,8 +149,8 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 
 	@Override
 	public void disconnect() throws Exception {
-		URL url = null;
-		HttpURLConnection conn = null;
+		URL url;
+		HttpURLConnection conn;
 
 		url = createHttpsUrl(protocol, "/data/logout");
 		conn = (HttpURLConnection) url.openConnection();
@@ -165,7 +164,7 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 	}
 
 	public List<Sensor> getSensors(String type) throws Exception {
-		List<Sensor> sensors = null;
+		List<Sensor> sensors;
 
 		URL url = createHttpsUrl(protocol, "/data?get=" + type + "s");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();

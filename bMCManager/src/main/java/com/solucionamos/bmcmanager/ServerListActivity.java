@@ -128,8 +128,8 @@ public class ServerListActivity extends Activity
 	}
 
     public void deleteServer(Server el){
-    	DBHelper mydb = new DBHelper(this);
-    	mydb.deleteServer(el.getName());
+    	DBHelper db = new DBHelper(this);
+    	db.deleteServer(el.getName());
     	((ServerListFragment) getFragmentManager()
                 .findFragmentById(R.id.item_list)).removeServer(el);
     	

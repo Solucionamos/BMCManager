@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:elevation="2dp"
-            android:text="@string/addserver_desc"
+            android:text="@string/add_server_desc"
             android:textSize="16sp" />
 
         <TextView
@@ -43,16 +43,16 @@
             android:paddingTop="15dp" >
 
             <TextView
-                android:id="@+id/addserver_address"
+                android:id="@+id/add_server_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.35"
                 android:elevation="2dp"
                 android:gravity="right"
-                android:text="@string/addserver_address" />
+                android:text="@string/add_server_address" />
 
             <EditText
-                android:id="@+id/ipaddressTxt"
+                android:id="@+id/ip_address_txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.65"
@@ -76,7 +76,7 @@
                 android:layout_weight="0.35"
                 android:elevation="2dp"
                 android:gravity="right"
-                android:text="@string/addserver_name" />
+                android:text="@string/add_server_name" />
 
             <EditText
                 android:id="@+id/serverNameTxt"
@@ -104,7 +104,7 @@
                 android:layout_weight="0.35"
                 android:elevation="2dp"
                 android:gravity="right"
-                android:text="@string/addserver_protocol" />
+                android:text="@string/add_server_protocol" />
 
             <Spinner
                 android:id="@+id/serverProtocolSpinner"
@@ -114,7 +114,7 @@
                 android:elevation="2dp"
                 android:ems="8"
                 android:entries="@array/connection_array"
-                android:prompt="@string/addserver_protocol" />
+                android:prompt="@string/add_server_protocol" />
         </LinearLayout>
 
         <TextView
@@ -141,7 +141,7 @@
                 android:layout_weight="0.35"
                 android:elevation="2dp"
                 android:gravity="right"
-                android:text="@string/addserver_username" />
+                android:text="@string/add_server_username" />
 
             <EditText
                 android:id="@+id/usernameTxt"
@@ -169,7 +169,7 @@
                 android:layout_weight="0.35"
                 android:elevation="2dp"
                 android:gravity="right"
-                android:text="@string/addserver_password" />
+                android:text="@string/add_server_password" />
 
             <EditText
                 android:id="@+id/pswText"
@@ -199,7 +199,7 @@
                 android:background="@android:color/transparent"
                 android:elevation="5dp"
                 android:gravity="center"
-                android:text="@string/backserver_button"
+                android:text="@string/back_server_button"
                 android:textColor="@color/text_red"
                 android:textSize="25sp" />
 
@@ -212,7 +212,7 @@
                 android:background="@android:color/transparent"
                 android:elevation="5dp"
                 android:gravity="center"
-                android:text="@string/addserver_button"
+                android:text="@string/add_server_button"
                 android:textColor="@color/text_green"
                 android:textSize="25sp" />
         </LinearLayout>

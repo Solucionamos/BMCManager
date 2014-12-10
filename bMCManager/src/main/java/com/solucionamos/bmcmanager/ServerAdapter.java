@@ -9,7 +9,6 @@ import com.solucionamos.bmcmanager.model.*;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,8 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 	public ServerAdapter(Context context, List<Server> objects) {
 		super(context, R.layout.serverlistitem, objects);
 		this.objects = objects;
-		viewList = new ArrayList<View>();
-		tasks = new ArrayList<AsyncTask>();
+		viewList = new ArrayList<>();
+		tasks = new ArrayList<>();
 		this.context = context;
 	}
 
@@ -48,7 +47,6 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			viewList.set(position,
 					inflater.inflate(R.layout.serverlistitem, parent, false));
-			// view = inflater.inflate(R.layout.serverlistitem, null);
 		}
 
 		/*
@@ -70,7 +68,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			TextView sName = (TextView) viewList.get(position).findViewById(
 					R.id.itemName);
 			TextView sDesc = (TextView) viewList.get(position).findViewById(
-					R.id.itemAddr);
+					R.id.itemAddress);
 
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -136,13 +134,13 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 			AsyncTask<Server, Void, BMCResponse> {
 		private Exception ex = null;
 		public AsyncResponse<BMCResponse> delegate = null;
-		private boolean isrunning = true;
+		private boolean isRunning = true;
 
 		@Override
 		protected BMCResponse doInBackground(Server... args) {
 			Integer colorIndex = 0;
 			int pwState;
-			List<Sensor> sensors = null;
+			List<Sensor> sensors;
 			Server server = args[0];
 			BMCResponse response = new BMCResponse();
 			response.setServer(server);
@@ -207,12 +205,12 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
 		@Override
 		protected void onCancelled() {
-			isrunning = false;
+			isRunning = false;
 		}
 
 		@Override
 		protected void onPostExecute(BMCResponse response) {
-			if (isrunning) {
+			if (isRunning) {
 				tasks.remove(this);
 				delegate.processFinish(response, ex);
 			}

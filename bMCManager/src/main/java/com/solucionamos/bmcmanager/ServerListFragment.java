@@ -50,10 +50,6 @@ public class ServerListFragment extends ListFragment implements
 
 	private List<Server> listArray = null;
 
-	private View view;
-	
-	private int pos;
-
 	private ListFragmentSwipeRefreshLayout swipeLayout;
 
 	
@@ -87,15 +83,15 @@ public class ServerListFragment extends ListFragment implements
 	 */
 	public ServerListFragment() {
 		swipeLayout = null;
-		listArray = new ArrayList<Server>();
+		listArray = new ArrayList<>();
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		DBHelper mydb = new DBHelper(this.getActivity());
-		listArray = mydb.getAllServers();
+		DBHelper db = new DBHelper(this.getActivity());
+		listArray = db.getAllServers();
 		
 		
 		
@@ -267,11 +263,6 @@ public class ServerListFragment extends ListFragment implements
 		}, 100);
 		
 		adapter.notifyDataSetChanged();
-		/*if(listArray != null){
-			DBHelper mydb = new DBHelper(this.getActivity().getApplicationContext());
-			listArray = mydb.getAllServers();
-		}*/
-		//this.refresh();
 	}
 	
 	private class ListFragmentSwipeRefreshLayout extends SwipeRefreshLayout {

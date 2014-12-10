@@ -6,7 +6,7 @@
     <ImageView
         android:id="@+id/iconTemperature1"
         style="@style/InformationBlockIcon"
-        android:contentDescription="@string/serverdetails_temperatureIcon"
+        android:contentDescription="@string/server_details_temperatureIcon"
         android:src="@drawable/ic_temperature_good" />
 
     <LinearLayout style="@style/InformationBlockDescriptionBlock" >

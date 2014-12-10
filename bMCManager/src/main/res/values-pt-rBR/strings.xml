@@ -17,36 +17,36 @@
     <!-- Strings de Adicionar Servidor -->
 
     <string name="empty">Não há servidores adicionados. Adicione um novo servidor através do símbolo "+", no barra acima.</string>
-    <string name="addserver_desc">Adicione um servidor, preenchendo as informações abaixo:</string>
-    <string name="addserver_protocol">Protocolo:</string>
-    <string name="addserver_name">Nome do Servidor:</string>
-    <string name="addserver_address">Endereço:</string>
-    <string name="addserver_username">Nome de Usuário:</string>
-    <string name="addserver_password">Senha:</string>
-    <string name="addserver_button">Confirmar</string>
-    <string name="backserver_button">@android:string/cancel</string>
+    <string name="add_server_desc">Adicione um servidor, preenchendo as informações abaixo:</string>
+    <string name="add_server_protocol">Protocolo:</string>
+    <string name="add_server_name">Nome do Servidor:</string>
+    <string name="add_server_address">Endereço:</string>
+    <string name="add_server_username">Nome de Usuário:</string>
+    <string name="add_server_password">Senha:</string>
+    <string name="add_server_button">Confirmar</string>
+    <string name="back_server_button">@android:string/cancel</string>
 	<string name="server_exists">Já existe um servidor com este nome!</string>
     <!-- FIM -->
 
 
     <!-- Strings de Detalhes do Servidor -->
 
-    <string name="serverdetails_options_delete">Remover</string>
-    <string name="serverdetails_options_cyclereset">Reset</string>
-    <string name="serverdetails_options_hardreset">Hard Reset</string>
-    <string name="serverdetails_power">Energia</string>
-    <string name="serverdetails_temperature">Temperatura</string>
-    <string name="serverdetails_temperatureIcon">Ícone da temperatura</string>
-    <string name="serverdetails_fans">Coolers</string>
-    <string name="serverdetails_powersupply">Alimentação de Energia</string>
-    <string name="deletedialog_text">Você tem certeza que quer deletar este servidor"?</string>
-    <string name="actiondialog_text">Você tem certeza que deseja realizar esta operação"?</string>
+    <string name="server_details_options_delete">Remover</string>
+    <string name="server_details_options_cycle_reset">Reset</string>
+    <string name="server_details_options_hard_reset">Hard Reset</string>
+    <string name="server_details_power">Energia</string>
+    <string name="server_details_temperature">Temperatura</string>
+    <string name="server_details_temperatureIcon">Ícone da temperatura</string>
+    <string name="server_details_fans">Coolers</string>
+    <string name="server_details_power_supply">Alimentação de Energia</string>
+    <string name="delete_dialog_text">Você tem certeza que quer deletar este servidor"?</string>
+    <string name="action_dialog_text">Você tem certeza que deseja realizar esta operação"?</string>
     <string name="dialog_confirm">Confirmar</string>
     <string name="dialog_cancel">Cancelar</string>
 
     <!-- FIM -->
     <!-- Toast Messages -->
-    <string name="connection_nosuccess">Conexão não pode ser executada com sucesso</string>
+    <string name="connection_no_success">Conexão não pode ser executada com sucesso</string>
     <string name="server_powered_off">O servidor está desligado</string>
     <string name="required_string">Campos obrigatórios:</string>
     <!-- END -->
@@ -59,7 +59,7 @@
     <string name="title_AppTitle">BMC Manager</string>
     <!-- END -->
 
-    <string name="title_activity_add_serv">Configuração de Servidor</string>
+    <string name="title_activity_add_server">Configuração de Servidor</string>
     <string name="all_fields_required">*Todos os campos são obrigatórios.</string>
 
     <string-array name="connection_array">
@@ -69,7 +69,7 @@
 
     <string name="credentials">Credenciais:</string>
     <string name="empty_block">Não foi possível carregar informação</string>
-    <string name="empty_value"></string>
+    <string name="empty_value"/>
     <string name="server_status">Estado: </string>
     <string name="server_on_status">Ligado</string>
     <string name="server_off_status">Desligado</string>
@@ -81,7 +81,7 @@
     <string name="status_normal">Normal</string>
     <string name="status_warning">Warning</string>
 
-    <string name="serverlist_view_details">Ver detalhes</string>
+    <string name="server_list_view_details">Ver detalhes</string>
 
     <string name="fan_state_normal">Fan em estado normal</string>
     <string name="voltage_state_normal">Voltagem em estado normal</string>

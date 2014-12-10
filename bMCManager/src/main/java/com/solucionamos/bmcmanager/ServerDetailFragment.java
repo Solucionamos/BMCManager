@@ -1,7 +1,6 @@
 package com.solucionamos.bmcmanager;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import android.app.Fragment;
@@ -14,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,7 +40,6 @@ public class ServerDetailFragment extends Fragment implements
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
-    public static final String ARG_POSITION = "position";
 
     /**
      * The dummy content this fragment is presenting.
@@ -52,12 +49,10 @@ public class ServerDetailFragment extends Fragment implements
     
     private LinearLayout tempBlock, voltBlock, fanBlock;
 	private Switch powerSwitch;
-	private Button imgBtn;
-	private DeleteDialogFragment ddialog;
-	private ActionDialogFragment pdialog;
+	private DeleteDialogFragment delete_dialog;
+	private ActionDialogFragment power_dialog;
 	private RelativeLayout colorBlock;
 	private List<AsyncTask> tasks;
-	private boolean checkedBefore;
 	private ServerDetailFragment thisRef;
 	private TextView statusTxt;
 	private View rootView = null;
@@ -80,21 +75,21 @@ public class ServerDetailFragment extends Fragment implements
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-        	DBHelper mydb = new DBHelper(this.getActivity());
-            serverItem = mydb.getServer(getArguments().getString(ARG_ITEM_ID));
+        	DBHelper db = new DBHelper(this.getActivity());
+            serverItem = db.getServer(getArguments().getString(ARG_ITEM_ID));
             
-            ddialog = new DeleteDialogFragment();
-    		ddialog.setServer(this.serverItem);
+            delete_dialog = new DeleteDialogFragment();
+    		delete_dialog.setServer(this.serverItem);
     		
     		if(this.getActivity().getClass().equals(ServerDetailActivity.class)){
-    			ddialog.setTablet(false);
+    			delete_dialog.setTablet(false);
     		}else{
-    			ddialog.setTablet(true);
+    			delete_dialog.setTablet(true);
     		}
     		
-    		tasks = new ArrayList<AsyncTask>();
+    		tasks = new ArrayList<>();
 
-    		pdialog = new ActionDialogFragment();
+    		power_dialog = new ActionDialogFragment();
     		thisRef = this;
         }
     }
@@ -131,30 +126,28 @@ public class ServerDetailFragment extends Fragment implements
 						if (!isRefreshing) {
 							Bundle bundle = new Bundle();
 							if (isChecked) {
-								checkedBefore = !isChecked;
 								bundle.putInt("operation",
 										Server.PWSTATE_ON);
 
 							} else {
-								checkedBefore = true;
 								bundle.putInt("operation",
 										Server.PWSTATE_OFF);
 							}
-							pdialog.setArguments(bundle);
-							pdialog.setTargetFragment(thisRef, 0);
-							pdialog.show(getFragmentManager(), getTag());
+							power_dialog.setArguments(bundle);
+							power_dialog.setTargetFragment(thisRef, 0);
+							power_dialog.show(getFragmentManager(), getTag());
 						}
 					}
 				});
 
          	
          	
-         	((Button) rootView.findViewById(R.id.Options_Image)).setOnClickListener(new View.OnClickListener() {
-    			@Override
-    			public void onClick(View v) {
-    				showPopUp(v);
-    			}
-    		});
+         	rootView.findViewById(R.id.Options_Image).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopUp(v);
+                }
+            });
          	
          	statusTxt = (TextView) rootView.findViewById(R.id.serverStatus);
          	colorBlock = (RelativeLayout) rootView.findViewById(R.id.relativeHeader);
@@ -175,7 +168,7 @@ public class ServerDetailFragment extends Fragment implements
     private class RetrieveSensorsTask extends AsyncTask<String, Void, BMCResponse> {
     	private Exception ex = null;
     	public AsyncResponse<BMCResponse> delegate = null;
-    	private boolean isrunning = true;
+    	private boolean isRunning = true;
 
     	@Override
     	protected BMCResponse doInBackground(String... args) {
@@ -184,13 +177,17 @@ public class ServerDetailFragment extends Fragment implements
     		String type = args[0];
     		try {
     			serverItem.connect();
-    			if (type.equals(Sensor.TYPE_FAN)) {
-    				sensors = serverItem.getFans();
-    			} else if (type.equals(Sensor.TYPE_TEMPERATURE)) {
-    				sensors = serverItem.getTemperatures();
-    			} else if (type.equals(Sensor.TYPE_VOLTAGE)) {
-    				sensors = serverItem.getVoltages();
-    			}
+                switch(type) {
+                    case Sensor.TYPE_FAN:
+                        sensors = serverItem.getFans();
+                        break;
+                    case Sensor.TYPE_TEMPERATURE:
+                        sensors = serverItem.getTemperatures();
+                        break;
+                    case Sensor.TYPE_VOLTAGE:
+                        sensors = serverItem.getVoltages();
+                        break;
+                }
     			response.setSensors(sensors);
     		} catch (Exception e) {
     			ex = e;
@@ -206,12 +203,12 @@ public class ServerDetailFragment extends Fragment implements
 
     	@Override
     	protected void onCancelled() {
-    		isrunning = false;
+    		isRunning = false;
     	}
 
     	@Override
     	protected void onPostExecute(BMCResponse response) {
-    		if (isrunning) {
+    		if (isRunning) {
     			tasks.remove(this);
     			delegate.processFinish(response, ex);
     		}
@@ -221,7 +218,7 @@ public class ServerDetailFragment extends Fragment implements
     private class GetPwStateTask extends AsyncTask<String, Void, BMCResponse> {
     	private Exception ex = null;
     	public AsyncResponse<BMCResponse> delegate = null;
-    	private boolean isrunning = true;
+    	private boolean isRunning = true;
 
     	@Override
 		protected BMCResponse doInBackground(String... args) {
@@ -244,12 +241,12 @@ public class ServerDetailFragment extends Fragment implements
 
     	@Override
     	protected void onCancelled() {
-    		isrunning = false;
+    		isRunning = false;
     	}
 
     	@Override
     	protected void onPostExecute(BMCResponse response) {
-    		if (isrunning) {
+    		if (isRunning) {
     			tasks.remove(this);
     			delegate.processFinish(response, ex);
     		}
@@ -259,7 +256,7 @@ public class ServerDetailFragment extends Fragment implements
     private class RetrievePWStateTask extends AsyncTask<String, Void, BMCResponse> {
     	private Exception ex = null;
     	public AsyncResponse<BMCResponse> delegate = null;
-    	private boolean isrunning = true;
+    	private boolean isRunning = true;
 
     	@Override
     	protected BMCResponse doInBackground(String... params) {
@@ -276,12 +273,12 @@ public class ServerDetailFragment extends Fragment implements
 
     	@Override
     	protected void onCancelled() {
-    		isrunning = false;
+    		isRunning = false;
     	}
 
     	@Override
     	protected void onPostExecute(BMCResponse response) {
-    		if (isrunning) {
+    		if (isRunning) {
     			tasks.remove(this);
     			delegate.processFinish(response, ex);
     		}
@@ -291,7 +288,7 @@ public class ServerDetailFragment extends Fragment implements
     private class SetPWStateTask extends AsyncTask<Integer, Void, BMCResponse> {
     	private Exception ex = null;
     	public AsyncResponse<BMCResponse> delegate = null;
-    	private boolean isrunning = true;
+    	private boolean isRunning = true;
 
     	@Override
     	protected BMCResponse doInBackground(Integer... params) {
@@ -309,12 +306,12 @@ public class ServerDetailFragment extends Fragment implements
 
     	@Override
     	protected void onCancelled() {
-    		isrunning = false;
+    		isRunning = false;
     	}
 
     	@Override
     	protected void onPostExecute(BMCResponse param) {
-    		if (isrunning) {
+    		if (isRunning) {
     			tasks.remove(this);
     			delegate.processFinish(param, ex);
     		}
@@ -411,7 +408,7 @@ public class ServerDetailFragment extends Fragment implements
 		inflater.inflate(R.menu.serverdetails_options_popmenu, popup.getMenu());
 		
 		if (!powerSwitch.isChecked()) {
-			popup.getMenu().removeItem(R.id.hreset_server);
+			popup.getMenu().removeItem(R.id.hard_reset_server);
 			popup.getMenu().removeItem(R.id.reset_server);
 		}
 		
@@ -420,19 +417,19 @@ public class ServerDetailFragment extends Fragment implements
 				Bundle bundle = new Bundle();
 				switch (item.getItemId()) {
 				case R.id.delete_server:
-					ddialog.show(getFragmentManager(), getTag());
+					delete_dialog.show(getFragmentManager(), getTag());
 					break;
-				case R.id.hreset_server:
+				case R.id.hard_reset_server:
 					bundle.putInt("operation", Server.PWSTATE_HRESET);
-					pdialog.setArguments(bundle);
-					pdialog.setTargetFragment(thisRef, 0);
-					pdialog.show(getFragmentManager(), getTag());
+					power_dialog.setArguments(bundle);
+					power_dialog.setTargetFragment(thisRef, 0);
+					power_dialog.show(getFragmentManager(), getTag());
 					break;
 				case R.id.reset_server:
 					bundle.putInt("operation", Server.PWSTATE_RESET);
-					pdialog.setArguments(bundle);
-					pdialog.setTargetFragment(thisRef, 0);
-					pdialog.show(getFragmentManager(), getTag());
+					power_dialog.setArguments(bundle);
+					power_dialog.setTargetFragment(thisRef, 0);
+					power_dialog.show(getFragmentManager(), getTag());
 					break;
 				}
 				return true;
@@ -454,9 +451,9 @@ public class ServerDetailFragment extends Fragment implements
 
 	@Override
 	public void processFinish(BMCResponse response, Exception ex) {
-		TextView sensorName = null;
-		TextView value = null;
-		ImageView iconChange = null;
+		TextView sensorName;
+		TextView value;
+		ImageView iconChange;
 		LinearLayout aBlock = null;
 
 		List<Sensor> sensors = null;
@@ -481,7 +478,7 @@ public class ServerDetailFragment extends Fragment implements
 			powerSwitch.setChecked(false);
 			isRefreshing = false;
 			
-			showToast(getString(R.string.connection_nosuccess));
+			showToast(getString(R.string.connection_no_success));
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_unreachable_status));
 			showEmptyBlocks(true);
@@ -501,125 +498,139 @@ public class ServerDetailFragment extends Fragment implements
 			isRefreshing = false;
 			statusTxt.setText(getString(R.string.server_status) + " "
 					+ getString(R.string.server_on_status));
-			String sensorType = null;
-			String sensorStatus = null;
+			String sensorType;
+			String sensorStatus;
 			LayoutInflater inflater = LayoutInflater.from(getActivity()
 					.getBaseContext());
 
-			Sensor aSensor = null;
-			Iterator<Sensor> it = sensors.iterator();
-			// colorFlag = 0;
-			while (it.hasNext()) {
-				aSensor = it.next();
-				sensorType = aSensor.getType();
-				sensorStatus = aSensor.getStatus();
-				View view = null;
+			Sensor aSensor;
+            // colorFlag = 0;
+            for (Sensor sensor : sensors) {
+                aSensor = sensor;
+                sensorType = aSensor.getType();
+                sensorStatus = aSensor.getStatus();
+                View view;
 
-				if (sensorType.equals(Sensor.TYPE_TEMPERATURE)) {
-					aBlock = tempBlock;
-					textName = R.id.textTemperature1;
-					textValue = R.id.textTemperatureNumber1;
-					layoutItem = R.layout.temperatureitem;
-					iconItem = R.id.iconTemperature1;
-					textDesc = R.id.textTemperatureDesc1;
-				} else if (sensorType.equals(Sensor.TYPE_VOLTAGE)) {
-					aBlock = voltBlock;
-					textName = R.id.textPower1;
-					textValue = R.id.textPowerNumber1;
-					layoutItem = R.layout.voltageitem;
-					iconItem = R.id.imageView12;
-					textDesc = R.id.textPowerDesc1;
-				} else if (sensorType.equals(Sensor.TYPE_FAN)) {
-					aBlock = fanBlock;
-					textName = R.id.textFan1;
-					textValue = R.id.textFanNumber1;
-					layoutItem = R.layout.fanitem;
-					iconItem = R.id.imageView3;
-					textDesc = R.id.textFanDesc1;
-				}
+                switch (sensorType) {
+                    case Sensor.TYPE_TEMPERATURE:
+                        aBlock = tempBlock;
+                        textName = R.id.textTemperature1;
+                        textValue = R.id.textTemperatureNumber1;
+                        layoutItem = R.layout.temperatureitem;
+                        iconItem = R.id.iconTemperature1;
+                        textDesc = R.id.textTemperatureDesc1;
+                        break;
+                    case Sensor.TYPE_VOLTAGE:
+                        aBlock = voltBlock;
+                        textName = R.id.textPower1;
+                        textValue = R.id.textPowerNumber1;
+                        layoutItem = R.layout.voltageitem;
+                        iconItem = R.id.imageView12;
+                        textDesc = R.id.textPowerDesc1;
+                        break;
+                    case Sensor.TYPE_FAN:
+                        aBlock = fanBlock;
+                        textName = R.id.textFan1;
+                        textValue = R.id.textFanNumber1;
+                        layoutItem = R.layout.fanitem;
+                        iconItem = R.id.imageView3;
+                        textDesc = R.id.textFanDesc1;
+                        break;
+                }
 
-				view = inflater.inflate(layoutItem, aBlock, false);
-				sensorName = (TextView) view.findViewById(textName);
-				sensorName.setText(aSensor.getName());
-				value = (TextView) view.findViewById(textValue);
-				
-				String unit = aSensor.getUnits();
-				if(!(unit == null)) {
-					if (unit.equals("C") || unit.equals("F")) {
-						unit = "º" + unit;
-					}
-					unit = " " + unit;
-					value.setText(aSensor.getReading() + unit);
-				}
-				else
-					value.setText(aSensor.getReading());
-				
-				if(aSensor.getStatus().equals("Critical")){
-					((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_critical));
-				}else if(aSensor.getStatus().equals("Warning")){
-					((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_warning));
-				}else if(aSensor.getStatus().equals("Normal")){
-					((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_normal));
-				}
-					
-				
-				
-				iconChange = (ImageView) view.findViewById(iconItem);
+                view = inflater.inflate(layoutItem, aBlock, false);
+                sensorName = (TextView) view.findViewById(textName);
+                sensorName.setText(aSensor.getName());
+                value = (TextView) view.findViewById(textValue);
 
-				if (sensorType.equals(Sensor.TYPE_TEMPERATURE)) {
-					if (sensorStatus.equals("Normal")) {
-						iconChange
-								.setImageResource(R.drawable.ic_temperature_good);
-					} else if (sensorStatus.equals("Warning")) {
-						if (colorFlag < 1) {
-							colorFlag = 1;
-						}
-						iconChange
-								.setImageResource(R.drawable.ic_temperature_warning);
-					} else if (sensorStatus.equals("Critical")) {
-						if (colorFlag < 2) {
-							colorFlag = 2;
-						}
-						iconChange
-								.setImageResource(R.drawable.ic_temperature_bad);
-					}
-				} else if (sensorType.equals(Sensor.TYPE_VOLTAGE)) {
-					if (sensorStatus.equals("Normal")) {
-						iconChange.setImageResource(R.drawable.ic_power_good);
-					} else if (sensorStatus.equals("Warning")) {
-						if (colorFlag < 1) {
-							colorFlag = 1;
-						}
-						iconChange
-								.setImageResource(R.drawable.ic_power_warning);
-					} else if (sensorStatus.equals("Critical")) {
-						if (colorFlag < 2) {
-							colorFlag = 2;
-						}
-						iconChange.setImageResource(R.drawable.ic_power_bad);
-					}
-				} else if (sensorType.equals(Sensor.TYPE_FAN)) {
-					if (sensorStatus.equals("Normal")) {
-						iconChange.setImageResource(R.drawable.ic_fan_good);
-					} else if (sensorStatus.equals("Warning")) {
-						if (colorFlag < 1) {
-							colorFlag = 1;
-						}
-						iconChange.setImageResource(R.drawable.ic_fan_warning);
-					} else if (sensorStatus.equals("Critical")) {
-						if (colorFlag < 2) {
-							colorFlag = 2;
-						}
-						iconChange.setImageResource(R.drawable.ic_fan_bad);
-					}
-				}
+                String unit = aSensor.getUnits();
+                if (!(unit == null)) {
+                    if (unit.equals("C") || unit.equals("F")) {
+                        unit = "º" + unit;
+                    }
+                    unit = " " + unit;
+                    value.setText(aSensor.getReading() + unit);
+                } else
+                    value.setText(aSensor.getReading());
 
-				aBlock.addView(view);
-			}
+                if (aSensor.getStatus().equals("Critical")) {
+                    ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_critical));
+                } else if (aSensor.getStatus().equals("Warning")) {
+                    ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_warning));
+                } else if (aSensor.getStatus().equals("Normal")) {
+                    ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_normal));
+                }
+
+
+                iconChange = (ImageView) view.findViewById(iconItem);
+
+                switch (sensorType) {
+                    case Sensor.TYPE_TEMPERATURE:
+                        switch (sensorStatus) {
+                            case "Normal":
+                                iconChange.setImageResource(R.drawable.ic_temperature_good);
+                                break;
+                            case "Warning":
+                                if (colorFlag < 1) {
+                                    colorFlag = 1;
+                                }
+                                iconChange.setImageResource(R.drawable.ic_temperature_warning);
+                                break;
+                            case "Critical":
+                                if (colorFlag < 2) {
+                                    colorFlag = 2;
+                                }
+                                iconChange.setImageResource(R.drawable.ic_temperature_bad);
+                                break;
+                        }
+                        break;
+                    case Sensor.TYPE_VOLTAGE:
+                        switch (sensorStatus) {
+                            case "Normal":
+                                iconChange.setImageResource(R.drawable.ic_power_good);
+                                break;
+                            case "Warning":
+                                if (colorFlag < 1) {
+                                    colorFlag = 1;
+                                }
+                                iconChange
+                                        .setImageResource(R.drawable.ic_power_warning);
+                                break;
+                            case "Critical":
+                                if (colorFlag < 2) {
+                                    colorFlag = 2;
+                                }
+                                iconChange.setImageResource(R.drawable.ic_power_bad);
+                                break;
+                        }
+                        break;
+                    case Sensor.TYPE_FAN:
+                        switch (sensorStatus) {
+                            case "Normal":
+                                iconChange.setImageResource(R.drawable.ic_fan_good);
+                                break;
+                            case "Warning":
+                                if (colorFlag < 1) {
+                                    colorFlag = 1;
+                                }
+                                iconChange.setImageResource(R.drawable.ic_fan_warning);
+                                break;
+                            case "Critical":
+                                if (colorFlag < 2) {
+                                    colorFlag = 2;
+                                }
+                                iconChange.setImageResource(R.drawable.ic_fan_bad);
+                                break;
+                        }
+                        break;
+                }
+
+                aBlock.addView(view);
+            }
 
 			if (colorFlag == 2) {
 				colorBlock.setBackgroundResource(R.color.background_red);
-				statusTxt.setText(statusTxt.getText()+" - "+getString(R.string.status_critical));
+				statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_critical));
 			} else if (colorFlag == 1) {
 				colorBlock.setBackgroundResource(R.color.background_orange);
 				statusTxt.setText(statusTxt.getText()+" - "+getString(R.string.status_warning));
@@ -647,7 +658,7 @@ public class ServerDetailFragment extends Fragment implements
 		int textValue;
 		int layoutItem;
 		
-		View view = null;
+		View view;
 		LayoutInflater inflater = LayoutInflater.from(getActivity()
 				.getBaseContext());
 

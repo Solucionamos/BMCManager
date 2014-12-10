@@ -43,20 +43,20 @@
     </style>
 
     <style name="ServerInformation.Green">
-        <item name="android:background">@drawable/serveron</item>
+        <item name="android:background">@drawable/server_on</item>
     </style>
 
     <style name="ServerInformation.Red">
         <item name="android:background">@color/background_red</item>
     </style>
 
-    <style name="InformartionBlock">
+    <style name="InformationBlock">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="InformartionBlockHeader">
+    <style name="InformationBlockHeader">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/header</item>
@@ -88,7 +88,7 @@
     </style>
 
     <style name="MyPopupMenu" parent="android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/serveron</item>
+        <item name="android:popupBackground">@drawable/server_on</item>
     </style>
 
 </resources>

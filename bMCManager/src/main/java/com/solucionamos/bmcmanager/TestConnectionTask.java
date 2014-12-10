@@ -1,11 +1,7 @@
 package com.solucionamos.bmcmanager;
 
-import com.example.bmcmanager.R;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.view.LayoutInflater;
-import android.widget.ImageView;
 
 import com.solucionamos.bmcmanager.model.Server;
 
@@ -23,18 +19,18 @@ public class TestConnectionTask extends AsyncTask<Server, Void, Void> {
 		response = new BMCResponse();
 
 		ex = null;
-		Server serv = params[0];
-		response.setServer(serv);
+		Server server = params[0];
+		response.setServer(server);
 		try {
-			serv.connect();
-			response.setPwState(serv.getPwState());
+			server.connect();
+			response.setPwState(server.getPwState());
 		} catch (Exception e) {
 			e.printStackTrace();
 			ex = e;
 		}
 
 		try {
-			serv.disconnect();
+			server.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

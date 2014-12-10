@@ -8,7 +8,7 @@
     android:paddingRight="8dp" >
 
     <ImageView
-        android:contentDescription="@string/serverlist_view_details"
+        android:contentDescription="@string/server_list_view_details"
         android:id="@+id/forward_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/itemAddr"
+            android:id="@+id/itemAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/server_address"

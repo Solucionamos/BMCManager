@@ -89,8 +89,8 @@ public class ServerDetailActivity extends Activity {
     }
     
     public void deleteServer(Server el){
-    	DBHelper mydb = new DBHelper(this);
-    	mydb.deleteServer(el.getName());
+    	DBHelper db = new DBHelper(this);
+    	db.deleteServer(el.getName());
     	NavUtils.navigateUpTo(this, new Intent(this, ServerListActivity.class));
     }
 }

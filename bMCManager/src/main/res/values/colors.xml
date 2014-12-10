@@ -19,7 +19,7 @@
     <!-- Background using grey (#9E9E9E) color -->
     <color name="background_grey">#9E9E9E</color>
 
-    <color name="blockheader_background">#512DA8</color>
+    <color name="block_header_background">#512DA8</color>
 
     <color name="white">#ffffff</color>
 

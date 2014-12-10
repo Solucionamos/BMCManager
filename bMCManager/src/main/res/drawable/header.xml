@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" >
 
-    <solid android:color="@color/blockheader_background" />
+    <solid android:color="@color/block_header_background" />
 
 </shape>

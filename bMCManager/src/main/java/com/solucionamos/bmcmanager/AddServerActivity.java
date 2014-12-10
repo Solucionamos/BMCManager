@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +32,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 	private Spinner spinner;
 	private String spinnerText;
 
-	private DBHelper mydb;
+	private DBHelper db;
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 	@Override
@@ -64,7 +63,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		// serverProtocol = (EditText)
 		// this.findViewById(R.id.serverProtocolTxt);
 		serverName = (EditText) this.findViewById(R.id.serverNameTxt);
-		hostname = (EditText) this.findViewById(R.id.ipaddressTxt);
+		hostname = (EditText) this.findViewById(R.id.ip_address_txt);
 		username = (EditText) this.findViewById(R.id.usernameTxt);
 		password = (EditText) this.findViewById(R.id.pswText);
 		spinner = (Spinner) this.findViewById(R.id.serverProtocolSpinner);
@@ -108,19 +107,19 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		try {
 
 			String name = serverName.getText().toString().trim();
-			String ipaddress = hostname.getText().toString().trim();
-			String uname = username.getText().toString().trim();
+			String address = hostname.getText().toString().trim();
+			String username = this.username.getText().toString().trim();
 			String pass = password.getText().toString().trim();
 			System.out.println("SPINNER: " + spinnerText);
-			Server serv = new Server(spinnerText, "IVB", serverName.getText()
-					.toString(), hostname.getText().toString(), username
+			Server server = new Server(spinnerText, "IVB", serverName.getText()
+					.toString(), hostname.getText().toString(), this.username
 					.getText().toString(), password.getText().toString());
 
 			if (!(spinnerText.length() == 0 || name.length() == 0
-					|| ipaddress.length() == 0 || uname.length() == 0 || pass
+					|| address.length() == 0 || username.length() == 0 || pass
 						.length() == 0)) {
-				mydb = new DBHelper(this);
-				Server el = mydb.getServer(name);
+				db = new DBHelper(this);
+				Server el = db.getServer(name);
 				if(el != null){
 					Context context = this.getApplicationContext();
 					CharSequence text = getString(R.string.server_exists);
@@ -130,7 +129,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 				}else{
 					TestConnectionTask asyncTask = new TestConnectionTask();
 					asyncTask.delegate = this;
-					asyncTask.execute(serv);
+					asyncTask.execute(server);
 				}
 			} else {
 				Context context = this.getApplicationContext();
@@ -138,27 +137,27 @@ public class AddServerActivity extends Activity implements OnClickListener,
 				if (name.length() == 0)
 					text = text
 							+ " -"
-							+ getString(R.string.addserver_name).replace(":",
+							+ getString(R.string.add_server_name).replace(":",
 									"") + "\n";
-				if (ipaddress.length() == 0)
+				if (address.length() == 0)
 					text = text
 							+ " -"
-							+ getString(R.string.addserver_address).replace(
+							+ getString(R.string.add_server_address).replace(
 									":", "") + "\n";
-				if (uname.length() == 0)
+				if (username.length() == 0)
 					text = text
 							+ " -"
-							+ getString(R.string.addserver_username).replace(
+							+ getString(R.string.add_server_username).replace(
 									":", "") + "\n";
 				if (pass.length() == 0)
 					text = text
 							+ " -"
-							+ getString(R.string.addserver_password).replace(
+							+ getString(R.string.add_server_password).replace(
 									":", "") + "\n";
 				if (spinnerText.length() == 0) {
 					text = text
 							+ " -"
-							+ getString(R.string.addserver_protocol).replace(
+							+ getString(R.string.add_server_protocol).replace(
 									":", "") + "\n";
 				}
 				int duration = Toast.LENGTH_SHORT;
@@ -167,7 +166,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 			}
 		} catch (Exception e) {
 			Context context = this.getApplicationContext();
-			CharSequence text = getString(R.string.connection_nosuccess);
+			CharSequence text = getString(R.string.connection_no_success);
 			int duration = Toast.LENGTH_SHORT;
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
@@ -193,8 +192,8 @@ public class AddServerActivity extends Activity implements OnClickListener,
     }
 
 	private void addServer(Server el) {
-		mydb = new DBHelper(this);
-		mydb.insertServer(el);
+		db = new DBHelper(this);
+		db.insertServer(el);
 
 		try {
 			Intent k = new Intent(AddServerActivity.this, ServerListActivity.class);
@@ -203,7 +202,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		} catch (Exception e) {
 
 			Context context = this.getApplicationContext();
-			CharSequence text = getString(R.string.connection_nosuccess);
+			CharSequence text = getString(R.string.connection_no_success);
 			int duration = Toast.LENGTH_SHORT;
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
@@ -217,7 +216,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 			System.out.println(ex.toString());
 			//ex.printStackTrace();
 			Context context = this.getApplicationContext();
-			CharSequence text = getString(R.string.connection_nosuccess);
+			CharSequence text = getString(R.string.connection_no_success);
 			int duration = Toast.LENGTH_SHORT;
 			Toast toast = Toast.makeText(context, text, duration);
 			toast.show();
