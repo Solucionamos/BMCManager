@@ -4,8 +4,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class PwStateSaxHandler extends DefaultHandler {
-	public int pwState = 666;
-	String content = null;
+	private int pwState = -1;
+	private String content = null;
 
 	public int getPwState() {
 		return pwState;

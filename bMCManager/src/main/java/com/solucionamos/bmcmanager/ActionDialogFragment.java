@@ -15,7 +15,6 @@ public class ActionDialogFragment extends DialogFragment {
 
 		public void confirmPowerOperation(int op);
 	}
-	private int operation;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class ActionDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	protected int getOperation() {
+	int getOperation() {
 		return getArguments().getInt("operation");
 	}
 }

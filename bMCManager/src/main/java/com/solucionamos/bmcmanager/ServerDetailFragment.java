@@ -379,7 +379,7 @@ public class ServerDetailFragment extends Fragment implements
 		tasks.add(voltTask);
 	}
 
-	public void cancelTasks() {
+	void cancelTasks() {
 		for (AsyncTask task : tasks) {
 			task.cancel(true);
 		}
@@ -405,7 +405,7 @@ public class ServerDetailFragment extends Fragment implements
 		refreshData();
 	}
 
-	public void showPopUp(View v) {
+	void showPopUp(View v) {
 		PopupMenu popup = new PopupMenu(getActivity(), v);
 		MenuInflater inflater = popup.getMenuInflater();
 		inflater.inflate(R.menu.serverdetails_options_popmenu, popup.getMenu());
@@ -443,11 +443,10 @@ public class ServerDetailFragment extends Fragment implements
 
 	
 
-	public void showToast(String string) {
+	void showToast(String string) {
 		Context context = getActivity().getApplicationContext();
-		CharSequence text = string;
 		int duration = Toast.LENGTH_SHORT;
-		Toast toast = Toast.makeText(context, text, duration);
+		Toast toast = Toast.makeText(context, string, duration);
 		toast.show();
 
 		colorBlock.setBackgroundResource(R.color.background_red);
@@ -654,7 +653,7 @@ public class ServerDetailFragment extends Fragment implements
 
 		cancelTasks();
 		
-		if (unreachable == true){
+		if (unreachable){
 			colorBlock.setBackgroundResource(R.color.background_grey);
 			removeChildrenFromBlock(tempBlock);
 			removeChildrenFromBlock(voltBlock);

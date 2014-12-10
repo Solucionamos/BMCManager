@@ -26,14 +26,12 @@ public class AddServerActivity extends Activity implements OnClickListener,
 
 	// It has a reference to the button and the EditText, in the future, there
 	// should be a reference to each text field in the fragment.
-	private Button btn;
 	private EditText serverName;
 	private EditText hostname;
 	private EditText username;
 	private EditText password;
 	private Spinner spinner;
 	private String spinnerText;
-	private Button cancelBtn;
 
 	private DBHelper mydb;
 
@@ -49,10 +47,10 @@ public class AddServerActivity extends Activity implements OnClickListener,
         		(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP))
         	getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
-		btn = (Button) this.findViewById(R.id.addServerBtn);
+		Button btn = (Button) this.findViewById(R.id.addServerBtn);
 		btn.setOnClickListener(this);
 
-		cancelBtn = (Button) this.findViewById(R.id.backServerBtn);
+		Button cancelBtn = (Button) this.findViewById(R.id.backServerBtn);
 		cancelBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -216,7 +214,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
 	public void processFinish(BMCResponse response, Exception ex) {
 		if (ex != null) {
 
-			System.out.println(ex);
+			System.out.println(ex.toString());
 			//ex.printStackTrace();
 			Context context = this.getApplicationContext();
 			CharSequence text = getString(R.string.connection_nosuccess);

@@ -17,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.bmcmanager.R;
-import com.solucionamos.bmcmanager.dummy.DummyContent;
 import com.solucionamos.bmcmanager.model.Server;
 
 /**
@@ -76,7 +75,7 @@ public class ServerListFragment extends ListFragment implements
 	 * A dummy implementation of the {@link Callbacks} interface that does
 	 * nothing. Used only when this fragment is not attached to an activity.
 	 */
-	private static Callbacks sDummyCallbacks = new Callbacks() {
+	private static final Callbacks sDummyCallbacks = new Callbacks() {
 		@Override
 		public void onItemSelected(String id) {
 		}
@@ -102,8 +101,7 @@ public class ServerListFragment extends ListFragment implements
 		
 		
 		// Create adapter
-		adapter = new ServerAdapter(this.getActivity(),
-						R.layout.serverlistitem, listArray);
+		adapter = new ServerAdapter(this.getActivity(), listArray);
 		/* Setting the list adapter for the ListFragment */
 		// Set the adapter for this list as the one we created
 		
@@ -202,12 +200,10 @@ public class ServerListFragment extends ListFragment implements
 	 * Turns on activate-on-click mode. When this mode is on, list items will be
 	 * given the 'activated' state when touched.
 	 */
-	public void setActivateOnItemClick(boolean activateOnItemClick) {
+	public void activateOnItemClick() {
 		// When setting CHOICE_MODE_SINGLE, ListView will automatically
 		// give items the 'activated' state when touched.
-		getListView().setChoiceMode(
-				activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
-						: ListView.CHOICE_MODE_NONE);
+		getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 	}
 
 	private void setActivatedPosition(int position) {
@@ -294,11 +290,7 @@ public class ServerListFragment extends ListFragment implements
 		@Override
 		public boolean canChildScrollUp() {
 			final ListView listView = getListView();
-			if (listView.getVisibility() == View.VISIBLE) {
-				return canListViewScrollUp(listView);
-			} else {
-				return false;
-			}
+            return (listView.getVisibility() == View.VISIBLE) &&  canListViewScrollUp(listView);
 		}
 
 	}
@@ -323,8 +315,8 @@ public class ServerListFragment extends ListFragment implements
 		}
 	}
 	
-	public void setRefreshing(boolean bool){
-		swipeLayout.setRefreshing(bool);
+	public void stopRefreshing(){
+		swipeLayout.setRefreshing(false);
 	}
 	
 }

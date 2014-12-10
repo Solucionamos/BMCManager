@@ -55,7 +55,7 @@ public class ServerListActivity extends Activity
             // 'activated' state when touched.
             ((ServerListFragment) getFragmentManager()
                     .findFragmentById(R.id.item_list))
-                    .setActivateOnItemClick(true);
+                    .activateOnItemClick();
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
@@ -122,7 +122,7 @@ public class ServerListActivity extends Activity
     		getActionBar().setTitle(R.string.action_titleServerList);
     }
     
-    public void goToAddServerActivity() {
+    void goToAddServerActivity() {
 		Intent k = new Intent(ServerListActivity.this, AddServerActivity.class);
 		startActivity(k);
 	}

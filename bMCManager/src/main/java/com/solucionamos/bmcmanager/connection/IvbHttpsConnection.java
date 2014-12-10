@@ -34,10 +34,10 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 	/*
 	 * Implementation for monitoring IVB servers (RD540 and 640)
 	 */
-	private String hostname;
-	private String username;
-	private String password;
-	private String protocol;
+	private final String hostname;
+	private final String username;
+	private final String password;
+	private final String protocol;
 
 	private List<HttpCookie> cookies;
 

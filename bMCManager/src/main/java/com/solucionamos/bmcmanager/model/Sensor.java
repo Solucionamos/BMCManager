@@ -11,17 +11,17 @@ public class Sensor {
 	public static final int CRITICAL = 3;
 	public static final int NONRCV = 4;
 
-	String type;
-	String status;
-	String name;
-	String reading;
-	String units;
-	String lowerNC;
-	String upperNC;
-	String lowerCT;
-	String upperCT;
-	String lowerNR;
-	String upperNR;
+	private String type;
+	private String status;
+	private String name;
+	private String reading;
+	private String units;
+	private String lowerNC;
+	private String upperNC;
+	private String lowerCT;
+	private String upperCT;
+	private String lowerNR;
+	private String upperNR;
 
 	public Sensor() {
 	}

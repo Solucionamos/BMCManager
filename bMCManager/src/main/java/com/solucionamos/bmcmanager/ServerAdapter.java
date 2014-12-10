@@ -18,14 +18,13 @@ import android.widget.TextView;
 
 public class ServerAdapter extends ArrayAdapter<Server> implements
 		AsyncResponse<BMCResponse> {
-	private List<View> viewList;
-	private List<Server> objects;
-	private List<AsyncTask> tasks;
-	private Context context;
+	private final List<View> viewList;
+	private final List<Server> objects;
+	private final List<AsyncTask> tasks;
+	private final Context context;
 
-	public ServerAdapter(Context context, int textViewResourceId,
-			List<Server> objects) {
-		super(context, textViewResourceId, objects);
+	public ServerAdapter(Context context, List<Server> objects) {
+		super(context, R.layout.serverlistitem, objects);
 		this.objects = objects;
 		viewList = new ArrayList<View>();
 		tasks = new ArrayList<AsyncTask>();
@@ -129,7 +128,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 		if(tasks.isEmpty()){
 			ServerListActivity listActivity = (ServerListActivity) context;
 			((ServerListFragment) listActivity.getFragmentManager()
-	                .findFragmentById(R.id.item_list)).setRefreshing(false);
+	                .findFragmentById(R.id.item_list)).stopRefreshing();
 		}
 	}
 

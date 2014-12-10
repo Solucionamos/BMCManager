@@ -6,8 +6,8 @@ import org.xml.sax.helpers.DefaultHandler;
 public class HttpsConnectionSaxHandler extends DefaultHandler {
 	public static final int AUTH_OK = 0;
 	
-	public int authResult = -1;
-	String content = null;
+	private int authResult = -1;
+	private String content = null;
 
 	public int getAuthResult() {
 		return authResult;

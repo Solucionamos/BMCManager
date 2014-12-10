@@ -10,15 +10,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.solucionamos.bmcmanager.model.Server;
 
 public class DBHelper extends SQLiteOpenHelper {
-	public static final String DATABASE_NAME = "Android.DB";
-	public static final String SERVER_TABLE_NAME = "Server";
-	public static final String SERVER_COLUMN_PROTOCOL = "protocol";
-	public static final String SERVER_COLUMN_MODEL = "model";
-	public static final String SERVER_COLUMN_ID = "id";
-	public static final String SERVER_COLUMN_ADDRESS = "address";
-	public static final String SERVER_COLUMN_NAME = "name";
-	public static final String SERVER_COLUMN_USERNAME = "username";
-	public static final String SERVER_COLUMN_PASSWORD = "password";
+	private static final String DATABASE_NAME = "Android.DB";
+	private static final String SERVER_TABLE_NAME = "Server";
+	private static final String SERVER_COLUMN_PROTOCOL = "protocol";
+	private static final String SERVER_COLUMN_MODEL = "model";
+	private static final String SERVER_COLUMN_ADDRESS = "address";
+	private static final String SERVER_COLUMN_NAME = "name";
+	private static final String SERVER_COLUMN_USERNAME = "username";
+	private static final String SERVER_COLUMN_PASSWORD = "password";
 
 	public DBHelper(Context context) {
 		super(context, DATABASE_NAME, null, 1);
@@ -39,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 	}
 
-	public boolean insertServer(Server el) {
+	public void insertServer(Server el) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues contentValues = new ContentValues();
 		
@@ -52,7 +51,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
 		db.insert(SERVER_TABLE_NAME, null, contentValues);
 		db.close();
-		return true;
 	}
 
 	public ArrayList<Server> getAllServers() {
@@ -61,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		Cursor res = db.rawQuery("select * from " + SERVER_TABLE_NAME, null);
 		res.moveToFirst();
 		
-		while (res.isAfterLast() == false) {
+        while (!res.isAfterLast()) {
 			array_list.add(new Server(res.getString(res
 					.getColumnIndex(SERVER_COLUMN_PROTOCOL)), res.getString(res
 					.getColumnIndex(SERVER_COLUMN_MODEL)), res.getString(res
@@ -88,7 +86,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor res = db.rawQuery("select * from " + SERVER_TABLE_NAME + " where name='"+ name +"';", null);
 		res.moveToFirst();
-		while (res.isAfterLast() == false) {
+		while (!res.isAfterLast()) {
 			s = new Server(res.getString(res
 					.getColumnIndex(SERVER_COLUMN_PROTOCOL)), res.getString(res
 					.getColumnIndex(SERVER_COLUMN_MODEL)), res.getString(res

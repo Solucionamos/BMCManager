@@ -11,16 +11,16 @@ public class Server {
 	public static final int PWSTATE_RESET = 2;
 	public static final int PWSTATE_HRESET = 3;
 
-	public static final String MODEL_IVB = "IVB";
+	private static final String MODEL_IVB = "IVB";
 
-	BmcConnectionInterface connection;
+	private BmcConnectionInterface connection;
 
-	private String name;
-	private String model;
-	private String protocol;
-	private String address;
-	private String username;
-	private String password;
+	private final String name;
+	private final String model;
+	private final String protocol;
+	private final String address;
+	private final String username;
+	private final String password;
 	private int listPosition;
 
 	public Server(String protocol, String model, String name, String address,

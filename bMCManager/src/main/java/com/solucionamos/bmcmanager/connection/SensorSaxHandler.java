@@ -10,7 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import com.solucionamos.bmcmanager.model.Sensor;
 
 public class SensorSaxHandler extends DefaultHandler {
-	private List<Sensor> sensors = new ArrayList<Sensor>();
+	private final List<Sensor> sensors = new ArrayList<Sensor>();
 	private Sensor lastSensor = null;
 	private String content = null;
 

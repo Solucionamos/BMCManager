@@ -12,7 +12,6 @@ import com.solucionamos.bmcmanager.model.Server;
 public class TestConnectionTask extends AsyncTask<Server, Void, Void> {
 
 	private BMCResponse response = null;
-	private Server serv = null;
 	private Exception ex;
 	public AsyncResponse<BMCResponse> delegate = null;
 
@@ -24,7 +23,7 @@ public class TestConnectionTask extends AsyncTask<Server, Void, Void> {
 		response = new BMCResponse();
 
 		ex = null;
-		serv = params[0];
+		Server serv = params[0];
 		response.setServer(serv);
 		try {
 			serv.connect();
