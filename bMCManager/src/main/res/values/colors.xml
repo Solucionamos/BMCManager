@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
-    <!-- Background using orange (#EF6C00) color -->
     <color name="background_orange">#EF6C00</color>
-    <!-- Text using orange (#f57c00) color -->
     <color name="text_orange">#f57c00</color>
 
-    <!-- Background using green (#4CAF50) color -->
     <color name="background_green">#4CAF50</color>
-    <!-- Text using green (#0a7e07) color -->
     <color name="text_green">#0a7e07</color>
 
-    <!-- Background using red (#E53935) color -->
     <color name="background_red">#E53935</color>
-    <!-- Text using red (#d01716) color -->
     <color name="text_red">#d01716</color>
 
-    <!-- Background using grey (#9E9E9E) color -->
     <color name="background_grey">#9E9E9E</color>
 
-    <color name="block_header_background">#512DA8</color>
+    <color name="block_header_background">@color/primary</color>
 
     <color name="white">#ffffff</color>
 
