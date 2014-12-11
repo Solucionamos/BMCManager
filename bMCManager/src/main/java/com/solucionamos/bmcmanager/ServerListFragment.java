@@ -94,7 +94,6 @@ public class ServerListFragment extends ListFragment implements
         DBHelper db = new DBHelper(this.getActivity());
         listArray = db.getAllServers();
 
-
         // Create adapter
         adapter = new ServerAdapter(this.getActivity(), listArray);
         /* Setting the list adapter for the ListFragment */
@@ -103,15 +102,11 @@ public class ServerListFragment extends ListFragment implements
         adapter.setNotifyOnChange(false);
 
         setListAdapter(adapter);
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        //setRetainInstance(true);
 
         View listView = super.onCreateView(inflater, container,
                 savedInstanceState);
@@ -127,7 +122,6 @@ public class ServerListFragment extends ListFragment implements
                 ViewGroup.LayoutParams.MATCH_PARENT));
 
         swipeLayout.setOnRefreshListener(this);
-        //swipeLayout.setRefreshing(true);
         swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -230,7 +224,6 @@ public class ServerListFragment extends ListFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setEmptyText(this.getActivity().getResources().getString(R.string.empty));
-
     }
 
     public void removeServer(Server el) {
@@ -254,7 +247,8 @@ public class ServerListFragment extends ListFragment implements
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                swipeLayout.setRefreshing(true);
+                if(!listArray.isEmpty())
+                    swipeLayout.setRefreshing(true);
             }
         }, 100);
 
