@@ -118,8 +118,9 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 
 		/* --- SEND REQUEST --- */
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(TIMEOUT);
+        conn.setReadTimeout(TIMEOUT);
 		conn.setDoOutput(true);
-		conn.setConnectTimeout(TIMEOUT);
 
 		OutputStreamWriter writer = new OutputStreamWriter(
 				conn.getOutputStream());
@@ -168,6 +169,7 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 
 		URL url = createHttpsUrl(protocol, "/data?get=" + type + "s");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(TIMEOUT);
 		conn.getContent();
 
 		/* --- GET RESPONSE --- */
@@ -201,6 +203,7 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 
 		URL url = createHttpsUrl(protocol, "/data?get=pwState");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(TIMEOUT);
 		conn.getContent();
 
 		/* --- GET RESPONSE --- */
@@ -225,6 +228,7 @@ public class IvbHttpsConnection implements BmcConnectionInterface {
 		URL url = createHttpsUrl(protocol,
 				"/data?set=pwState:" + String.valueOf(state));
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(TIMEOUT);
 		conn.getContent();
 		conn.disconnect();
 	}
