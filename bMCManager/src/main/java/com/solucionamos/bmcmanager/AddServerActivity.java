@@ -52,7 +52,6 @@ public class AddServerActivity extends Activity implements OnClickListener,
 		Button cancelBtn = (Button) this.findViewById(R.id.backServerBtn);
 		cancelBtn.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				finish();
 			}
 
@@ -73,14 +72,11 @@ public class AddServerActivity extends Activity implements OnClickListener,
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
 				spinnerText = spinner.getSelectedItem().toString();
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 		

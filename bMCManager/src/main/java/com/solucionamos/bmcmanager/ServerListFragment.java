@@ -214,7 +214,6 @@ public class ServerListFragment extends ListFragment implements
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
 		swipeLayout.setRefreshing(true);
 		adapter.notifyDataSetChanged();
 		if(this.getActivity().findViewById(R.id.item_detail_container) != null){

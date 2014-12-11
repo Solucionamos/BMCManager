@@ -58,7 +58,6 @@ public class ServerListActivity extends Activity
                     .activateOnItemClick();
         }
 
-        // TODO: If exposing deep links into your app, handle intents here.
     }
  
     /**
