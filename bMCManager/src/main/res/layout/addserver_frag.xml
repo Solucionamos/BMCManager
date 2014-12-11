@@ -2,14 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-    android:fillViewport="true" >
+    android:fillViewport="true">
 
     <RelativeLayout
         android:id="@+id/addForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="10dp" >
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/serverDesc"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/serverDesc"
             android:paddingBottom="5dp"
-            android:paddingTop="15dp" >
+            android:paddingTop="15dp">
 
             <TextView
                 android:id="@+id/add_server_address"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/formBlock1"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingTop="5dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/formBlock2"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingTop="5dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/credentials"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingTop="5dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/formBlock4"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp" >
+            android:paddingTop="5dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -167,8 +167,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/formBlock5"
-            android:layout_marginTop="25dp"
-            >
+            android:layout_marginTop="25dp">
 
             <Button
                 android:id="@+id/backServerBtn"

@@ -1,6 +1,12 @@
 package com.solucionamos.bmcmanager.connection;
 
 import android.annotation.SuppressLint;
+
+import com.solucionamos.bmcmanager.model.Sensor;
+
+import org.apache.http.auth.AuthenticationException;
+import org.xml.sax.SAXException;
+
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.CookieHandler;
@@ -23,214 +29,208 @@ import javax.net.ssl.X509TrustManager;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.apache.http.auth.AuthenticationException;
-import org.xml.sax.SAXException;
-
-import com.solucionamos.bmcmanager.model.Sensor;
-
 public class IvbHttpsConnection implements BmcConnectionInterface {
 
-	private static final int TIMEOUT = 1000;
-	/*
-	 * Implementation for monitoring IVB servers (RD540 and 640)
-	 */
-	private final String hostname;
-	private final String username;
-	private final String password;
-	private final String protocol;
+    private static final int TIMEOUT = 1000;
+    /*
+     * Implementation for monitoring IVB servers (RD540 and 640)
+     */
+    private final String hostname;
+    private final String username;
+    private final String password;
+    private final String protocol;
 
-	private List<HttpCookie> cookies;
+    private List<HttpCookie> cookies;
 
-	/*
-	 * Constructor
-	 */
-	public IvbHttpsConnection(String protocol, String hostname,
-			String username, String password) {
-		this.protocol = protocol;
-		this.hostname = hostname;
-		this.username = username;
-		this.password = password;
-		this.cookies = null;
-	}
+    /*
+     * Constructor
+     */
+    public IvbHttpsConnection(String protocol, String hostname,
+                              String username, String password) {
+        this.protocol = protocol;
+        this.hostname = hostname;
+        this.username = username;
+        this.password = password;
+        this.cookies = null;
+    }
 
-	/*
-	 * Configure the environment to accept self-signed certificates and
-	 * certificates with wrong hostname
-	 */
-	@SuppressLint("TrulyRandom")
-	private void trustAllCertificates() throws Exception {
+    /*
+     * Configure the environment to accept self-signed certificates and
+     * certificates with wrong hostname
+     */
+    @SuppressLint("TrulyRandom")
+    private void trustAllCertificates() throws Exception {
 
-		// Create a trust manager that does not validate certificate chains
-		final TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-			public X509Certificate[] getAcceptedIssuers() {
-				return null;
-			}
+        // Create a trust manager that does not validate certificate chains
+        final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
 
-			public void checkServerTrusted(final X509Certificate[] chain,
-					final String authType) {
-			}
+            public void checkServerTrusted(final X509Certificate[] chain,
+                                           final String authType) {
+            }
 
-			public void checkClientTrusted(final X509Certificate[] chain,
-					final String authType) {
-			}
-		} };
+            public void checkClientTrusted(final X509Certificate[] chain,
+                                           final String authType) {
+            }
+        }};
 
-		// Install the all-trusting trust manager
-		SSLContext sslContext = SSLContext.getInstance("SSL");
-		sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-		HttpsURLConnection.setDefaultSSLSocketFactory(sslContext
-				.getSocketFactory());
+        // Install the all-trusting trust manager
+        SSLContext sslContext = SSLContext.getInstance("SSL");
+        sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext
+                .getSocketFactory());
 
-		// Create all-trusting host name verifier
-		HostnameVerifier allHostValid = new HostnameVerifier() {
-			public boolean verify(String arg0, SSLSession arg1) {
-				return true;
-			}
-		};
+        // Create all-trusting host name verifier
+        HostnameVerifier allHostValid = new HostnameVerifier() {
+            public boolean verify(String arg0, SSLSession arg1) {
+                return true;
+            }
+        };
 
-		// Install the all-trusting host verifier
-		HttpsURLConnection.setDefaultHostnameVerifier(allHostValid);
-	}
+        // Install the all-trusting host verifier
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostValid);
+    }
 
-	/*
-	 * Create a HTTPS URL object from the hostname and the given path
-	 */
-	private URL createHttpsUrl(String protocol, String path)
-			throws MalformedURLException {
-		return new URL(protocol + "://" + hostname + path);
-	}
+    /*
+     * Create a HTTPS URL object from the hostname and the given path
+     */
+    private URL createHttpsUrl(String protocol, String path)
+            throws MalformedURLException {
+        return new URL(protocol + "://" + hostname + path);
+    }
 
-	@Override
-	public void connect() throws Exception {
+    @Override
+    public void connect() throws Exception {
 
 		/* --- ACCEPT ANY CERTIFICATE --- */
-		trustAllCertificates();
+        trustAllCertificates();
 
 		/* --- PREPARE TO RECEIVE COOKIES --- */
-		CookieManager cookieManager = new CookieManager();
-		cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-		CookieHandler.setDefault(cookieManager);
+        CookieManager cookieManager = new CookieManager();
+        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+        CookieHandler.setDefault(cookieManager);
 
 		/* --- PREPARE THE REQUEST --- */
-		URL url = createHttpsUrl(protocol, "/data/login");
-		String urlParameters = "user=" + username + "&password=" + password
-				+ "&press=btnOK";
+        URL url = createHttpsUrl(protocol, "/data/login");
+        String urlParameters = "user=" + username + "&password=" + password
+                + "&press=btnOK";
 
 		/* --- SEND REQUEST --- */
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(TIMEOUT);
         conn.setReadTimeout(TIMEOUT);
-		conn.setDoOutput(true);
+        conn.setDoOutput(true);
 
-		OutputStreamWriter writer = new OutputStreamWriter(
-				conn.getOutputStream());
-		writer.write(urlParameters);
-		writer.flush();
-		writer.close();
+        OutputStreamWriter writer = new OutputStreamWriter(
+                conn.getOutputStream());
+        writer.write(urlParameters);
+        writer.flush();
+        writer.close();
 
-		conn.getContent();
+        conn.getContent();
 
 		/* --- READ THE RECEIVED COOKIE --- */
-		CookieStore cookieJar = cookieManager.getCookieStore();
-		cookies = cookieJar.getCookies();
+        CookieStore cookieJar = cookieManager.getCookieStore();
+        cookies = cookieJar.getCookies();
 
 		/* --- GET RESPONSE --- */
-		InputStream in = conn.getInputStream();
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		HttpsConnectionSaxHandler handler = new HttpsConnectionSaxHandler();
-		SAXParser parser = factory.newSAXParser();
+        InputStream in = conn.getInputStream();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        HttpsConnectionSaxHandler handler = new HttpsConnectionSaxHandler();
+        SAXParser parser = factory.newSAXParser();
 
-		parser.parse(in, handler);
-		if (handler.getAuthResult() != HttpsConnectionSaxHandler.AUTH_OK) {
-			throw new AuthenticationException();
-		}
+        parser.parse(in, handler);
+        if (handler.getAuthResult() != HttpsConnectionSaxHandler.AUTH_OK) {
+            throw new AuthenticationException();
+        }
 
-		conn.disconnect();
-	}
+        conn.disconnect();
+    }
 
-	@Override
-	public void disconnect() throws Exception {
-		URL url;
-		HttpURLConnection conn;
+    @Override
+    public void disconnect() throws Exception {
+        URL url;
+        HttpURLConnection conn;
 
-		url = createHttpsUrl(protocol, "/data/logout");
-		conn = (HttpURLConnection) url.openConnection();
-		conn.setConnectTimeout(TIMEOUT);
-
-		// send the cookie received on connect()
-		conn.setRequestProperty("Cookie", cookies.get(0).toString());
-		conn.getContent();
-
-		conn.disconnect();
-	}
-
-	public List<Sensor> getSensors(String type) throws Exception {
-		List<Sensor> sensors;
-
-		URL url = createHttpsUrl(protocol, "/data?get=" + type + "s");
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        url = createHttpsUrl(protocol, "/data/logout");
+        conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(TIMEOUT);
-		conn.getContent();
+
+        // send the cookie received on connect()
+        conn.setRequestProperty("Cookie", cookies.get(0).toString());
+        conn.getContent();
+
+        conn.disconnect();
+    }
+
+    public List<Sensor> getSensors(String type) throws Exception {
+        List<Sensor> sensors;
+
+        URL url = createHttpsUrl(protocol, "/data?get=" + type + "s");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(TIMEOUT);
+        conn.getContent();
 
 		/* --- GET RESPONSE --- */
-		InputStream in = conn.getInputStream();
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SensorSaxHandler handler = new SensorSaxHandler();
-		SAXParser parser = factory.newSAXParser();
+        InputStream in = conn.getInputStream();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SensorSaxHandler handler = new SensorSaxHandler();
+        SAXParser parser = factory.newSAXParser();
 
-		try {
-			parser.parse(in, handler);
-		} catch (SAXException sax) {
-			Exception embed = sax.getException();
-			embed.printStackTrace();
-		}
-		sensors = handler.getSensors();
-		for (Sensor s : sensors) {
-			s.setType(type);
-		}
+        try {
+            parser.parse(in, handler);
+        } catch (SAXException sax) {
+            Exception embed = sax.getException();
+            embed.printStackTrace();
+        }
+        sensors = handler.getSensors();
+        for (Sensor s : sensors) {
+            s.setType(type);
+        }
 
-		conn.disconnect();
+        conn.disconnect();
 
-		return sensors;
-		
-		
-		
-	}
+        return sensors;
 
-	@Override
-	public int getPwState() throws Exception {
-		int pwState;
 
-		URL url = createHttpsUrl(protocol, "/data?get=pwState");
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    }
+
+    @Override
+    public int getPwState() throws Exception {
+        int pwState;
+
+        URL url = createHttpsUrl(protocol, "/data?get=pwState");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(TIMEOUT);
-		conn.getContent();
+        conn.getContent();
 
 		/* --- GET RESPONSE --- */
-		InputStream in = conn.getInputStream();
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		PwStateSaxHandler handler = new PwStateSaxHandler();
-		SAXParser parser = factory.newSAXParser();
+        InputStream in = conn.getInputStream();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        PwStateSaxHandler handler = new PwStateSaxHandler();
+        SAXParser parser = factory.newSAXParser();
 
-		try {
-			parser.parse(in, handler);
-		} catch (SAXException sax) {
-			Exception embed = sax.getException();
-			embed.printStackTrace();
-		}
-		pwState = handler.getPwState();
-		conn.disconnect();
-		return pwState;
-	}
+        try {
+            parser.parse(in, handler);
+        } catch (SAXException sax) {
+            Exception embed = sax.getException();
+            embed.printStackTrace();
+        }
+        pwState = handler.getPwState();
+        conn.disconnect();
+        return pwState;
+    }
 
-	@Override
-	public void setPwState(int state) throws Exception {
-		URL url = createHttpsUrl(protocol,
-				"/data?set=pwState:" + String.valueOf(state));
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    @Override
+    public void setPwState(int state) throws Exception {
+        URL url = createHttpsUrl(protocol,
+                "/data?set=pwState:" + String.valueOf(state));
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setConnectTimeout(TIMEOUT);
-		conn.getContent();
-		conn.disconnect();
-	}
+        conn.getContent();
+        conn.disconnect();
+    }
 
 }

@@ -1,32 +1,32 @@
 package com.solucionamos.bmcmanager.connection;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.solucionamos.bmcmanager.model.Sensor;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.solucionamos.bmcmanager.model.Sensor;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SensorSaxHandler extends DefaultHandler {
-	private final List<Sensor> sensors = new ArrayList<>();
-	private Sensor lastSensor = null;
-	private String content = null;
+    private final List<Sensor> sensors = new ArrayList<>();
+    private Sensor lastSensor = null;
+    private String content = null;
 
-	public List<Sensor> getSensors() {
-		return sensors;
-	}
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
 
-	public void startElement(String uri, String localName, String qName,
-			Attributes atts) throws SAXException {
-		if (localName.equals("sensor")) {
-			lastSensor = new Sensor();
-		}
-	}
+    public void startElement(String uri, String localName, String qName,
+                             Attributes atts) throws SAXException {
+        if (localName.equals("sensor")) {
+            lastSensor = new Sensor();
+        }
+    }
 
-	public void endElement(String uri, String localName, String qName)
-			throws SAXException {
+    public void endElement(String uri, String localName, String qName)
+            throws SAXException {
         switch (localName) {
             case "sensorStatus":
                 lastSensor.setStatus(content);
@@ -62,10 +62,10 @@ public class SensorSaxHandler extends DefaultHandler {
                 sensors.add(lastSensor);
                 break;
         }
-	}
+    }
 
-	public void characters(char[] ch, int start, int length) {
-		content = String.copyValueOf(ch, start, length);
-	}
+    public void characters(char[] ch, int start, int length) {
+        content = String.copyValueOf(ch, start, length);
+    }
 
 }

@@ -2,87 +2,87 @@ package com.solucionamos.bmcmanager.model;
 
 public class Sensor {
 
-	public static final String TYPE_FAN = "fan";
-	public static final String TYPE_VOLTAGE = "voltage";
-	public static final String TYPE_TEMPERATURE = "temperature";
+    public static final String TYPE_FAN = "fan";
+    public static final String TYPE_VOLTAGE = "voltage";
+    public static final String TYPE_TEMPERATURE = "temperature";
 
-	private String type;
-	private String status;
-	private String name;
-	private String reading;
-	private String units;
-	private String lowerNC;
-	private String upperNC;
-	private String lowerCT;
-	private String upperCT;
-	private String lowerNR;
-	private String upperNR;
+    private String type;
+    private String status;
+    private String name;
+    private String reading;
+    private String units;
+    private String lowerNC;
+    private String upperNC;
+    private String lowerCT;
+    private String upperCT;
+    private String lowerNR;
+    private String upperNR;
 
-	public Sensor() {
-	}
+    public Sensor() {
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getReading() {
-		return reading;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setReading(String reading) {
-		this.reading = reading;
-	}
+    public String getReading() {
+        return reading;
+    }
 
-	public String getUnits() {
-		return units;
-	}
+    public void setReading(String reading) {
+        this.reading = reading;
+    }
 
-	public void setUnits(String units) {
-		this.units = units;
-	}
+    public String getUnits() {
+        return units;
+    }
 
-	public void setLowerNC(String lowerNC) {
-		this.lowerNC = lowerNC;
-	}
+    public void setUnits(String units) {
+        this.units = units;
+    }
 
-	public void setUpperNC(String upperNC) {
-		this.upperNC = upperNC;
-	}
+    public void setLowerNC(String lowerNC) {
+        this.lowerNC = lowerNC;
+    }
 
-	public void setLowerCT(String lowerCT) {
-		this.lowerCT = lowerCT;
-	}
+    public void setUpperNC(String upperNC) {
+        this.upperNC = upperNC;
+    }
 
-	public void setUpperCT(String upperCT) {
-		this.upperCT = upperCT;
-	}
+    public void setLowerCT(String lowerCT) {
+        this.lowerCT = lowerCT;
+    }
 
-	public void setLowerNR(String lowerNR) {
-		this.lowerNR = lowerNR;
-	}
+    public void setUpperCT(String upperCT) {
+        this.upperCT = upperCT;
+    }
 
-	public void setUpperNR(String upperNR) {
-		this.upperNR = upperNR;
-	}
+    public void setLowerNR(String lowerNR) {
+        this.lowerNR = lowerNR;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setUpperNR(String upperNR) {
+        this.upperNR = upperNR;
+    }
 
 }

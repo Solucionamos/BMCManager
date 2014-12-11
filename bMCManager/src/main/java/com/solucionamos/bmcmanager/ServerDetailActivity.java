@@ -1,16 +1,16 @@
 package com.solucionamos.bmcmanager;
 
-import com.example.bmcmanager.R;
-
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.example.bmcmanager.R;
 import com.solucionamos.bmcmanager.model.Server;
 
 
@@ -19,7 +19,7 @@ import com.solucionamos.bmcmanager.model.Server;
  * activity is only used on handset devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
  * in a {@link ServerListActivity}.
- * <p>
+ * <p/>
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link ServerDetailFragment}.
  */
@@ -33,9 +33,9 @@ public class ServerDetailActivity extends Activity {
 
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) && 
-        		(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP))
-        	getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) &&
+                (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP))
+            getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity
@@ -74,23 +74,23 @@ public class ServerDetailActivity extends Activity {
             NavUtils.navigateUpTo(this, new Intent(this, ServerListActivity.class));
             return true;
         }
-        if(id == R.id.add_server){
-        	Intent k = new Intent(ServerDetailActivity.this, AddServerActivity.class);
-    		startActivity(k);
+        if (id == R.id.add_server) {
+            Intent k = new Intent(ServerDetailActivity.this, AddServerActivity.class);
+            startActivity(k);
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-    	inflater.inflate(R.menu.menu_server_list, menu);
-		return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_server_list, menu);
+        return true;
     }
-    
-    public void deleteServer(Server el){
-    	DBHelper db = new DBHelper(this);
-    	db.deleteServer(el.getName());
-    	NavUtils.navigateUpTo(this, new Intent(this, ServerListActivity.class));
+
+    public void deleteServer(Server el) {
+        DBHelper db = new DBHelper(this);
+        db.deleteServer(el.getName());
+        NavUtils.navigateUpTo(this, new Intent(this, ServerListActivity.class));
     }
 }

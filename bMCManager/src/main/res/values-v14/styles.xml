@@ -7,8 +7,8 @@
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!-- API 14 theme customizations can go here. -->
-        
-		<item name="android:logo">@android:color/transparent</item>
+
+        <item name="android:logo">@android:color/transparent</item>
     </style>
 
 </resources>

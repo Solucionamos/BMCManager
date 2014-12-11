@@ -1,54 +1,55 @@
 package com.solucionamos.bmcmanager;
 
-import java.util.List;
+import com.solucionamos.bmcmanager.model.Sensor;
+import com.solucionamos.bmcmanager.model.Server;
 
-import com.solucionamos.bmcmanager.model.*;
+import java.util.List;
 
 public class BMCResponse {
 
-	public final static String TYPE_SENSOR = "SENSOR";
-	public final static String TYPE_PWSTATE = "PWSTATE";
-	public final static String TYPE_SERVER = "SERVER";
-	
-	public Object type = null;
-	private List<Sensor> sensors;
-	private int pwState;
-	private Server server;
-	private int colorIndex;
+    public final static String TYPE_SENSOR = "SENSOR";
+    public final static String TYPE_PWSTATE = "PWSTATE";
+    public final static String TYPE_SERVER = "SERVER";
 
-	public void setSensors(List<Sensor> sensors) {
-		type = TYPE_SENSOR;
-		this.sensors = sensors;
-	}
+    public Object type = null;
+    private List<Sensor> sensors;
+    private int pwState;
+    private Server server;
+    private int colorIndex;
 
-	public List<Sensor> getSensors() {
-		return sensors;
-	}
+    public List<Sensor> getSensors() {
+        return sensors;
+    }
 
-	public void setPwState(int i) {
-		type = TYPE_PWSTATE;
-		this.pwState = i;
-	}
+    public void setSensors(List<Sensor> sensors) {
+        type = TYPE_SENSOR;
+        this.sensors = sensors;
+    }
 
-	public int getPwState() {
-		return pwState;
-	}
+    public int getPwState() {
+        return pwState;
+    }
 
-	public void setServer(Server server) {
-		type = TYPE_SERVER;
-		this.server = server;
-	}
+    public void setPwState(int i) {
+        type = TYPE_PWSTATE;
+        this.pwState = i;
+    }
 
-	public Server getServer() {
-		return server;
-	}
+    public Server getServer() {
+        return server;
+    }
 
-	public int getColorIndex() {
-		return colorIndex;
-	}
+    public void setServer(Server server) {
+        type = TYPE_SERVER;
+        this.server = server;
+    }
 
-	public void setColorIndex(int colorIndex) {
-		this.colorIndex = colorIndex;
-	}
+    public int getColorIndex() {
+        return colorIndex;
+    }
+
+    public void setColorIndex(int colorIndex) {
+        this.colorIndex = colorIndex;
+    }
 
 }

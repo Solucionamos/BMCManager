@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    android:theme="@style/AppBaseTheme" >
+    android:theme="@style/AppBaseTheme">
 
     <item
         android:id="@+id/reset_server"
-        android:title="@string/server_details_options_cycle_reset"/>
+        android:title="@string/server_details_options_cycle_reset" />
     <item
         android:id="@+id/hard_reset_server"
-        android:title="@string/server_details_options_hard_reset"/>
+        android:title="@string/server_details_options_hard_reset" />
     <item
         android:id="@+id/delete_server"
-        android:title="@string/server_details_options_delete"/>
+        android:title="@string/server_details_options_delete" />
 
 </menu>

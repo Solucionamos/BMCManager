@@ -26,7 +26,7 @@
     <string name="add_server_button">Confirm</string>
     <string name="back_server_button">@android:string/cancel</string>
 
-    
+
     <string name="server_exists">There is already one server with this name!</string>
     <!-- END -->
 
@@ -70,7 +70,7 @@
 
     <string name="credentials">Credentials:</string>
     <string name="empty_block">Couldn\'t load information</string>
-    <string name="empty_value"/>
+    <string name="empty_value" />
     <string name="server_status">Status: </string>
     <string name="server_on_status">On</string>
     <string name="server_off_status">Off</string>

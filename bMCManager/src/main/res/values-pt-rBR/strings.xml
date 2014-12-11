@@ -25,7 +25,7 @@
     <string name="add_server_password">Senha:</string>
     <string name="add_server_button">Confirmar</string>
     <string name="back_server_button">@android:string/cancel</string>
-	<string name="server_exists">Já existe um servidor com este nome!</string>
+    <string name="server_exists">Já existe um servidor com este nome!</string>
     <!-- FIM -->
 
 
@@ -69,7 +69,7 @@
 
     <string name="credentials">Credenciais:</string>
     <string name="empty_block">Não foi possível carregar informação</string>
-    <string name="empty_value"/>
+    <string name="empty_value" />
     <string name="server_status">Estado: </string>
     <string name="server_on_status">Ligado</string>
     <string name="server_off_status">Desligado</string>

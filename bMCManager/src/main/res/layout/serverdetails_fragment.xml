@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
-<RelativeLayout
-    android:id="@+id/relativeHeader"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/background_grey"
-    android:minHeight="72dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp" >
+    <RelativeLayout
+        android:id="@+id/relativeHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_grey"
+        android:minHeight="72dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
 
         <Button
             android:id="@+id/Options_Image"
@@ -21,35 +21,35 @@
             android:drawableRight="@drawable/ic_action_overflow"
             android:minHeight="72dip" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/textServerName"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:text="@string/server_name"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textServerDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
-            android:text="@string/server_address"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textServerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:text="@string/server_name"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
-</RelativeLayout>
-    
+            <TextView
+                android:id="@+id/textServerDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:text="@string/server_address"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/bellowHeader"
         android:layout_width="fill_parent"
@@ -59,7 +59,7 @@
         android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="4dp" >
+        android:paddingTop="4dp">
 
         <TextView
             android:id="@+id/serverStatus"
@@ -89,42 +89,39 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:checked="true"
-            />
+            android:checked="true" />
     </RelativeLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bellowHeader" >
+        android:layout_below="@+id/bellowHeader">
 
         <ScrollView
             android:id="@+id/scrollViewBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/bellowHeader" >
+            android:layout_below="@+id/bellowHeader">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="4dp" >
+                android:padding="4dp">
 
-                <android.support.v7.widget.CardView
-                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                	android:id="@+id/card_view1"
-                	android:layout_width="match_parent"
-                	android:layout_height="wrap_content"
-               		card_view:cardElevation="4dp"
-                	card_view:cardUseCompatPadding="true"
-                	card_view:contentPadding="0dp"
-                	card_view:elevation="7dp" >
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:cardElevation="4dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="0dp"
+                    card_view:elevation="7dp">
 
                     <LinearLayout
                         android:id="@+id/temperatureBlock"
-                        style="@style/InformationBlock" >
+                        style="@style/InformationBlock">
 
                         <TextView
                             android:id="@+id/textTemperatureHeader"
@@ -133,19 +130,18 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                	android:id="@+id/card_view2"
-                	android:layout_width="match_parent"
-                	android:layout_height="wrap_content"
-               		card_view:cardElevation="4dp"
-                	card_view:cardUseCompatPadding="true"
-                	card_view:contentPadding="0dp"
-                	card_view:elevation="7dp" >
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:cardElevation="4dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="0dp"
+                    card_view:elevation="7dp">
 
                     <LinearLayout
                         android:id="@+id/coolerBlock"
-                        style="@style/InformationBlock" >
+                        style="@style/InformationBlock">
 
                         <TextView
                             android:id="@+id/textCoolerHeader"
@@ -154,19 +150,18 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                	xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                	android:id="@+id/card_view3"
-                	android:layout_width="match_parent"
-                	android:layout_height="wrap_content"
-               		card_view:cardElevation="4dp"
-                	card_view:cardUseCompatPadding="true"
-                	card_view:contentPadding="0dp"
-                	card_view:elevation="7dp" >
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/card_view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:cardElevation="4dp"
+                    card_view:cardUseCompatPadding="true"
+                    card_view:contentPadding="0dp"
+                    card_view:elevation="7dp">
 
                     <LinearLayout
                         android:id="@+id/powerBlock"
-                        style="@style/InformationBlock" >
+                        style="@style/InformationBlock">
 
                         <TextView
                             android:id="@+id/textPowerHeader"
@@ -177,5 +172,5 @@
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
- 
+
 </RelativeLayout>
