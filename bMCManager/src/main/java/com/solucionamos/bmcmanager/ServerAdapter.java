@@ -126,8 +126,11 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
         if (tasks.isEmpty()) {
             ServerListActivity listActivity = (ServerListActivity) context;
-            ((ServerListFragment) listActivity.getFragmentManager()
-                    .findFragmentById(R.id.item_list)).stopRefreshing();
+            ServerListFragment listFragment = ((ServerListFragment) listActivity.getFragmentManager()
+                    .findFragmentById(R.id.item_list));
+            if (listFragment != null) {
+                listFragment.stopRefreshing();
+            }
         }
     }
 
