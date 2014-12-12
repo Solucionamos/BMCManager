@@ -233,8 +233,12 @@ public class ServerDetailFragment extends Fragment implements
     @Override
     public void onResume() {
         super.onResume();
-        // Set title
 
+        isRefreshing = true;
+        powerSwitch.setChecked(false);
+        isRefreshing = false;
+
+        // Set title
         if (this.getActivity().getClass().equals(ServerDetailActivity.class)) {
             getActivity().getActionBar().setTitle(
                     R.string.action_titleServerDetails);
