@@ -297,21 +297,56 @@ public class ServerDetailFragment extends Fragment implements
 
     @Override
     public void processFinish(BMCResponse response, Exception ex) {
+        if (ex != null) {
+            callbackServerUnreachable();
+        } else {
+            switch(response.type) {
+                case BMCResponse.TYPE_PWSTATE:
+                    if (response.getPwState() == Server.PWSTATE_OFF) {
+                        callbackServerOff();
+                    }
+                    break;
+
+                case BMCResponse.TYPE_SENSOR:
+                    callBackSensors(response.getSensors());
+                    break;
+            }
+        }
+
+        if (tasks.isEmpty()) {
+            swipeLayout.setRefreshing(false);
+            powerSwitch.setEnabled(true);
+        }
+    }
+
+    private void callbackServerUnreachable() {
+        isRefreshing = true;
+        powerSwitch.setChecked(false);
+        isRefreshing = false;
+
+        showToast(getString(R.string.connection_no_success));
+        statusTxt.setText(getString(R.string.server_status) + " "
+                + getString(R.string.server_unreachable_status));
+        showEmptyBlocks(true);
+    }
+
+    private void callbackServerOff() {
+        isRefreshing = true;
+        powerSwitch.setChecked(false);
+        isRefreshing = false;
+
+        showToast(getString(R.string.server_powered_off));
+        statusTxt.setText(getString(R.string.server_status) + " "
+                + getString(R.string.server_off_status));
+        colorBlock.setBackgroundResource(R.color.background_grey);
+        showEmptyBlocks(false);
+    }
+
+    private void callBackSensors(List<Sensor> sensors) {
         TextView sensorName;
         TextView value;
         ImageView iconChange;
         LinearLayout aBlock = null;
-
-        List<Sensor> sensors = null;
-        int pwState = -1;
-        if (ex == null) {
-            if (response.type.equals(BMCResponse.TYPE_SENSOR)) {
-                sensors = response.getSensors();
-            } else if (response.type.equals(BMCResponse.TYPE_PWSTATE)) {
-                pwState = response.getPwState();
-            }
-        }
-
 
         int textName = 0;
         int textValue = 0;
@@ -319,177 +354,148 @@ public class ServerDetailFragment extends Fragment implements
         int iconItem = 0;
         int textDesc = 0;
 
-        if (ex != null) {
-            isRefreshing = true;
-            powerSwitch.setChecked(false);
-            isRefreshing = false;
+        isRefreshing = true;
+        powerSwitch.setChecked(true);
+        isRefreshing = false;
+        statusTxt.setText(getString(R.string.server_status) + " "
+                + getString(R.string.server_on_status));
 
-            showToast(getString(R.string.connection_no_success));
-            statusTxt.setText(getString(R.string.server_status) + " "
-                    + getString(R.string.server_unreachable_status));
-            showEmptyBlocks(true);
-        } else if (pwState == Server.PWSTATE_OFF) {
-            isRefreshing = true;
-            powerSwitch.setChecked(false);
-            isRefreshing = false;
+        String sensorType;
+        String sensorStatus;
+        View view;
+        LayoutInflater inflater = LayoutInflater.from(getActivity()
+                .getBaseContext());
 
-            showToast(getString(R.string.server_powered_off));
-            statusTxt.setText(getString(R.string.server_status) + " "
-                    + getString(R.string.server_off_status));
-            colorBlock.setBackgroundResource(R.color.background_grey);
-            showEmptyBlocks(false);
-        } else if (sensors != null) {
-            isRefreshing = true;
-            powerSwitch.setChecked(true);
-            isRefreshing = false;
-            statusTxt.setText(getString(R.string.server_status) + " "
-                    + getString(R.string.server_on_status));
-            String sensorType;
-            String sensorStatus;
-            LayoutInflater inflater = LayoutInflater.from(getActivity()
-                    .getBaseContext());
+        for (Sensor sensor : sensors) {
+            sensorType = sensor.getType();
 
-            Sensor aSensor;
-            // colorFlag = 0;
-            for (Sensor sensor : sensors) {
-                aSensor = sensor;
-                sensorType = aSensor.getType();
-                sensorStatus = aSensor.getStatus();
-                View view;
-
-                switch (sensorType) {
-                    case Sensor.TYPE_TEMPERATURE:
-                        aBlock = tempBlock;
-                        textName = R.id.textTemperature1;
-                        textValue = R.id.textTemperatureNumber1;
-                        layoutItem = R.layout.temperatureitem;
-                        iconItem = R.id.iconTemperature1;
-                        textDesc = R.id.textTemperatureDesc1;
-                        break;
-                    case Sensor.TYPE_VOLTAGE:
-                        aBlock = voltBlock;
-                        textName = R.id.textPower1;
-                        textValue = R.id.textPowerNumber1;
-                        layoutItem = R.layout.voltageitem;
-                        iconItem = R.id.imageView12;
-                        textDesc = R.id.textPowerDesc1;
-                        break;
-                    case Sensor.TYPE_FAN:
-                        aBlock = fanBlock;
-                        textName = R.id.textFan1;
-                        textValue = R.id.textFanNumber1;
-                        layoutItem = R.layout.fanitem;
-                        iconItem = R.id.imageView3;
-                        textDesc = R.id.textFanDesc1;
-                        break;
-                }
-
-                view = inflater.inflate(layoutItem, aBlock, false);
-                sensorName = (TextView) view.findViewById(textName);
-                sensorName.setText(aSensor.getName());
-                value = (TextView) view.findViewById(textValue);
-
-                String unit = aSensor.getUnits();
-                if (!(unit == null)) {
-                    if (unit.equals("C") || unit.equals("F")) {
-                        unit = "º" + unit;
-                    }
-                    unit = " " + unit;
-                    value.setText(aSensor.getReading() + unit);
-                } else
-                    value.setText(aSensor.getReading());
-
-                if (aSensor.getStatus().equals("Critical")) {
-                    ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_critical));
-                } else if (aSensor.getStatus().equals("Warning")) {
-                    ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_warning));
-                } else if (aSensor.getStatus().equals("Normal")) {
-                    ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_normal));
-                }
-
-
-                iconChange = (ImageView) view.findViewById(iconItem);
-
-                switch (sensorType) {
-                    case Sensor.TYPE_TEMPERATURE:
-                        switch (sensorStatus) {
-                            case "Normal":
-                                iconChange.setImageResource(R.drawable.ic_temperature_good);
-                                break;
-                            case "Warning":
-                                if (colorFlag < 1) {
-                                    colorFlag = 1;
-                                }
-                                iconChange.setImageResource(R.drawable.ic_temperature_warning);
-                                break;
-                            case "Critical":
-                                if (colorFlag < 2) {
-                                    colorFlag = 2;
-                                }
-                                iconChange.setImageResource(R.drawable.ic_temperature_bad);
-                                break;
-                        }
-                        break;
-                    case Sensor.TYPE_VOLTAGE:
-                        switch (sensorStatus) {
-                            case "Normal":
-                                iconChange.setImageResource(R.drawable.ic_power_good);
-                                break;
-                            case "Warning":
-                                if (colorFlag < 1) {
-                                    colorFlag = 1;
-                                }
-                                iconChange
-                                        .setImageResource(R.drawable.ic_power_warning);
-                                break;
-                            case "Critical":
-                                if (colorFlag < 2) {
-                                    colorFlag = 2;
-                                }
-                                iconChange.setImageResource(R.drawable.ic_power_bad);
-                                break;
-                        }
-                        break;
-                    case Sensor.TYPE_FAN:
-                        switch (sensorStatus) {
-                            case "Normal":
-                                iconChange.setImageResource(R.drawable.ic_fan_good);
-                                break;
-                            case "Warning":
-                                if (colorFlag < 1) {
-                                    colorFlag = 1;
-                                }
-                                iconChange.setImageResource(R.drawable.ic_fan_warning);
-                                break;
-                            case "Critical":
-                                if (colorFlag < 2) {
-                                    colorFlag = 2;
-                                }
-                                iconChange.setImageResource(R.drawable.ic_fan_bad);
-                                break;
-                        }
-                        break;
-                }
-
-                aBlock.addView(view);
+            switch (sensorType) {
+                case Sensor.TYPE_TEMPERATURE:
+                    aBlock = tempBlock;
+                    textName = R.id.textTemperature1;
+                    textValue = R.id.textTemperatureNumber1;
+                    layoutItem = R.layout.temperatureitem;
+                    iconItem = R.id.iconTemperature1;
+                    textDesc = R.id.textTemperatureDesc1;
+                    break;
+                case Sensor.TYPE_VOLTAGE:
+                    aBlock = voltBlock;
+                    textName = R.id.textPower1;
+                    textValue = R.id.textPowerNumber1;
+                    layoutItem = R.layout.voltageitem;
+                    iconItem = R.id.imageView12;
+                    textDesc = R.id.textPowerDesc1;
+                    break;
+                case Sensor.TYPE_FAN:
+                    aBlock = fanBlock;
+                    textName = R.id.textFan1;
+                    textValue = R.id.textFanNumber1;
+                    layoutItem = R.layout.fanitem;
+                    iconItem = R.id.imageView3;
+                    textDesc = R.id.textFanDesc1;
+                    break;
             }
 
-            if (colorFlag == 2) {
-                colorBlock.setBackgroundResource(R.color.background_red);
-                statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_critical));
-            } else if (colorFlag == 1) {
-                colorBlock.setBackgroundResource(R.color.background_orange);
-                statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_warning));
+            view = inflater.inflate(layoutItem, aBlock, false);
+            sensorName = (TextView) view.findViewById(textName);
+            sensorName.setText(sensor.getName());
+
+            value = (TextView) view.findViewById(textValue);
+            String unit = sensor.getUnits();
+            if (unit != null) {
+                if (unit.equals("C") || unit.equals("F")) {
+                    unit = "º" + unit;
+                }
+                unit = " " + unit;
+                value.setText(sensor.getReading() + unit);
             } else {
-                colorBlock.setBackgroundResource(R.color.background_green);
-                statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_normal));
+                value.setText(sensor.getReading());
             }
 
+            sensorStatus = sensor.getStatus();
+            if (sensorStatus.equals("Critical")) {
+                ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_critical));
+            } else if (sensorStatus.equals("Warning")) {
+                ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_warning));
+            } else if (sensorStatus.equals("Normal")) {
+                ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_normal));
+            }
+
+            iconChange = (ImageView) view.findViewById(iconItem);
+
+            switch (sensorType) {
+                case Sensor.TYPE_TEMPERATURE:
+                    switch (sensorStatus) {
+                        case "Normal":
+                            iconChange.setImageResource(R.drawable.ic_temperature_good);
+                            break;
+                        case "Warning":
+                            if (colorFlag < 1) {
+                                colorFlag = 1;
+                            }
+                            iconChange.setImageResource(R.drawable.ic_temperature_warning);
+                            break;
+                        case "Critical":
+                            if (colorFlag < 2) {
+                                colorFlag = 2;
+                            }
+                            iconChange.setImageResource(R.drawable.ic_temperature_bad);
+                            break;
+                    }
+                    break;
+                case Sensor.TYPE_VOLTAGE:
+                    switch (sensorStatus) {
+                        case "Normal":
+                            iconChange.setImageResource(R.drawable.ic_power_good);
+                            break;
+                        case "Warning":
+                            if (colorFlag < 1) {
+                                colorFlag = 1;
+                            }
+                            iconChange
+                                    .setImageResource(R.drawable.ic_power_warning);
+                            break;
+                        case "Critical":
+                            if (colorFlag < 2) {
+                                colorFlag = 2;
+                            }
+                            iconChange.setImageResource(R.drawable.ic_power_bad);
+                            break;
+                    }
+                    break;
+                case Sensor.TYPE_FAN:
+                    switch (sensorStatus) {
+                        case "Normal":
+                            iconChange.setImageResource(R.drawable.ic_fan_good);
+                            break;
+                        case "Warning":
+                            if (colorFlag < 1) {
+                                colorFlag = 1;
+                            }
+                            iconChange.setImageResource(R.drawable.ic_fan_warning);
+                            break;
+                        case "Critical":
+                            if (colorFlag < 2) {
+                                colorFlag = 2;
+                            }
+                            iconChange.setImageResource(R.drawable.ic_fan_bad);
+                            break;
+                    }
+                    break;
+            }
+
+            aBlock.addView(view);
         }
 
-        if (tasks.isEmpty()) {
-            swipeLayout.setRefreshing(false);
-            powerSwitch.setEnabled(true);
+        if (colorFlag == 2) {
+            colorBlock.setBackgroundResource(R.color.background_red);
+            statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_critical));
+        } else if (colorFlag == 1) {
+            colorBlock.setBackgroundResource(R.color.background_orange);
+            statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_warning));
+        } else {
+            colorBlock.setBackgroundResource(R.color.background_green);
+            statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_normal));
         }
     }
 

@@ -7,11 +7,11 @@ import java.util.List;
 
 public class BMCResponse {
 
-    public final static String TYPE_SENSOR = "SENSOR";
-    public final static String TYPE_PWSTATE = "PWSTATE";
-    public final static String TYPE_SERVER = "SERVER";
+    public final static int TYPE_SENSOR = 0;
+    public final static int TYPE_PWSTATE = 1;
+    public final static int TYPE_SERVER = 2;
 
-    public Object type = null;
+    public int type = -1;
     private List<Sensor> sensors;
     private int pwState;
     private Server server;
