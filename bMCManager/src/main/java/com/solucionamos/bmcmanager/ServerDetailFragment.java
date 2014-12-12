@@ -401,16 +401,14 @@ public class ServerDetailFragment extends Fragment implements
             sensorName.setText(sensor.getName());
 
             value = (TextView) view.findViewById(textValue);
+            String reading = sensor.getReading();
             String unit = sensor.getUnits();
             if (unit != null) {
                 if (unit.equals("C") || unit.equals("F")) {
                     unit = "º" + unit;
                 }
-                unit = " " + unit;
-                value.setText(sensor.getReading() + unit);
-            } else {
-                value.setText(sensor.getReading());
             }
+            value.setText(reading + " " + unit);
 
             sensorStatus = sensor.getStatus();
             if (sensorStatus.equals("Critical")) {
