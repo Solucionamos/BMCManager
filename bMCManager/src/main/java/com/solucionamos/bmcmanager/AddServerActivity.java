@@ -46,10 +46,10 @@ public class AddServerActivity extends Activity implements OnClickListener,
                 (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP))
             getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
-        Button btn = (Button) this.findViewById(R.id.addServerBtn);
+        Button btn = (Button) this.findViewById(R.id.add_server_confirm_btn);
         btn.setOnClickListener(this);
 
-        Button cancelBtn = (Button) this.findViewById(R.id.backServerBtn);
+        Button cancelBtn = (Button) this.findViewById(R.id.add_server_back_btn);
         cancelBtn.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 finish();
@@ -61,11 +61,11 @@ public class AddServerActivity extends Activity implements OnClickListener,
 
         // serverProtocol = (EditText)
         // this.findViewById(R.id.serverProtocolTxt);
-        serverName = (EditText) this.findViewById(R.id.serverNameTxt);
-        hostname = (EditText) this.findViewById(R.id.ip_address_txt);
-        username = (EditText) this.findViewById(R.id.usernameTxt);
-        password = (EditText) this.findViewById(R.id.pswText);
-        spinner = (Spinner) this.findViewById(R.id.serverProtocolSpinner);
+        serverName = (EditText) this.findViewById(R.id.add_server_name_txt);
+        hostname = (EditText) this.findViewById(R.id.add_server_address_txt);
+        username = (EditText) this.findViewById(R.id.add_server_username_txt);
+        password = (EditText) this.findViewById(R.id.add_server_password_txt);
+        spinner = (Spinner) this.findViewById(R.id.add_server_protocol_spinner);
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 
