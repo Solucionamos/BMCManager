@@ -17,12 +17,11 @@
     <!-- Strings de Adicionar Servidor -->
 
     <string name="empty">Não há servidores adicionados. Adicione um novo servidor através do símbolo "+", no barra acima.</string>
-    <string name="add_server_desc">Adicione um servidor, preenchendo as informações abaixo:</string>
-    <string name="add_server_protocol">Protocolo:</string>
-    <string name="add_server_name">Nome do Servidor:</string>
-    <string name="add_server_address">Endereço:</string>
-    <string name="add_server_username">Nome de Usuário:</string>
-    <string name="add_server_password">Senha:</string>
+    <string name="add_server_protocol">Protocolo</string>
+    <string name="add_server_name">Nome do Servidor</string>
+    <string name="add_server_address">Endereço</string>
+    <string name="add_server_username">Nome de Usuário</string>
+    <string name="add_server_password">Senha</string>
     <string name="add_server_button">Confirmar</string>
     <string name="back_server_button">@android:string/cancel</string>
     <string name="server_exists">Já existe um servidor com este nome!</string>
@@ -67,7 +66,6 @@
         <item>HTTPS</item>
     </string-array>
 
-    <string name="credentials">Credenciais:</string>
     <string name="empty_block">Não foi possível carregar informação</string>
     <string name="empty_value" />
     <string name="server_status">Estado: </string>
