@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:drawableRight="@drawable/ic_action_overflow"
+            android:drawableRight="@drawable/ic_more_vert_white"
             android:minHeight="72dip" />
 
         <LinearLayout

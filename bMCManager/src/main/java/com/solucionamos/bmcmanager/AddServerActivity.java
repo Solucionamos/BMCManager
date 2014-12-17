@@ -7,12 +7,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ import android.widget.Toast;
 import com.example.bmcmanager.R;
 import com.solucionamos.bmcmanager.model.Server;
 
-public class AddServerActivity extends Activity implements OnClickListener,
+public class AddServerActivity extends Activity implements
         AsyncResponse<BMCResponse> {
 
     // It has a reference to the button and the EditText, in the future, there
@@ -45,17 +44,6 @@ public class AddServerActivity extends Activity implements OnClickListener,
         if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) &&
                 (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP))
             getActionBar().setHomeAsUpIndicator(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-
-        Button btn = (Button) this.findViewById(R.id.add_server_confirm_btn);
-        btn.setOnClickListener(this);
-
-        Button cancelBtn = (Button) this.findViewById(R.id.add_server_back_btn);
-        cancelBtn.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-
-        });
 
         spinnerText = "";
 
@@ -85,9 +73,9 @@ public class AddServerActivity extends Activity implements OnClickListener,
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
-
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.confirm, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -97,8 +85,7 @@ public class AddServerActivity extends Activity implements OnClickListener,
         this.getActionBar().setTitle(R.string.action_titleAddServer);
     }
 
-    @Override
-    public void onClick(View v) {
+    private void confirmServerData() {
         try {
 
             String name = serverName.getText().toString().trim();
@@ -166,7 +153,6 @@ public class AddServerActivity extends Activity implements OnClickListener,
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
-
     }
 
     @Override
@@ -182,6 +168,8 @@ public class AddServerActivity extends Activity implements OnClickListener,
             //
             onBackPressed();
             return true;
+        } else if (id == R.id.action_bar_confirm_btn) {
+            confirmServerData();
         }
         return super.onOptionsItemSelected(item);
     }

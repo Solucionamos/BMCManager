@@ -42,8 +42,8 @@
     <string name="server_details_power_supply">Power Supply</string>
     <string name="delete_dialog_text">Are you sure you want to delete this server?</string>
     <string name="action_dialog_text">Are you sure you want to proceed with this operation?</string>
-    <string name="dialog_confirm">Confirm</string>
-    <string name="dialog_cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 
     <!-- END -->
     <!-- Toast Messages -->

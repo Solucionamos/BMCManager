@@ -40,8 +40,8 @@
     <string name="server_details_power_supply">Alimentação de Energia</string>
     <string name="delete_dialog_text">Você tem certeza que quer deletar este servidor"?</string>
     <string name="action_dialog_text">Você tem certeza que deseja realizar esta operação"?</string>
-    <string name="dialog_confirm">Confirmar</string>
-    <string name="dialog_cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
 
     <!-- FIM -->
     <!-- Toast Messages -->

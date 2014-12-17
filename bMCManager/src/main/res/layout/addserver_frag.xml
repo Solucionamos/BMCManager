@@ -1,52 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="fill_parent"
-android:fillViewport="true">
-
-<LinearLayout
-    android:id="@+id/addForm"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:padding="4dp">
-
-    <EditText
-        android:id="@+id/add_server_name_txt"
-        android:hint="@string/server_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="8"
-        android:imeOptions="actionNext"
-        android:inputType="text|textNoSuggestions"
-        android:textSize="16sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:height="48dp" />
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
 
     <LinearLayout
-        android:id="@+id/formBlock1"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <Spinner
-            android:id="@+id/add_server_protocol_spinner"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="0.4"
-            android:ems="8"
-            android:dropDownWidth="wrap_content"
-            android:entries="@array/connection_array"
-            android:prompt="@string/add_server_protocol" />
+        android:id="@+id/addForm"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="4dp">
 
         <EditText
-            android:id="@+id/add_server_address_txt"
-            android:hint="@string/server_address"
-            android:layout_width="wrap_content"
+            android:id="@+id/add_server_name_txt"
+            android:hint="@string/server_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.6"
+            android:ems="8"
             android:imeOptions="actionNext"
             android:inputType="text|textNoSuggestions"
             android:textSize="16sp"
@@ -54,66 +25,61 @@ android:fillViewport="true">
             android:paddingBottom="16dp"
             android:height="48dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/formBlock1"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
+            <Spinner
+                android:id="@+id/add_server_protocol_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:ems="8"
+                android:dropDownWidth="wrap_content"
+                android:entries="@array/connection_array"
+                android:prompt="@string/add_server_protocol" />
 
-    <EditText
-        android:id="@+id/add_server_username_txt"
-        android:hint="@string/add_server_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="8"
-        android:imeOptions="actionNext"
-        android:inputType="text|textNoSuggestions"
-        android:textSize="16sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:height="48dp" />
+            <EditText
+                android:id="@+id/add_server_address_txt"
+                android:hint="@string/server_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text|textNoSuggestions"
+                android:textSize="16sp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:height="48dp" />
 
-    <EditText
-        android:id="@+id/add_server_password_txt"
-        android:hint="@string/add_server_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="8"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:textSize="16sp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:height="48dp" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/formBlock2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        >
-
-        <Button
-            android:id="@+id/add_server_back_btn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/add_server_username_txt"
+            android:hint="@string/add_server_username"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="@string/back_server_button"
-            android:textColor="@color/text_red"
-            android:textSize="25sp" />
+            android:ems="8"
+            android:imeOptions="actionNext"
+            android:inputType="text|textNoSuggestions"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:height="48dp" />
 
-        <Button
-            android:id="@+id/add_server_confirm_btn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="0dp"
+        <EditText
+            android:id="@+id/add_server_password_txt"
+            android:hint="@string/add_server_password"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:text="@string/add_server_button"
-            android:textColor="@color/text_green"
-            android:textSize="25sp" />
+            android:ems="8"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:height="48dp" />
+
     </LinearLayout>
-</LinearLayout>
 
 </ScrollView>
