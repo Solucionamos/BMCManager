@@ -24,7 +24,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
     private final Context context;
 
     public ServerAdapter(Context context, List<Server> objects) {
-        super(context, R.layout.serverlistitem, objects);
+        super(context, R.layout.server_list_item, objects);
         this.objects = objects;
         viewList = new ArrayList<>();
         tasks = new ArrayList<>();
@@ -47,7 +47,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
             LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             viewList.set(position,
-                    inflater.inflate(R.layout.serverlistitem, parent, false));
+                    inflater.inflate(R.layout.server_list_item, parent, false));
         }
 
 		/*

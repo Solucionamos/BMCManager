@@ -1,5 +1,6 @@
 package com.solucionamos.bmcmanager;
 
+import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -25,6 +26,7 @@ import com.solucionamos.bmcmanager.model.Sensor;
 import com.solucionamos.bmcmanager.model.Server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,8 +35,10 @@ import java.util.List;
  * in two-pane mode (on tablets) or a {@link ServerDetailActivity}
  * on handsets.
  */
-public class ServerDetailFragment extends Fragment implements
-        AsyncResponse<BMCResponse>, SwipeRefreshLayout.OnRefreshListener, ActionDialogInterface {
+public class ServerDetailFragment extends Fragment
+        implements AsyncResponse<BMCResponse>,
+        SwipeRefreshLayout.OnRefreshListener,
+        ActionDialogInterface {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -46,8 +50,7 @@ public class ServerDetailFragment extends Fragment implements
      */
     private Server serverItem = null;
 
-
-    private LinearLayout tempBlock, voltBlock, fanBlock;
+    private LinearLayout temperatureBlock, powerBlock, fanBlock;
     private Switch powerSwitch;
     private DeleteDialogFragment delete_dialog;
     private ActionDialogFragment power_dialog;
@@ -59,6 +62,7 @@ public class ServerDetailFragment extends Fragment implements
     private SwipeRefreshLayout swipeLayout;
     private boolean isRefreshing;
     private int colorFlag;
+    private HashMap<String, HashMap<String, Integer>> sensorIcon = new HashMap<>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,15 +76,11 @@ public class ServerDetailFragment extends Fragment implements
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
             DBHelper db = new DBHelper(this.getActivity());
             serverItem = db.getServer(getArguments().getString(ARG_ITEM_ID));
 
             delete_dialog = new DeleteDialogFragment();
             delete_dialog.setServer(this.serverItem);
-
             if (this.getActivity().getClass().equals(ServerDetailActivity.class)) {
                 delete_dialog.setTablet(false);
             } else {
@@ -88,72 +88,87 @@ public class ServerDetailFragment extends Fragment implements
             }
 
             tasks = new ArrayList<>();
-
             power_dialog = new ActionDialogFragment();
             thisRef = this;
         }
+
+        HashMap<String, Integer> temperatureIcon = new HashMap<>();
+        temperatureIcon.put("Normal", R.drawable.ic_temperature_good);
+        temperatureIcon.put("Warning", R.drawable.ic_temperature_warning);
+        temperatureIcon.put("Critical", R.drawable.ic_temperature_bad);
+        sensorIcon.put(Sensor.TYPE_TEMPERATURE, temperatureIcon);
+
+        HashMap<String, Integer> powerIcon = new HashMap<>();
+        powerIcon.put("Normal", R.drawable.ic_power_good);
+        powerIcon.put("Warning", R.drawable.ic_power_warning);
+        powerIcon.put("Critical", R.drawable.ic_power_bad);
+        sensorIcon.put(Sensor.TYPE_VOLTAGE, powerIcon);
+
+        HashMap<String, Integer> fanIcon = new HashMap<>();
+        fanIcon.put("Normal", R.drawable.ic_fan_good);
+        fanIcon.put("Warning", R.drawable.ic_fan_warning);
+        fanIcon.put("Critical", R.drawable.ic_fan_bad);
+        sensorIcon.put(Sensor.TYPE_FAN, fanIcon);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.serverdetails_fragment, container, false);
+        rootView = inflater
+                .inflate(R.layout.server_details_fragment, container, false);
 
-        // Show the dummy content as text in a TextView.
-        if (serverItem != null) {
-
-            swipeLayout = (SwipeRefreshLayout) rootView
-                    .findViewById(R.id.swipeContainer);
-            swipeLayout.setOnRefreshListener(this);
-            swipeLayout.setRefreshing(true);
-            swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
-                    android.R.color.holo_green_light,
-                    android.R.color.holo_orange_light,
-                    android.R.color.holo_red_light);
-
-            ((TextView) rootView.findViewById(R.id.textServerName)).setText(serverItem.getName());
-
-            ((TextView) rootView.findViewById(R.id.textServerDescription)).setText(serverItem.getAddress());
-
-            powerSwitch = (Switch) rootView.findViewById(R.id.switchStatus);
-
-            if (savedInstanceState != null)
-                powerSwitch.setChecked(savedInstanceState.getBoolean("switchChecked"));
-
-            powerSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                public void onCheckedChanged(CompoundButton buttonView,
-                                             boolean isChecked) {
-                    if (!isRefreshing) {
-                        Bundle bundle = new Bundle();
-                        if (isChecked) {
-                            bundle.putInt("operation",
-                                    Server.PWSTATE_ON);
-
-                        } else {
-                            bundle.putInt("operation",
-                                    Server.PWSTATE_OFF);
-                        }
-                        power_dialog.setArguments(bundle);
-                        power_dialog.setTargetFragment(thisRef, 0);
-                        power_dialog.show(getFragmentManager(), getTag());
-                    }
-                }
-            });
-
-
-            rootView.findViewById(R.id.Options_Image).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showPopUp(v);
-                }
-            });
-
-            statusTxt = (TextView) rootView.findViewById(R.id.serverStatus);
-            colorBlock = (RelativeLayout) rootView.findViewById(R.id.relativeHeader);
-            colorBlock.setBackgroundResource(R.color.background_grey);
-
-
+        if (serverItem == null) {
+            return rootView;
         }
+
+        swipeLayout = (SwipeRefreshLayout) rootView
+                .findViewById(R.id.swipeContainer);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setRefreshing(true);
+        swipeLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        ((TextView) rootView.findViewById(R.id.textServerName))
+                .setText(serverItem.getName());
+        ((TextView) rootView.findViewById(R.id.textServerDescription))
+                .setText(serverItem.getAddress());
+
+        powerSwitch = (Switch) rootView.findViewById(R.id.switchStatus);
+        if (savedInstanceState != null) {
+            powerSwitch.setChecked(savedInstanceState.getBoolean("switchChecked"));
+        }
+
+        powerSwitch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    public void onCheckedChanged(CompoundButton buttonView,
+                                                 boolean isChecked) {
+                        if (!isRefreshing) {
+                            Bundle bundle = new Bundle();
+                            if (isChecked) {
+                                bundle.putInt("operation", Server.PWSTATE_ON);
+                            } else {
+                                bundle.putInt("operation", Server.PWSTATE_OFF);
+                            }
+                            power_dialog.setArguments(bundle);
+                            power_dialog.setTargetFragment(thisRef, 0);
+                            power_dialog.show(getFragmentManager(), getTag());
+                        }
+                    }
+                });
+
+        rootView.findViewById(R.id.Options_Image)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopUp(v);
+                    }
+                });
+
+        statusTxt = (TextView) rootView.findViewById(R.id.serverStatus);
+        colorBlock = (RelativeLayout) rootView.findViewById(R.id.relativeHeader);
+        colorBlock.setBackgroundResource(R.color.background_grey);
 
         return rootView;
     }
@@ -180,11 +195,11 @@ public class ServerDetailFragment extends Fragment implements
         powerSwitch.setEnabled(false);
         cancelTasks();
 
-        if (voltBlock != null) {
-            removeChildrenFromBlock(voltBlock);
+        if (powerBlock != null) {
+            removeChildrenFromBlock(powerBlock);
         }
-        if (tempBlock != null) {
-            removeChildrenFromBlock(tempBlock);
+        if (temperatureBlock != null) {
+            removeChildrenFromBlock(temperatureBlock);
         }
         if (fanBlock != null) {
             removeChildrenFromBlock(fanBlock);
@@ -195,7 +210,6 @@ public class ServerDetailFragment extends Fragment implements
     }
 
     private void updateSensors() {
-
         colorFlag = 0;
 
         RetrievePWStateTask switchTask = new RetrievePWStateTask();
@@ -203,7 +217,7 @@ public class ServerDetailFragment extends Fragment implements
         switchTask.execute();
         tasks.add(switchTask);
 
-        tempBlock = (LinearLayout) rootView.findViewById(R.id.temperatureBlock);
+        temperatureBlock = (LinearLayout) rootView.findViewById(R.id.temperatureBlock);
         RetrieveSensorsTask tempTask = new RetrieveSensorsTask();
         tempTask.delegate = this;
         tempTask.execute(Sensor.TYPE_TEMPERATURE);
@@ -215,7 +229,7 @@ public class ServerDetailFragment extends Fragment implements
         fanTask.execute(Sensor.TYPE_FAN);
         tasks.add(fanTask);
 
-        voltBlock = (LinearLayout) rootView.findViewById(R.id.powerBlock);
+        powerBlock = (LinearLayout) rootView.findViewById(R.id.powerBlock);
         RetrieveSensorsTask voltTask = new RetrieveSensorsTask();
         voltTask.delegate = this;
         voltTask.execute(Sensor.TYPE_VOLTAGE);
@@ -234,18 +248,18 @@ public class ServerDetailFragment extends Fragment implements
     public void onResume() {
         super.onResume();
 
-        isRefreshing = true;
-        powerSwitch.setChecked(false);
-        isRefreshing = false;
+        setPowerSwitch(false);
 
         // Set title
-        if (this.getActivity().getClass().equals(ServerDetailActivity.class)) {
-            getActivity().getActionBar().setTitle(
-                    R.string.action_titleServerDetails);
-        } else {
-            getActivity().getActionBar().setTitle(
-                    R.string.title_AppTitle);
+        ActionBar actionBar = getActivity().getActionBar();
+        if (actionBar != null) {
+            if (this.getActivity().getClass().equals(ServerDetailActivity.class)) {
+                actionBar.setTitle(R.string.action_titleServerDetails);
+            } else {
+                actionBar.setTitle(R.string.title_AppTitle);
+            }
         }
+
         swipeLayout.setRefreshing(false);
         refreshData();
     }
@@ -253,7 +267,7 @@ public class ServerDetailFragment extends Fragment implements
     void showPopUp(View v) {
         PopupMenu popup = new PopupMenu(getActivity(), v);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.serverdetails_options_popmenu, popup.getMenu());
+        inflater.inflate(R.menu.server_details_options_popmenu, popup.getMenu());
 
         if (!powerSwitch.isChecked()) {
             popup.getMenu().removeItem(R.id.hard_reset_server);
@@ -291,26 +305,27 @@ public class ServerDetailFragment extends Fragment implements
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, string, duration);
         toast.show();
-
-        colorBlock.setBackgroundResource(R.color.background_red);
     }
 
     @Override
     public void processFinish(BMCResponse response, Exception ex) {
         if (ex != null) {
             callbackServerUnreachable();
-        } else {
-            switch(response.type) {
-                case BMCResponse.TYPE_PWSTATE:
-                    if (response.getPwState() == Server.PWSTATE_OFF) {
-                        callbackServerOff();
-                    }
-                    break;
+            response.type = -1;
+        }
 
-                case BMCResponse.TYPE_SENSOR:
-                    callBackSensors(response.getSensors());
-                    break;
-            }
+        switch (response.type) {
+            case BMCResponse.TYPE_PWSTATE:
+                if (response.getPwState() == Server.PWSTATE_ON) {
+                    callbackServerPowerState(true);
+                } else {
+                    callbackServerPowerState(false);
+                }
+                break;
+
+            case BMCResponse.TYPE_SENSOR:
+                callBackSensors(response.getSensors());
+                break;
         }
 
         if (tasks.isEmpty()) {
@@ -320,9 +335,7 @@ public class ServerDetailFragment extends Fragment implements
     }
 
     private void callbackServerUnreachable() {
-        isRefreshing = true;
-        powerSwitch.setChecked(false);
-        isRefreshing = false;
+        setPowerSwitch(false);
 
         showToast(getString(R.string.connection_no_success));
         statusTxt.setText(getString(R.string.server_status) + " "
@@ -330,16 +343,16 @@ public class ServerDetailFragment extends Fragment implements
         showEmptyBlocks(true);
     }
 
-    private void callbackServerOff() {
-        isRefreshing = true;
-        powerSwitch.setChecked(false);
-        isRefreshing = false;
+    private void callbackServerPowerState(boolean poweredOn) {
+        setPowerSwitch(poweredOn);
 
-        showToast(getString(R.string.server_powered_off));
-        statusTxt.setText(getString(R.string.server_status) + " "
-                + getString(R.string.server_off_status));
-        colorBlock.setBackgroundResource(R.color.background_grey);
-        showEmptyBlocks(false);
+        if(!poweredOn) {
+            showToast(getString(R.string.server_powered_off));
+            statusTxt.setText(getString(R.string.server_status) + " "
+                    + getString(R.string.server_off_status));
+            colorBlock.setBackgroundResource(R.color.background_grey);
+            showEmptyBlocks(false);
+        }
     }
 
     private void callBackSensors(List<Sensor> sensors) {
@@ -352,11 +365,9 @@ public class ServerDetailFragment extends Fragment implements
         int textValue = 0;
         int layoutItem = 0;
         int iconItem = 0;
-        int textDesc = 0;
+        int textDescId = 0;
 
-        isRefreshing = true;
-        powerSwitch.setChecked(true);
-        isRefreshing = false;
+        setPowerSwitch(true);
         statusTxt.setText(getString(R.string.server_status) + " "
                 + getString(R.string.server_on_status));
 
@@ -371,28 +382,28 @@ public class ServerDetailFragment extends Fragment implements
 
             switch (sensorType) {
                 case Sensor.TYPE_TEMPERATURE:
-                    aBlock = tempBlock;
+                    aBlock = temperatureBlock;
                     textName = R.id.textTemperature1;
                     textValue = R.id.textTemperatureNumber1;
-                    layoutItem = R.layout.temperatureitem;
+                    layoutItem = R.layout.temperature_item;
                     iconItem = R.id.iconTemperature1;
-                    textDesc = R.id.textTemperatureDesc1;
+                    textDescId = R.id.textTemperatureDesc1;
                     break;
                 case Sensor.TYPE_VOLTAGE:
-                    aBlock = voltBlock;
+                    aBlock = powerBlock;
                     textName = R.id.textPower1;
                     textValue = R.id.textPowerNumber1;
-                    layoutItem = R.layout.voltageitem;
+                    layoutItem = R.layout.power_item;
                     iconItem = R.id.imageView12;
-                    textDesc = R.id.textPowerDesc1;
+                    textDescId = R.id.textPowerDesc1;
                     break;
                 case Sensor.TYPE_FAN:
                     aBlock = fanBlock;
                     textName = R.id.textFan1;
                     textValue = R.id.textFanNumber1;
-                    layoutItem = R.layout.fanitem;
+                    layoutItem = R.layout.fan_item;
                     iconItem = R.id.imageView3;
-                    textDesc = R.id.textFanDesc1;
+                    textDescId = R.id.textFanDesc1;
                     break;
             }
 
@@ -400,86 +411,41 @@ public class ServerDetailFragment extends Fragment implements
             sensorName = (TextView) view.findViewById(textName);
             sensorName.setText(sensor.getName());
 
-            value = (TextView) view.findViewById(textValue);
             String reading = sensor.getReading();
             String unit = sensor.getUnits();
+
+            value = (TextView) view.findViewById(textValue);
             if (unit != null) {
-                if (unit.equals("C") || unit.equals("F")) {
+                if (unit.equals("C") || unit.equals("F")){
                     unit = "º" + unit;
                 }
+                value.setText(reading + " " + unit);
+            } else {
+                value.setText(reading);
             }
-            value.setText(reading + " " + unit);
 
+            TextView textDesc = (TextView) view.findViewById(textDescId);
             sensorStatus = sensor.getStatus();
-            if (sensorStatus.equals("Critical")) {
-                ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_critical));
-            } else if (sensorStatus.equals("Warning")) {
-                ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_warning));
-            } else if (sensorStatus.equals("Normal")) {
-                ((TextView) view.findViewById(textDesc)).setText(getString(R.string.status_normal));
+            switch (sensorStatus) {
+                case "Critical":
+                    textDesc.setText(getString(R.string.status_critical));
+                    if (colorFlag < 2) {
+                        colorFlag = 2;
+                    }
+                    break;
+                case "Warning":
+                    textDesc.setText(getString(R.string.status_warning));
+                    if (colorFlag < 1)
+                        colorFlag = 1;
+                    break;
+                case "Normal":
+                    textDesc.setText(getString(R.string.status_normal));
+                    break;
             }
 
             iconChange = (ImageView) view.findViewById(iconItem);
-
-            switch (sensorType) {
-                case Sensor.TYPE_TEMPERATURE:
-                    switch (sensorStatus) {
-                        case "Normal":
-                            iconChange.setImageResource(R.drawable.ic_temperature_good);
-                            break;
-                        case "Warning":
-                            if (colorFlag < 1) {
-                                colorFlag = 1;
-                            }
-                            iconChange.setImageResource(R.drawable.ic_temperature_warning);
-                            break;
-                        case "Critical":
-                            if (colorFlag < 2) {
-                                colorFlag = 2;
-                            }
-                            iconChange.setImageResource(R.drawable.ic_temperature_bad);
-                            break;
-                    }
-                    break;
-                case Sensor.TYPE_VOLTAGE:
-                    switch (sensorStatus) {
-                        case "Normal":
-                            iconChange.setImageResource(R.drawable.ic_power_good);
-                            break;
-                        case "Warning":
-                            if (colorFlag < 1) {
-                                colorFlag = 1;
-                            }
-                            iconChange
-                                    .setImageResource(R.drawable.ic_power_warning);
-                            break;
-                        case "Critical":
-                            if (colorFlag < 2) {
-                                colorFlag = 2;
-                            }
-                            iconChange.setImageResource(R.drawable.ic_power_bad);
-                            break;
-                    }
-                    break;
-                case Sensor.TYPE_FAN:
-                    switch (sensorStatus) {
-                        case "Normal":
-                            iconChange.setImageResource(R.drawable.ic_fan_good);
-                            break;
-                        case "Warning":
-                            if (colorFlag < 1) {
-                                colorFlag = 1;
-                            }
-                            iconChange.setImageResource(R.drawable.ic_fan_warning);
-                            break;
-                        case "Critical":
-                            if (colorFlag < 2) {
-                                colorFlag = 2;
-                            }
-                            iconChange.setImageResource(R.drawable.ic_fan_bad);
-                            break;
-                    }
-                    break;
+            if (sensorIcon.get(sensorType).containsKey(sensorStatus)) {
+                iconChange.setImageResource(sensorIcon.get(sensorType).get(sensorStatus));
             }
 
             aBlock.addView(view);
@@ -495,6 +461,12 @@ public class ServerDetailFragment extends Fragment implements
             colorBlock.setBackgroundResource(R.color.background_green);
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_normal));
         }
+    }
+
+    private void setPowerSwitch(boolean poweredOn) {
+        isRefreshing = true;
+        powerSwitch.setChecked(poweredOn);
+        isRefreshing = false;
     }
 
     private void showEmptyBlocks(boolean unreachable) {
@@ -516,16 +488,16 @@ public class ServerDetailFragment extends Fragment implements
 
         if (unreachable) {
             colorBlock.setBackgroundResource(R.color.background_grey);
-            removeChildrenFromBlock(tempBlock);
-            removeChildrenFromBlock(voltBlock);
+            removeChildrenFromBlock(temperatureBlock);
+            removeChildrenFromBlock(powerBlock);
             removeChildrenFromBlock(fanBlock);
         }
 
-        aBlock = tempBlock;
+        aBlock = temperatureBlock;
         textName = R.id.textTemperature1;
         textLocal = R.id.textTemperatureDesc1;
         textValue = R.id.textTemperatureNumber1;
-        layoutItem = R.layout.temperatureitem;
+        layoutItem = R.layout.temperature_item;
 
         view = inflater.inflate(layoutItem, aBlock, false);
         iconChange = (ImageView) view.findViewById(R.id.iconTemperature1);
@@ -539,11 +511,11 @@ public class ServerDetailFragment extends Fragment implements
 
         aBlock.addView(view);
 
-        aBlock = voltBlock;
+        aBlock = powerBlock;
         textName = R.id.textPower1;
         textLocal = R.id.textPowerDesc1;
         textValue = R.id.textPowerNumber1;
-        layoutItem = R.layout.voltageitem;
+        layoutItem = R.layout.power_item;
 
         view = inflater.inflate(layoutItem, aBlock, false);
         iconChange = (ImageView) view.findViewById(R.id.imageView12);
@@ -561,7 +533,7 @@ public class ServerDetailFragment extends Fragment implements
         textName = R.id.textFan1;
         textLocal = R.id.textFanDesc1;
         textValue = R.id.textFanNumber1;
-        layoutItem = R.layout.fanitem;
+        layoutItem = R.layout.fan_item;
 
         view = inflater.inflate(layoutItem, aBlock, false);
         iconChange = (ImageView) view.findViewById(R.id.imageView3);
@@ -628,12 +600,11 @@ public class ServerDetailFragment extends Fragment implements
                 response.setSensors(sensors);
             } catch (Exception e) {
                 ex = e;
-                e.printStackTrace();
             }
             try {
                 serverItem.disconnect();
             } catch (Exception e) {
-                e.printStackTrace();
+                // ignore the exception
             }
             return response;
         }
@@ -666,12 +637,11 @@ public class ServerDetailFragment extends Fragment implements
                 response.setPwState(pwState);
             } catch (Exception e) {
                 ex = e;
-                e.printStackTrace();
             }
             try {
                 serverItem.disconnect();
             } catch (Exception e) {
-                e.printStackTrace();
+                // ignore the exception
             }
             return response;
         }
