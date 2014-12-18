@@ -13,17 +13,9 @@
         android:padding="4dp">
 
         <EditText
+            style="@style/EditText"
             android:id="@+id/add_server_name_txt"
-            android:hint="@string/server_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="8"
-            android:imeOptions="actionNext"
-            android:inputType="text|textNoSuggestions"
-            android:textSize="16sp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:height="48dp" />
+            android:hint="@string/server_name" />
 
         <LinearLayout
             android:id="@+id/formBlock1"
@@ -41,44 +33,21 @@
                 android:prompt="@string/add_server_protocol" />
 
             <EditText
+                style="@style/EditText"
                 android:id="@+id/add_server_address_txt"
-                android:hint="@string/server_address"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="text|textNoSuggestions"
-                android:textSize="16sp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:height="48dp" />
+                android:hint="@string/server_address" />
 
         </LinearLayout>
 
         <EditText
+            style="@style/EditText"
             android:id="@+id/add_server_username_txt"
-            android:hint="@string/add_server_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="8"
-            android:imeOptions="actionNext"
-            android:inputType="text|textNoSuggestions"
-            android:textSize="16sp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:height="48dp" />
+            android:hint="@string/add_server_username" />
 
         <EditText
+            style="@style/EditText"
             android:id="@+id/add_server_password_txt"
-            android:hint="@string/add_server_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="8"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:textSize="16sp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:height="48dp" />
+            android:hint="@string/add_server_password" />
 
     </LinearLayout>
 

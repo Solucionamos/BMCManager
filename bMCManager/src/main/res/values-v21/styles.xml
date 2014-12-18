@@ -18,6 +18,10 @@
 
     </style>
 
+    <style name="ElevationEditText" parent="EditText">
+        <item name="android:elevation">2dp</item>
+    </style>
+
     <style name="ServerInformation">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
