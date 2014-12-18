@@ -22,8 +22,6 @@
     <string name="add_server_address">Server Address</string>
     <string name="add_server_username">Username</string>
     <string name="add_server_password">Password</string>
-    <string name="add_server_button">Confirm</string>
-    <string name="back_server_button">@android:string/cancel</string>
 
 
     <string name="server_exists">There is already one server with this name!</string>
@@ -60,7 +58,6 @@
     <string name="title_AppTitle">BMC Manager</string>
     <!-- END -->
     <string name="title_activity_add_server">Server Setup</string>
-    <string name="all_fields_required">*All fields are mandatory.</string>
 
     <string-array name="connection_array">
         <item>HTTP</item>

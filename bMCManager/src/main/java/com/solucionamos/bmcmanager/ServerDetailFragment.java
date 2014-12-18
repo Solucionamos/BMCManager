@@ -61,8 +61,14 @@ public class ServerDetailFragment extends Fragment
     private View rootView = null;
     private SwipeRefreshLayout swipeLayout;
     private boolean isRefreshing;
-    private int colorFlag;
     private HashMap<String, HashMap<String, Integer>> sensorIcon = new HashMap<>();
+
+    private enum Severity {
+        NORMAL,
+        WARNING,
+        CRITICAL
+    }
+    private Severity severity;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -210,7 +216,7 @@ public class ServerDetailFragment extends Fragment
     }
 
     private void updateSensors() {
-        colorFlag = 0;
+        severity = Severity.NORMAL;
 
         RetrievePWStateTask switchTask = new RetrievePWStateTask();
         switchTask.delegate = this;
@@ -429,14 +435,14 @@ public class ServerDetailFragment extends Fragment
             switch (sensorStatus) {
                 case "Critical":
                     textDesc.setText(getString(R.string.status_critical));
-                    if (colorFlag < 2) {
-                        colorFlag = 2;
+                    if (severity.compareTo(Severity.CRITICAL) < 0) {
+                        severity = Severity.CRITICAL;
                     }
                     break;
                 case "Warning":
                     textDesc.setText(getString(R.string.status_warning));
-                    if (colorFlag < 1)
-                        colorFlag = 1;
+                    if (severity.compareTo(Severity.WARNING) < 0)
+                        severity = Severity.WARNING;
                     break;
                 case "Normal":
                     textDesc.setText(getString(R.string.status_normal));
@@ -451,10 +457,10 @@ public class ServerDetailFragment extends Fragment
             aBlock.addView(view);
         }
 
-        if (colorFlag == 2) {
+        if (severity.compareTo(Severity.CRITICAL) == 0) {
             colorBlock.setBackgroundResource(R.color.background_red);
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_critical));
-        } else if (colorFlag == 1) {
+        } else if (severity.compareTo(Severity.WARNING) == 0) {
             colorBlock.setBackgroundResource(R.color.background_orange);
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_warning));
         } else {

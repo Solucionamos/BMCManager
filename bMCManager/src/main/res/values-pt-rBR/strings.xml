@@ -22,8 +22,6 @@
     <string name="add_server_address">Endereço</string>
     <string name="add_server_username">Nome de Usuário</string>
     <string name="add_server_password">Senha</string>
-    <string name="add_server_button">Confirmar</string>
-    <string name="back_server_button">@android:string/cancel</string>
     <string name="server_exists">Já existe um servidor com este nome!</string>
     <!-- FIM -->
 
@@ -59,7 +57,6 @@
     <!-- END -->
 
     <string name="title_activity_add_server">Configuração de Servidor</string>
-    <string name="all_fields_required">*Todos os campos são obrigatórios.</string>
 
     <string-array name="connection_array">
         <item>HTTP</item>
