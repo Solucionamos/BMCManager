@@ -1,54 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    android:id="@+id/addForm"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent"
+    android:padding="4dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/add_server_name_txt"
+        android:hint="@string/server_name" />
 
     <LinearLayout
-        android:id="@+id/addForm"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="4dp">
+        android:id="@+id/formBlock1"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/add_server_protocol_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:ems="8"
+            android:dropDownWidth="wrap_content"
+            android:entries="@array/connection_array"
+            android:prompt="@string/add_server_protocol" />
 
         <EditText
             style="@style/EditText"
-            android:id="@+id/add_server_name_txt"
-            android:hint="@string/server_name" />
-
-        <LinearLayout
-            android:id="@+id/formBlock1"
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <Spinner
-                android:id="@+id/add_server_protocol_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:ems="8"
-                android:dropDownWidth="wrap_content"
-                android:entries="@array/connection_array"
-                android:prompt="@string/add_server_protocol" />
-
-            <EditText
-                style="@style/EditText"
-                android:id="@+id/add_server_address_txt"
-                android:hint="@string/server_address" />
-
-        </LinearLayout>
-
-        <EditText
-            style="@style/EditText"
-            android:id="@+id/add_server_username_txt"
-            android:hint="@string/add_server_username" />
-
-        <EditText
-            style="@style/EditText"
-            android:id="@+id/add_server_password_txt"
-            android:hint="@string/add_server_password" />
+            android:id="@+id/add_server_address_txt"
+            android:hint="@string/server_address" />
 
     </LinearLayout>
 
-</ScrollView>
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/add_server_username_txt"
+        android:hint="@string/add_server_username" />
+
+    <EditText
+        style="@style/EditText"
+        android:id="@+id/add_server_password_txt"
+        android:hint="@string/add_server_password"
+        android:inputType="textPassword"/>
+
+</LinearLayout>
+
