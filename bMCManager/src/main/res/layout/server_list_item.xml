@@ -2,10 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="72dp"
-    android:background="@color/background_grey"
+    android:background="@color/accent"
     android:minHeight="72dp"
-    android:paddingLeft="8dp"
     android:paddingRight="8dp">
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/statusColor"
+        android:background="@color/grey"
+        android:layout_alignParentLeft="true" />
 
     <ImageView
         android:id="@+id/forward_Image"
@@ -14,22 +23,23 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/server_list_view_details"
-        android:src="@drawable/ic_chevron_right_white" />
+        android:src="@drawable/ic_chevron_right_grey" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:paddingLeft="8dp"
+        android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/forward_Image"
-        android:orientation="vertical">
+        android:layout_toRightOf="@+id/statusColor"
+        android:layout_toEndOf="@+id/statusColor">
 
         <TextView
             android:id="@+id/itemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/server_name"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="24sp" />
 
         <TextView
@@ -37,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/server_address"
-            android:textColor="@color/white"
+            android:textColor="@color/primary"
             android:textSize="12sp" />
     </LinearLayout>
 

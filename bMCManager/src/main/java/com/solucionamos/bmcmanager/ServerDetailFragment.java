@@ -15,7 +15,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +53,7 @@ public class ServerDetailFragment extends Fragment
     private Switch powerSwitch;
     private DeleteDialogFragment delete_dialog;
     private ActionDialogFragment power_dialog;
-    private RelativeLayout colorBlock;
+    private ImageView colorBlock;
     private List<AsyncTask> tasks;
     private ServerDetailFragment thisRef;
     private TextView statusTxt;
@@ -173,8 +172,8 @@ public class ServerDetailFragment extends Fragment
                 });
 
         statusTxt = (TextView) rootView.findViewById(R.id.serverStatus);
-        colorBlock = (RelativeLayout) rootView.findViewById(R.id.relativeHeader);
-        colorBlock.setBackgroundResource(R.color.background_grey);
+        colorBlock = (ImageView) rootView.findViewById(R.id.detailStatusColor);
+        colorBlock.setBackgroundColor(getResources().getColor(R.color.grey));
 
         return rootView;
     }
@@ -356,7 +355,7 @@ public class ServerDetailFragment extends Fragment
             showToast(getString(R.string.server_powered_off));
             statusTxt.setText(getString(R.string.server_status) + " "
                     + getString(R.string.server_off_status));
-            colorBlock.setBackgroundResource(R.color.background_grey);
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.grey));
             showEmptyBlocks(false);
         }
     }
@@ -458,13 +457,13 @@ public class ServerDetailFragment extends Fragment
         }
 
         if (severity.compareTo(Severity.CRITICAL) == 0) {
-            colorBlock.setBackgroundResource(R.color.background_red);
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_red));
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_critical));
         } else if (severity.compareTo(Severity.WARNING) == 0) {
-            colorBlock.setBackgroundResource(R.color.background_orange);
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_orange));
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_warning));
         } else {
-            colorBlock.setBackgroundResource(R.color.background_green);
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_green));
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_normal));
         }
     }
@@ -493,7 +492,7 @@ public class ServerDetailFragment extends Fragment
         cancelTasks();
 
         if (unreachable) {
-            colorBlock.setBackgroundResource(R.color.background_grey);
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_red));
             removeChildrenFromBlock(temperatureBlock);
             removeChildrenFromBlock(powerBlock);
             removeChildrenFromBlock(fanBlock);

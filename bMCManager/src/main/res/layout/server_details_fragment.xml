@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
     <RelativeLayout
         android:id="@+id/relativeHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_grey"
+        android:background="@color/accent"
         android:minHeight="72dp"
-        android:paddingLeft="8dp"
         android:paddingRight="8dp">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:minHeight="72dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:id="@+id/detailStatusColor"
+            android:background="@color/grey"
+            android:layout_alignParentLeft="true" />
 
         <Button
             android:id="@+id/Options_Image"
@@ -18,14 +28,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@null"
-            android:drawableRight="@drawable/ic_more_vert_white"
+            android:drawableRight="@drawable/ic_more_vert_grey"
             android:minHeight="72dip" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:paddingLeft="8dp"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/detailStatusColor"
             android:orientation="vertical">
 
             <TextView
@@ -34,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
                 android:text="@string/server_name"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 android:textSize="24sp" />
 
             <TextView
@@ -44,7 +55,7 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:text="@string/server_address"
-                android:textColor="@color/white"
+                android:textColor="@color/primary"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -55,7 +66,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeHeader"
-        android:background="@drawable/header"
+        android:background="@color/primary"
         android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
@@ -69,7 +80,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="0dp"
             android:text="@string/server_status"
-            android:textColor="@color/white" />
+            android:textColor="@color/accent" />
 
         <TextView
             android:id="@+id/textView1"
@@ -81,7 +92,7 @@
             android:layout_toLeftOf="@+id/switchStatus"
             android:text="@string/server_details_power"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/white" />
+            android:textColor="@color/accent" />
 
         <Switch
             android:id="@+id/switchStatus"

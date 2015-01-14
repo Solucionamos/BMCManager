@@ -2,23 +2,13 @@
 
 <resources>
 
-    <color name="background_orange">#EF6C00</color>
-    <color name="text_orange">#f57c00</color>
+    <color name="background_orange">#ffc425</color>
+    <color name="background_green">#64bedc</color>
+    <color name="background_red">#ff0000</color>
+    <color name="grey">#414042</color>
 
-    <color name="background_green">#4CAF50</color>
-    <color name="text_green">#0a7e07</color>
-
-    <color name="background_red">#E53935</color>
-    <color name="text_red">#d01716</color>
-
-    <color name="background_grey">#9E9E9E</color>
-
-    <color name="block_header_background">@color/primary</color>
-
-    <color name="white">#ffffff</color>
-
-    <color name="primary">#512DA8</color>
-    <color name="primary_dark">#311B92</color>
-    <color name="accent">#ff9800</color>
+    <color name="primary">#414042</color>
+    <color name="primary_dark">#000000</color>
+    <color name="accent">#ffffff</color>
 
 </resources>

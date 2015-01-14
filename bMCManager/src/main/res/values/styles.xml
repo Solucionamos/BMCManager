@@ -26,7 +26,7 @@
     </style>
 
     <style name="ActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/accent</item>
         <item name="android:textStyle">bold</item>
     </style>
     <!-- Application theme. -->
@@ -55,7 +55,7 @@
     </style>
 
     <style name="ServerInformation.Green">
-        <item name="android:background">@drawable/server_on</item>
+        <item name="android:background">@color/background_green</item>
     </style>
 
     <style name="ServerInformation.Red">
@@ -71,9 +71,9 @@
     <style name="InformationBlockHeader">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/header</item>
+        <item name="android:background">@color/primary</item>
         <item name="android:padding">8dp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/accent</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -100,7 +100,7 @@
     </style>
 
     <style name="MyPopupMenu" parent="android:style/Widget.Holo.Light.ListPopupWindow">
-        <item name="android:popupBackground">@drawable/server_on</item>
+        <item name="android:popupBackground">@color/primary</item>
     </style>
 
 </resources>

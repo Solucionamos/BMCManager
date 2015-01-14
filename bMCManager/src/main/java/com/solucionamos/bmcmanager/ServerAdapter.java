@@ -1,6 +1,8 @@
 package com.solucionamos.bmcmanager;
 
 import android.content.Context;
+
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,24 +96,29 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
     @Override
     public void processFinish(BMCResponse response, Exception ex) {
         if (ex == null) {
+            Resources res = getContext().getResources();
             if (response.getPwState() == Server.PWSTATE_OFF) {
                 viewList.get(response.getServer().getPosition())
-                        .setBackgroundResource(R.color.background_grey);
+                        .findViewById(R.id.statusColor)
+                        .setBackgroundColor(res.getColor(R.color.grey));
                 viewList.get(response.getServer().getPosition()).setTag(
-                        R.color.background_grey);
+                        res.getColor(R.color.grey));
             } else if (response.getPwState() == Server.PWSTATE_ON) {
                 if (response.getColorIndex() == 0) {
                     viewList.get(response.getServer().getPosition())
+                            .findViewById(R.id.statusColor)
                             .setBackgroundResource(R.color.background_green);
                     viewList.get(response.getServer().getPosition()).setTag(
                             R.color.background_green);
                 } else if (response.getColorIndex() == 1) {
                     viewList.get(response.getServer().getPosition())
+                            .findViewById(R.id.statusColor)
                             .setBackgroundResource(R.color.background_orange);
                     viewList.get(response.getServer().getPosition()).setTag(
                             R.color.background_orange);
                 } else if (response.getColorIndex() == 2) {
                     viewList.get(response.getServer().getPosition())
+                            .findViewById(R.id.statusColor)
                             .setBackgroundResource(R.color.background_red);
                     viewList.get(response.getServer().getPosition()).setTag(
                             R.color.background_red);
@@ -119,9 +126,10 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
             }
         } else {
             viewList.get(response.getServer().getPosition())
-                    .setBackgroundResource(R.color.background_grey);
+                    .findViewById(R.id.statusColor)
+                    .setBackgroundResource(R.color.background_red);
             viewList.get(response.getServer().getPosition()).setTag(
-                    R.color.background_grey);
+                    R.color.background_red);
         }
 
         if (tasks.isEmpty()) {
