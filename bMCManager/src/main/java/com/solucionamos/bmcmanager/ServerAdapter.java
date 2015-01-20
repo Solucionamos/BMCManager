@@ -17,7 +17,6 @@ import com.solucionamos.bmcmanager.model.Server;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class ServerAdapter extends ArrayAdapter<Server> implements
@@ -35,9 +34,9 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
         viewList = new ArrayList<>();
         tasks = new ArrayList<>();
         mapStatusColor = new HashMap<>();
-        mapStatusColor.put(Server.STATUS_NORMAL, R.color.background_green);
-        mapStatusColor.put(Server.STATUS_WARNING, R.color.background_orange);
-        mapStatusColor.put(Server.STATUS_CRITICAL, R.color.background_red);
+        mapStatusColor.put(Server.STATUS_NORMAL, R.color.green);
+        mapStatusColor.put(Server.STATUS_WARNING, R.color.orange);
+        mapStatusColor.put(Server.STATUS_CRITICAL, R.color.red);
 
         this.context = context;
     }

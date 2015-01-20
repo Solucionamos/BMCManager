@@ -457,13 +457,13 @@ public class ServerDetailFragment extends Fragment
         }
 
         if (severity.compareTo(Severity.CRITICAL) == 0) {
-            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_red));
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.red));
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_critical));
         } else if (severity.compareTo(Severity.WARNING) == 0) {
-            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_orange));
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.orange));
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_warning));
         } else {
-            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_green));
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.green));
             statusTxt.setText(statusTxt.getText() + " - " + getString(R.string.status_normal));
         }
     }
@@ -492,7 +492,7 @@ public class ServerDetailFragment extends Fragment
         cancelTasks();
 
         if (unreachable) {
-            colorBlock.setBackgroundColor(getResources().getColor(R.color.background_red));
+            colorBlock.setBackgroundColor(getResources().getColor(R.color.red));
             removeChildrenFromBlock(temperatureBlock);
             removeChildrenFromBlock(powerBlock);
             removeChildrenFromBlock(fanBlock);

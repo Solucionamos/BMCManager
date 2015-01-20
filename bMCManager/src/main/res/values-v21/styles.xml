@@ -33,7 +33,7 @@
     </style>
 
     <style name="ServerInformation.Red">
-        <item name="android:background">@color/background_red</item>
+        <item name="android:background">@color/red</item>
     </style>
 
     <style name="InformationBlock">
