@@ -101,32 +101,25 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
     }
 
+    private void paintServer(Server server, int color) {
+        Resources res = getContext().getResources();
+        viewList.get(server.getPosition())
+                .findViewById(R.id.statusColor)
+                .setBackgroundResource(color);
+        viewList.get(server.getPosition()).setTag(
+                res.getColor(color));
+    }
+
     @Override
     public void processFinish(BMCResponse response, Exception ex) {
-
-        if (ex == null) {
-            Resources res = getContext().getResources();
-            int pwState = response.getPwState();
-            if (pwState == Server.PWSTATE_OFF) {
-                viewList.get(response.getServer().getPosition())
-                        .findViewById(R.id.statusColor)
-                        .setBackgroundResource(R.color.grey);
-                viewList.get(response.getServer().getPosition()).setTag(
-                        res.getColor(R.color.grey));
-            } else {
-                int colorIndex = response.getColorIndex();
-                viewList.get(response.getServer().getPosition())
-                        .findViewById(R.id.statusColor)
-                        .setBackgroundResource(mapStatusColor.get(colorIndex));
-                viewList.get(response.getServer().getPosition()).setTag(
-                        res.getColor(mapStatusColor.get(colorIndex)));
-            }
+        if (ex != null) {
+            paintServer(response.getServer(), mapStatusColor.get(Server.STATUS_CRITICAL));
         } else {
-            viewList.get(response.getServer().getPosition())
-                    .findViewById(R.id.statusColor)
-                    .setBackgroundResource(mapStatusColor.get(Server.STATUS_CRITICAL));
-            viewList.get(response.getServer().getPosition()).setTag(
-                    Server.STATUS_CRITICAL);
+            if (response.getPwState() == Server.PWSTATE_OFF) {
+                paintServer(response.getServer(), R.color.grey);
+            } else {
+                paintServer(response.getServer(), mapStatusColor.get(response.getColorIndex()));
+            }
         }
 
         if (tasks.isEmpty()) {
