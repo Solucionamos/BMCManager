@@ -15,6 +15,8 @@ import com.solucionamos.bmcmanager.model.Sensor;
 import com.solucionamos.bmcmanager.model.Server;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,12 +26,19 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
     private final List<Server> objects;
     private final List<AsyncTask> tasks;
     private final Context context;
+    private HashMap<Integer, Integer> mapStatusColor;
 
     public ServerAdapter(Context context, List<Server> objects) {
         super(context, R.layout.server_list_item, objects);
+
         this.objects = objects;
         viewList = new ArrayList<>();
         tasks = new ArrayList<>();
+        mapStatusColor = new HashMap<>();
+        mapStatusColor.put(Server.STATUS_NORMAL, R.color.background_green);
+        mapStatusColor.put(Server.STATUS_WARNING, R.color.background_orange);
+        mapStatusColor.put(Server.STATUS_CRITICAL, R.color.background_red);
+
         this.context = context;
     }
 
@@ -95,41 +104,30 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
     @Override
     public void processFinish(BMCResponse response, Exception ex) {
+
         if (ex == null) {
             Resources res = getContext().getResources();
-            if (response.getPwState() == Server.PWSTATE_OFF) {
+            int pwState = response.getPwState();
+            if (pwState == Server.PWSTATE_OFF) {
                 viewList.get(response.getServer().getPosition())
                         .findViewById(R.id.statusColor)
-                        .setBackgroundColor(res.getColor(R.color.grey));
+                        .setBackgroundResource(R.color.grey);
                 viewList.get(response.getServer().getPosition()).setTag(
                         res.getColor(R.color.grey));
-            } else if (response.getPwState() == Server.PWSTATE_ON) {
-                if (response.getColorIndex() == 0) {
-                    viewList.get(response.getServer().getPosition())
-                            .findViewById(R.id.statusColor)
-                            .setBackgroundResource(R.color.background_green);
-                    viewList.get(response.getServer().getPosition()).setTag(
-                            R.color.background_green);
-                } else if (response.getColorIndex() == 1) {
-                    viewList.get(response.getServer().getPosition())
-                            .findViewById(R.id.statusColor)
-                            .setBackgroundResource(R.color.background_orange);
-                    viewList.get(response.getServer().getPosition()).setTag(
-                            R.color.background_orange);
-                } else if (response.getColorIndex() == 2) {
-                    viewList.get(response.getServer().getPosition())
-                            .findViewById(R.id.statusColor)
-                            .setBackgroundResource(R.color.background_red);
-                    viewList.get(response.getServer().getPosition()).setTag(
-                            R.color.background_red);
-                }
+            } else {
+                int colorIndex = response.getColorIndex();
+                viewList.get(response.getServer().getPosition())
+                        .findViewById(R.id.statusColor)
+                        .setBackgroundResource(mapStatusColor.get(colorIndex));
+                viewList.get(response.getServer().getPosition()).setTag(
+                        res.getColor(mapStatusColor.get(colorIndex)));
             }
         } else {
             viewList.get(response.getServer().getPosition())
                     .findViewById(R.id.statusColor)
-                    .setBackgroundResource(R.color.background_red);
+                    .setBackgroundResource(mapStatusColor.get(Server.STATUS_CRITICAL));
             viewList.get(response.getServer().getPosition()).setTag(
-                    R.color.background_red);
+                    Server.STATUS_CRITICAL);
         }
 
         if (tasks.isEmpty()) {
@@ -150,7 +148,7 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
 
         @Override
         protected BMCResponse doInBackground(Server... args) {
-            Integer colorIndex = 0;
+            ArrayList<Integer> colorIndexes = new ArrayList<>();
             int pwState;
             List<Sensor> sensors;
             Server server = args[0];
@@ -158,25 +156,15 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
             response.setServer(server);
             try {
                 server.connect();
-                Integer colorAux;
 
                 sensors = server.getFans();
-                colorAux = goThroughList(sensors.iterator());
-                if (colorAux > colorIndex) {
-                    colorIndex = colorAux;
-                }
+                colorIndexes.add(goThroughList(sensors));
 
                 sensors = server.getTemperatures();
-                colorAux = goThroughList(sensors.iterator());
-                if (colorAux > colorIndex) {
-                    colorIndex = colorAux;
-                }
+                colorIndexes.add(goThroughList(sensors));
 
                 sensors = server.getVoltages();
-                colorAux = goThroughList(sensors.iterator());
-                if (colorAux > colorIndex) {
-                    colorIndex = colorAux;
-                }
+                colorIndexes.add(goThroughList(sensors));
 
                 pwState = server.getPwState();
                 response.setPwState(pwState);
@@ -190,29 +178,23 @@ public class ServerAdapter extends ArrayAdapter<Server> implements
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            response.setColorIndex(colorIndex);
+            response.setColorIndex(Collections.max(colorIndexes));
             return response;
         }
 
-        private int goThroughList(Iterator<Sensor> itSensor) {
-            int colorIndex = 0;
-            while (itSensor.hasNext()) {
-
-                Sensor aSensor = itSensor.next();
-                String sensorStatus = aSensor.getStatus();
-
-                if (sensorStatus.equals("Warning")) {
-                    if (colorIndex < 1) {
-                        colorIndex = 1;
-                    }
-                } else if (sensorStatus.equals("Critical")) {
-                    if (colorIndex < 2) {
-                        colorIndex = 2;
-                    }
-                }
-
+        private int goThroughList(List<Sensor> sensors) {
+            List<String> statusList = new ArrayList<>();
+            for (Sensor s: sensors) {
+                statusList.add(s.getStatus());
             }
-            return colorIndex;
+
+            if (statusList.contains("Critical")) {
+                return Server.STATUS_CRITICAL;
+            } else if (statusList.contains("Warning")) {
+                return Server.STATUS_WARNING;
+            } else {
+                return Server.STATUS_NORMAL;
+            }
         }
 
         @Override

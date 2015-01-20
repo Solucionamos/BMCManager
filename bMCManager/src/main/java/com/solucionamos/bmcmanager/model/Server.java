@@ -12,6 +12,10 @@ public class Server {
     public static final int PWSTATE_RESET = 2;
     public static final int PWSTATE_HRESET = 3;
 
+    public final static int STATUS_NORMAL = 0;
+    public final static int STATUS_WARNING = 1;
+    public final static int STATUS_CRITICAL = 2;
+
     private static final String MODEL_IVB = "IVB";
     private final String name;
     private final String model;
